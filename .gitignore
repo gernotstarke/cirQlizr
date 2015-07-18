@@ -10,3 +10,9 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+groovy/.idea/.name
+groovy/.idea/compiler.xml
+groovy/.idea/misc.xml
+groovy/.idea/modules.xml
+profiles_settings.xml
+num-viz.iml
