@@ -12,5 +12,5 @@ class PairTest extends GroovyTestCase {
         assertEquals( "$p1 and $p2 should be equal", p1, p2)
     }
 
-    
+
 }
