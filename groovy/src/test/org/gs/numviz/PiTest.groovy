@@ -26,6 +26,7 @@ class PiTest extends GroovyTestCase {
     public void testFirstPairIsThreeOne() {
         Pair p = Pi.getPair( 0 )
 
-        assertTrue "Pi's first pair should be 3 and 1", new Pair(3,1), p)
+        assertEquals "Pi's first pair should be 3 and 1",
+                new Pair(3,1), p
     }
 }
