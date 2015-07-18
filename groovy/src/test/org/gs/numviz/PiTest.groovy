@@ -17,6 +17,15 @@ class PiTest extends GroovyTestCase {
 
     @Test
     public void testIllegalIndex() {
-        false
+        shouldFail( IndexOutOfBoundsException ) {
+            Pi.getDigit(-1)
+        }
+    }
+
+    @Test
+    public void testFirstPairIsThreeOne() {
+        Pair p = Pi.getPair( 0 )
+
+        assertTrue "Pi's first pair should be 3 and 1", new Pair(3,1), p)
     }
 }
