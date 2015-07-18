@@ -16,3 +16,5 @@ groovy/.idea/misc.xml
 groovy/.idea/modules.xml
 profiles_settings.xml
 num-viz.iml
+groovy/.gradle
+groovy.iml
