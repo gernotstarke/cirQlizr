@@ -29,4 +29,14 @@ class PiTest extends GroovyTestCase {
         assertEquals "Pi's first pair should be 3 and 1",
                 new Pair(3,1), p
     }
+
+    @Test
+    public void testSecondPairIsOneFour() {
+        Pair p = Pi.getPair( 1 )
+
+        assertEquals "Pi's first pair should be 3 and 1",
+                new Pair(1,4), p
+    }
+
+
 }
