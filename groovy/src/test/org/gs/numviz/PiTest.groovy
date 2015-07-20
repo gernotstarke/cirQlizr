@@ -1,6 +1,5 @@
 package org.gs.numviz
 
-import org.junit.Before
 import org.junit.Test
 
 // see end-of-file for license information
@@ -24,7 +23,7 @@ class PiTest extends GroovyTestCase {
 
     @Test
     public void testFirstPairIsThreeOne() {
-        Pair p = Pi.getPair( 0 )
+        Pair p = Pi.pair( 0 )
 
         assertEquals "Pi's first pair should be 3 and 1",
                 new Pair(3,1), p
@@ -32,7 +31,7 @@ class PiTest extends GroovyTestCase {
 
     @Test
     public void testSecondPairIsOneFour() {
-        Pair p = Pi.getPair( 1 )
+        Pair p = Pi.pair( 1 )
 
         assertEquals "Pi's first pair should be 3 and 1",
                 new Pair(1,4), p
