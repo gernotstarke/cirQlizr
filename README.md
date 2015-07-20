@@ -32,4 +32,32 @@ upon pure asthetic aspects, but on research...
 [Cynthia Bewer](http://colorbrewer2.org/) gives serious advice on this topic.  
 
 
+## Numbers
+I used the following resources for getting the numbers:
+
+* [pi: Angio.net](http://www.angio.net/pi/digits.html)
+
+and helped myself with a small script to convert the plain format to
+comma-separated digits useable as static ArrayList initializer:
+
+    def numAsString = 
+    """3.1415926535 8979323846 2643383279 5028841971 6939937510
+       5820974944 5923078164 0628620899 8628034825 3421170679
+    """
+
+    def numAsArrayListStr = "["
+
+    def String processSingleChar( String singleC ) { 
+      if ( singleC.isInteger()) return singleC + ","
+        else return ""
+    }
+
+    for(int i = 0; i < numAsString.length(); i++) {
+        numAsArrayListStr +=
+                processSingleChar( numAsString.charAt(i).toString())
+
+        if ((i>0) && (i % 50) == 0) numAsArrayListStr += "\n "
+    }
+
+    println numAsArrayListStr
 
