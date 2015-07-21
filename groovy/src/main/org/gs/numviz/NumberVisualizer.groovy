@@ -8,6 +8,9 @@ import java.awt.EventQueue
 
 class NumberVisualizer extends JFrame {
 
+        final static int X_SIZE = 800
+        final static int Y_SIZE = 700
+
         public NumberVisualizer() {
 
             initUI();
@@ -15,10 +18,10 @@ class NumberVisualizer extends JFrame {
 
         private void initUI() {
 
-            add(new SampleGraphic());
+            add(new NumberGraph());
 
-            setTitle("Simple Java 2D example");
-            setSize(400, 400);
+            setTitle("Number Visualizer");
+            setSize(X_SIZE, Y_SIZE);
             setLocationRelativeTo(null);
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         }
