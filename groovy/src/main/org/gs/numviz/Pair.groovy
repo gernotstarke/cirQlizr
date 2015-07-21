@@ -18,5 +18,4 @@ class Pair {
         return "("+first + ", " + second + ")"
     }
 
-
 }
