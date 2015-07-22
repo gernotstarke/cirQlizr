@@ -24,8 +24,10 @@ class NumberVisualizer extends JFrame {
             setSize(X_SIZE, Y_SIZE);
             setLocationRelativeTo(null);
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
             setResizable( false ) // issue #9
         }
+
 
         public static void main(String[] args) {
 
