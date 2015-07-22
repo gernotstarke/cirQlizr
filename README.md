@@ -8,6 +8,7 @@ The result shall at least look similar to the awesome [mother of circular pi vis
 
 There's even a nice [Numberphile video](https://www.youtube.com/watch?v=NPoj8lk9Fo4) on this kind of graphics.
 
+
 ## Principle
 
 A coarse overview by the [original authors](http://mkweb.bcgsc.ca/pi/art/method.mhtml),
@@ -17,6 +18,25 @@ Martin Krzywinski and Cristian Illies Vasile.
 2. for each pair of digits within a number, draw a curve from first-to-second.
 3. transition the color of this curve
 4. the position of the curve on the segment is determined by the position of the digits
+
+
+## Domain Terminology
+
+![number visualization domain](numviz-domain.jpg)
+
+* The number to be visualized consists of ordered Digits.
+* Pair consists of left ("from") and right ("to") Digit,
+* Line represents graphical connection of "from" (left) and "to" (right) Digit of a Pair.
+* Segment:
+  * visually represents all Lines for one specific Digit (either left or right in a Pair).
+  * contains list of DigiNodes and determines their x/y positions
+  on the drawing canvas.
+  * has a position on drawing canvas
+  * has a shape (in the image above its rectangular,
+    in more appealing visuals it should be an arc)
+* Line
+  * corresponds to a Pair of Digits.
+  * Start and end of the line are DigiNodes
 
 #### Open Issues
 * what is the radius of the curve drawn?
@@ -61,21 +81,3 @@ comma-separated digits useable as static ArrayList initializer:
 
     println numAsArrayListStr
 
-
-## Domain
-
-![number visualization domain](numviz-domain.jpg)
-
-* The number to be visualized consists of ordered Digits.
-* Pair consists of left ("from") and right ("to") Digit,
-* Line represents graphical connection of "from" (left) and "to" (right) Digit of a Pair.
-* Segment:
-  * visually represents all Lines for one specific Digit (either left or right in a Pair).
-  * contains list of DigiNodes and determines their x/y positions
-  on the drawing canvas.
-  * has a position on drawing canvas
-  * has a shape (in the image above its rectangular,
-    in more appealing visuals it should be an arc)
-* Line
-  * corresponds to a Pair of Digits.
-  * Start and end of the line are DigiNodes
