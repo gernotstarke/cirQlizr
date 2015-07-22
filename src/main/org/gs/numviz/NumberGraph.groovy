@@ -11,7 +11,7 @@ import java.awt.RenderingHints
 import java.awt.font.TextAttribute;
 
 class NumberGraph extends JPanel {
-    final static String SELF_PRAISE = "zorg42 number visualizer, https://github.com/gernotstarke/num-viz  "
+    final static String SELF_PRAISE = "Number visualizer, https://github.com/gernotstarke/num-viz  "
     //
     private void someSelfPraise( Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
