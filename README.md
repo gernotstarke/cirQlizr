@@ -1,4 +1,4 @@
-# num-viz
+Ich# num-viz
 Number visualization - similar to http://mkweb.bcgsc.ca/pi/art/method.mhtml
 
 A simple experiment with 2D graphics.
@@ -19,9 +19,9 @@ Martin Krzywinski and Cristian Illies Vasile.
 4. the position of the curve on the segment is determined by the position of the digits
 
 #### Open Issues
-* what is the radius of the curve drawn? 
-* Is it Bezier-style?   
-* What to do with lines from i to i? 
+* what is the radius of the curve drawn?
+* Is it Bezier-style?
+* What to do with lines from i to i?
 
 
 
@@ -40,14 +40,14 @@ I used the following resources for getting the numbers:
 and helped myself with a small script to convert the plain format to
 comma-separated digits useable as static ArrayList initializer:
 
-    def numAsString = 
+    def numAsString =
     """3.1415926535 8979323846 2643383279 5028841971 6939937510
        5820974944 5923078164 0628620899 8628034825 3421170679
     """
 
     def numAsArrayListStr = "["
 
-    def String processSingleChar( String singleC ) { 
+    def String processSingleChar( String singleC ) {
       if ( singleC.isInteger()) return singleC + ","
         else return ""
     }
@@ -61,3 +61,21 @@ comma-separated digits useable as static ArrayList initializer:
 
     println numAsArrayListStr
 
+
+## Domain
+
+![number visualization domain](numviz-domain.jpg)
+
+* The number to be visualized consists of ordered Digits.
+* Pair consists of left ("from") and right ("to") Digit,
+* Line represents graphical connection of "from" (left) and "to" (right) Digit of a Pair.
+* Segment:
+  * visually represents all Lines for one specific Digit (either left or right in a Pair).
+  * contains list of DigiNodes and determines their x/y positions
+  on the drawing canvas.
+  * has a position on drawing canvas
+  * has a shape (in the image above its rectangular,
+    in more appealing visuals it should be an arc)
+* Line
+  * corresponds to a Pair of Digits.
+  * Start and end of the line are DigiNodes
