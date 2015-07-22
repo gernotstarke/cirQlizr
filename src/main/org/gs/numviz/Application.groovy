@@ -6,26 +6,27 @@ import java.awt.EventQueue
 // see end-of-file for license information
 
 
-class NumberVisualizer extends JFrame {
+class Application extends JFrame {
 
         final static int X_SIZE = 800
         final static int Y_SIZE = 700
 
-        public NumberVisualizer() {
 
+        public Application() {
             initUI();
         }
 
+
         private void initUI() {
 
-            add(new NumberGraph());
+            add(new NumberGrapher( X_SIZE, Y_SIZE ));
 
             setTitle("Number Visualizer");
             setSize(X_SIZE, Y_SIZE);
             setLocationRelativeTo(null);
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-            setResizable( false ) // issue #9
+            setResizable( false ) // resolves issue #9
         }
 
 
@@ -35,7 +36,7 @@ class NumberVisualizer extends JFrame {
 
                 @Override
                 public void run() {
-                    NumberVisualizer ex = new NumberVisualizer();
+                    Application ex = new Application(  );
                     ex.setVisible(true);
                 }
             });
