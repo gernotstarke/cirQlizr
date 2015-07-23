@@ -21,8 +21,11 @@ class NumberGrapher extends JPanel {
     final Integer X_SIZE
     final Integer Y_SIZE
 
+    private Point center
+    private int radius
+
     // margin between (invisible) circle and JPanel border
-    final Integer MARGIN = 20
+    final Integer MARGIN = 10
 
 
     public NumberGrapher( Integer xSize, Integer ySize ) {
@@ -34,6 +37,8 @@ class NumberGrapher extends JPanel {
         assert X_SIZE > 1
         assert Y_SIZE > 1
 
+        this.center = center()
+        this.radius = radius()
     }
 
     /*
@@ -59,14 +64,17 @@ class NumberGrapher extends JPanel {
 
         // Circle -> specialized Ellipse, coords give
         // upper left corner of enclosing rectangle
-        g2d.draw( new Ellipse2D.Double( 10, 10, 660, 660 ))
+        g2d.draw( new Ellipse2D.Double( MARGIN, MARGIN, 2*radius, 2*radius ))
 
-        g2d.setPaint(Color.magenta)
         g2d.setStroke( new BasicStroke( 12.0f ))
-
         Arc2D arc2D = new Arc2D.Double()
-        arc2D.setArcByCenter( 330, 330, radius(), 3, 30, Arc2D.OPEN)
-        g2d.draw( arc2D )
+
+        (0..9).each { digit ->
+            g2d.setPaint( Color.DARK_GRAY)
+            arc2D.setArcByCenter( center.x, center.y, radius, digit*36 + 3, 30, Arc2D.OPEN)
+
+            g2d.draw( arc2D )
+        }
 
     }
 
@@ -107,26 +115,6 @@ class NumberGrapher extends JPanel {
     }
 
 
-    private void doDrawing(Graphics2D g2d) {
-
-//        Graphics2D g2d = (Graphics2D) g;
-
-        g2d.drawLine(30, 30, 200, 30);
-        g2d.drawLine(200, 30, 30, 200);
-        g2d.drawLine(30, 200, 200, 200);
-        g2d.drawLine(200, 200, 30, 30);
-
-        Arc2D arc2D = new Arc2D.Double(200, 200, 20, 20, 90,
-                135, Arc2D.OPEN)
-        g2d.setStroke( new BasicStroke( 10.0f ))
-        g2d.draw( arc2D );
-
-        g2d.setPaint(Color.red);
-        g2d.fill(new Arc2D.Double(250, 250, 50, 50, 90,
-                135, Arc2D.OPEN));
-        g2d.setPaint( Color.cyan );
-
-    }
 
     @Override
     public void paintComponent(Graphics g) {
@@ -138,8 +126,6 @@ class NumberGrapher extends JPanel {
         drawSegments( g2d )
 
         someSelfPraise(g2d)
-
-        //doDrawing(g2d );
 
     }
 }
