@@ -64,7 +64,9 @@ class NumberGrapher extends JPanel {
         g2d.setPaint(Color.magenta)
         g2d.setStroke( new BasicStroke( 12.0f ))
 
-        Arc2D arc2D = new Arc2D.Double(200, 200, 20, 20, 90, 135, Arc2D.OPEN)
+        Arc2D arc2D = new Arc2D.Double()
+        arc2D.setArcByCenter( 330, 330, radius(), 3, 30, Arc2D.OPEN)
+        g2d.draw( arc2D )
 
     }
 
