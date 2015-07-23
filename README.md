@@ -29,11 +29,14 @@ Martin Krzywinski and Cristian Illies Vasile.
 * Line represents graphical connection of "from" (left) and "to" (right) Digit of a Pair.
 * Segment:
   * visually represents all Lines for one specific Digit (either left or right in a Pair).
-  * contains list of DigiNodes and determines their x/y positions
-  on the drawing canvas.
+  * contains ordered list of DigiNodes 
+  * determines their x/y positions on the drawing canvas.
   * has a position on drawing canvas
-  * has a shape (in the image above its rectangular,
-    in more appealing visuals it should be an arc)
+  * has a Color
+  * might have a shape. 
+     * In the image above its rectangular,
+    in more appealing visuals it should be an arc.
+     * The shape determines the positions of the Segments' DigiNodes.
 * Line
   * corresponds to a Pair of Digits.
   * Start and end of the line are DigiNodes
