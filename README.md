@@ -49,11 +49,16 @@ Martin Krzywinski and Cristian Illies Vasile.
 
 
 ## Color Selection
-Selecting color schemes for visualizations should *not* only based
+ 
+ Selecting color schemes for visualizations should *not* only based
 upon pure asthetic aspects, but on research...
 
 [Cynthia Bewer](http://colorbrewer2.org/) gives serious advice on this topic.  
 
+we use [their](http://colorbrewer2.org/?type=qualitative&scheme=Paired&n=10) proposed 10-class scheme for qualitative data.
+Please note - this scheme is *not* colorblind safe.
+
+![ColorBrewer Scheme](./ColorBrewer10ClassScheme.jpg) 
 
 ## Numbers
 I used the following resources for getting the numbers:
