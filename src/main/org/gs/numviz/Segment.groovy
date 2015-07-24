@@ -1,8 +1,29 @@
 package org.gs.numviz
 
+import java.awt.Color
 
+/**
+ *
+ */
 
 class Segment {
+
+    // assumption: segment represents an arc (a part of a circle)
+
+    private int digit
+
+    private int centerX
+    private int centerY
+    private int radius
+
+    private Color color
+
+    private int angleStart
+    private int angleExtend // maximum 36 degrees
+
+
+    // implicit constructor to allow named parameters
+
 
 }
 

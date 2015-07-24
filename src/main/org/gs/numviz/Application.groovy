@@ -5,6 +5,10 @@ import java.awt.EventQueue
 
 // see end-of-file for license information
 
+/**
+ * startup class for number visualizations
+ *
+ */
 
 class Application extends JFrame {
 
@@ -31,6 +35,8 @@ class Application extends JFrame {
 
 
         public static void main(String[] args) {
+
+            // TODO: add command line parsing for color scheme, number, size
 
             EventQueue.invokeLater(new Runnable() {
 
