@@ -1,13 +1,55 @@
 package org.gs.numviz
 
 import spock.lang.Specification
+import static spock.util.matcher.HamcrestMatchers.closeTo
+
+import java.awt.Point
 
 // see end-of-file for license information
 
 
 class CircleSpec extends Specification {
-}
 
+    def "Circle crosses X axis With Angle Zero at Zero"() {
+        given:
+        Circle circle = new Circle(center: new Point(0, 0), radius: 1)
+
+        when:
+        Point onXAxis = circle.getPointByAngle(0)
+
+        Double actualX = onXAxis.getX()
+        Double actualY = onXAxis.getY()
+
+        then:
+        closeTo(actualX, 1)
+        closeTo(actualY, 0)
+    }
+
+    /*
+    * with angles 0, 90, 180, 270 the circle shall cross the x and y axis
+     */
+
+    def "Circle crosses Axis"(int angle, int xAxis, int yAxis) {
+        given:
+        Circle circle = new Circle(center: new Point(0, 0), radius: 1)
+
+        when:
+        Point crossingAxis = circle.getPointByAngle(angle)
+
+        then:
+        closeTo(crossingAxis.getX(), xAxis)
+        closeTo(crossingAxis.getY(), yAxis)
+
+        where:
+        angle| xAxis | yAxis
+        0    | 1    | 0
+        90   | 0    | 1
+        180  | -1   | 0
+        270  | 0    | -1
+    }
+
+
+}
 
 /*********************************************************************************
  The MIT License (MIT)
