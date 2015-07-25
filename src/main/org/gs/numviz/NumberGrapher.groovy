@@ -1,5 +1,7 @@
 package org.gs.numviz
 
+// see end of file for licence information
+
 import java.awt.BasicStroke
 import java.awt.Color
 import java.awt.Font
@@ -8,16 +10,17 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import javax.swing.JPanel
 import java.awt.Point
-import java.awt.Rectangle
 import java.awt.RenderingHints
 import java.awt.Shape
 import java.awt.font.TextAttribute
 import java.awt.geom.Arc2D
 import java.awt.geom.Ellipse2D
-import java.awt.geom.PathIterator
+import java.awt.geom.Line2D
+import java.util.logging.Logger
 
 
 class NumberGrapher extends JPanel {
+
     final static String SELF_PRAISE = "Number visualizer, https://github.com/gernotstarke/num-viz  "
 
     // size of drawing canvas
@@ -34,6 +37,7 @@ class NumberGrapher extends JPanel {
     // one segment for every digit
     List<Segment> segment
 
+    private static final Logger LOGGER = Logger.getLogger(NumberGrapher.class.getName())
 
     public NumberGrapher(Integer xFrameSize, Integer yFrameSize) {
         super()
@@ -81,12 +85,16 @@ class NumberGrapher extends JPanel {
                     radius: this.radius,
                     angleStart: thisDigit * 36 + 3,
                     angleExtend: 30)
+
+            segment[thisDigit].setDigiPoint()
         }
+
     }
 
     /*
      * draw segments with their circular representation
      */
+
     private void drawSegments(Graphics2D g2d) {
 
         //g2d.setPaint(Color.lightGray)
@@ -100,16 +108,55 @@ class NumberGrapher extends JPanel {
         g2d.setStroke(new BasicStroke(12.0f))
         Arc2D arc2D = new Arc2D.Double()
 
-        (0..9).each { digit ->
+        (0..1).each { digit ->
             segment[digit].with {
                 g2d.setPaint(color)
                 //arc2D.setArcByCenter(center.x, center.y, radius, digit * 36 + 3, 30, Arc2D.OPEN)
+                //LOGGER.info "digit $digit: center.x=${center.x}, center.y=${center.y}"
+
                 arc2D.setArcByCenter(center.x, center.y, radius, angleStart, angleExtend, Arc2D.OPEN)
                 g2d.draw(arc2D)
             }
         }
     }
 
+    /*
+    * draw the lines
+     */
+
+    private void drawLines(Graphics2D g2d) {
+        g2d.setStroke(new BasicStroke(1.0f))
+
+        g2d.draw( new Line2D.Double( center, segment[0].digiPoint))
+//        g2d.draw( new Line2D.Double( center, segment[1].digiPoint))
+//        g2d.draw( new Line2D.Double( center, segment[2].digiPoint))
+//        g2d.draw( new Line2D.Double( center, segment[3].digiPoint))
+//        g2d.draw( new Line2D.Double( center, segment[4].digiPoint))
+//        g2d.draw( new Line2D.Double( center, segment[5].digiPoint))
+//        g2d.draw( new Line2D.Double( center, segment[6].digiPoint))
+//        g2d.draw( new Line2D.Double( center, segment[7].digiPoint))
+//        g2d.draw( new Line2D.Double( center, segment[8].digiPoint))
+//        g2d.draw( new Line2D.Double( center, segment[9].digiPoint))
+
+        //drawSingleLine(g2d, 3, 1)
+
+        //drawSingleLine(g2d, 1, 4)
+
+    }
+
+    private void drawSingleLine(Graphics2D g2d, int fromDigit, int toDigit) {
+        g2d.setColor(segment[fromDigit].color)
+    //    g2d.drawLine(segment[fromDigit].digiPoint.getX(), segment[fromDigit].digiPoint.getY(),
+    //            segment[toDigit].digiPoint.getY(), segment[toDigit].digiPoint.getY())
+
+        LOGGER.info "draw line from $fromDigit (${segment[fromDigit].digiPoint}"
+
+        Line2D line = new Line2D.Double( segment[fromDigit].digiPoint, segment[toDigit].digiPoint )
+        g2d.draw( line )
+    }
+    /*
+    * draw the legend
+     */
 
     private void drawLegend(Graphics2D g2d) {
 
@@ -188,44 +235,10 @@ class NumberGrapher extends JPanel {
 
         drawLegend(g2d)
 
+        drawLines(g2d)
+
         someSelfPraise(g2d)
 
-    }
-
-    private void understandPathIterator(Shape s) {
-        PathIterator pi = s.getPathIterator(null);
-
-        while (pi.isDone() == false) {
-            describeCurrentSegment(pi);
-            pi.next();
-        }
-
-    }
-
-    public static void describeCurrentSegment(PathIterator pi) {
-        double[] coordinates = new double[6];
-        int type = pi.currentSegment(coordinates);
-        switch (type) {
-            case PathIterator.SEG_MOVETO:
-                System.out.println("move to " + coordinates[0] + ", " + coordinates[1]);
-                break;
-            case PathIterator.SEG_LINETO:
-                System.out.println("line to " + coordinates[0] + ", " + coordinates[1]);
-                break;
-            case PathIterator.SEG_QUADTO:
-                System.out.println("quadratic to " + coordinates[0] + ", " + coordinates[1] + ", "
-                        + coordinates[2] + ", " + coordinates[3]);
-                break;
-            case PathIterator.SEG_CUBICTO:
-                System.out.println("cubic to " + coordinates[0] + ", " + coordinates[1] + ", "
-                        + coordinates[2] + ", " + coordinates[3] + ", " + coordinates[4] + ", " + coordinates[5]);
-                break;
-            case PathIterator.SEG_CLOSE:
-                System.out.println("close");
-                break;
-            default:
-                break;
-        }
     }
 
 }
