@@ -40,22 +40,22 @@ Martin Krzywinski and Cristian Illies Vasile.
 * Line represents graphical connection of "from" (left) and "to" (right) Digit of a Pair.
 * Segment:
   * visually represents all Lines for one specific Digit (either left or right in a Pair).
-  * contains ordered list of DigiNodes 
+  * contains ordered list of connection points called "digiNodes" 
   * determines their x/y positions on the drawing canvas.
   * has a position on drawing canvas
   * has a Color
-  * might have a shape. 
-     * In the image above its rectangular,
-    in more appealing visuals it should be an arc.
-     * The shape determines the positions of the Segments' DigiNodes.
+  * is shaped like a "circle segment" 
 * Line
   * corresponds to a Pair of Digits.
-  * Start and end of the line are DigiNodes
+  * Start and end of the line are digiNodes
 
 #### Open Issues
-* what is the radius of the curve drawn?
-* Is it Bezier-style?
+* Are lines staight or curved?
+  * if curved: what is the radius of the curve drawn?
+  * Is it Bezier-style?
 * What to do with lines from i to i?
+* how to change the color scheme
+* Enable command line parameters to determine size, colors etc.
 
 
 
