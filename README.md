@@ -1,7 +1,18 @@
-Ich# num-viz
-Number visualization - similar to http://mkweb.bcgsc.ca/pi/art/method.mhtml
+# num-viz: Number visualization 
+A simple experiment with 2D graphics to create circular visualisations of numbers
+like &#960; (pi), e (Euler number) or similar.
 
-A simple experiment with 2D graphics.
+Inspired by [Martin Krzywinski](http://mkweb.bcgsc.ca/pi/art/method.mhtml) and his
+website "The art of Pi".
+
+Currently implemented using [Java2D](https://docs.oracle.com/javase/tutorial/2d/).
+
+## Status
+Work in progress. 
+
+![License](https://img.shields.io/github/license/gernotstarke/num-viz.svg)
+![Tasks](https://img.shields.io/github/issues/gernotstarke/num-viz.svg)
+![Bugs](https://badge.waffle.io/gernotstarke/num-viz.svg?label=bug&title=Bugs)
 
 ## Goal
 The result shall at least look similar to the awesome [mother of circular pi visualisations](http://thecreatorsproject.vice.com/blog/visualising-the-infinite-data-of-pie)
@@ -63,7 +74,7 @@ Please note - this scheme is *not* colorblind safe.
 ## Numbers
 I used the following resources for getting the numbers:
 
-* [pi: Angio.net](http://www.angio.net/pi/digits.html)
+* [&#960; (pi): Angio.net](http://www.angio.net/pi/digits.html)
 
 and helped myself with a small script to convert the plain format to
 comma-separated digits useable as static ArrayList initializer:
@@ -88,4 +99,5 @@ comma-separated digits useable as static ArrayList initializer:
     }
 
     println numAsArrayListStr
+
 
