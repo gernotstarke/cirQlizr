@@ -6,7 +6,7 @@ import java.awt.EventQueue
 // see end-of-file for license information
 
 /**
- * startup class for number visualizations
+ * Startup class for circular number visualizations.
  *
  */
 
