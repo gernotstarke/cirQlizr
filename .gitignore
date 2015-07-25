@@ -19,3 +19,5 @@ num-viz.iml
 groovy/.gradle
 groovy.iml
 .idea
+.gradle
+.da*
