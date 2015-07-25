@@ -1,14 +1,15 @@
 package org.gs.numviz
 
 import java.awt.Color
+import java.awt.Point
+import java.util.logging.Logger
+
 
 /**
- *
+ * Segment represents a digit and is drawn as part of a circle.
  */
 
 class Segment {
-
-    // assumption: segment represents an arc (a part of a circle)
 
     private int digit
 
@@ -21,9 +22,28 @@ class Segment {
     private int angleStart
     private int angleExtend // maximum 36 degrees
 
+    public Point digiPoint
+
+    private static final Logger LOGGER = Logger.getLogger(Segment.class.getName())
+
 
     // implicit constructor to allow named parameters
 
+    /**
+     * calculate the DigiPoint for this Segment with the
+     * <a href="http://www.mathopenref.com/coordparamcircle.html">parametric circle equation</a>:
+     * x = radius * cos(t)    y = radius * sin(t) with t being the angle...
+     * @return point in Segment, where lines will be attached
+     */
+    public void setDigiPoint() {
+        float angle = angleStart + angleExtend/2
+
+        int x = radius * Math.cos( angle ) + centerX
+        int y = radius * Math.sin( angle ) + centerY
+        digiPoint = new Point( x , y )
+
+        LOGGER.info "Segment[${digit}]: X=$x, y=$y, angle=$angle, center=($centerX, $centerY), radius=$radius"
+    }
 
 }
 
