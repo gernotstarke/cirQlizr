@@ -39,8 +39,6 @@ class Segment {
     public void setDigiPoint() {
         double angle = angleStart + angleExtend/2
 
-        double x = radius * Math.cos( angle ) + centerX
-        double y = radius * Math.sin( angle ) + centerY
         digiPoint = new Point2D.Double( x , y )
 
         LOGGER.info "Segment[${digit}]: X=$x, y=$y, angle=$angle, center=($centerX, $centerY), radius=$radius"

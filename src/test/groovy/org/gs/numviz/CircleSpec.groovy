@@ -3,14 +3,14 @@ package org.gs.numviz
 import spock.lang.Specification
 
 import java.awt.geom.Point2D
-
-import static spock.util.matcher.HamcrestMatchers.closeTo
-
 import java.awt.Point
 
 // see end-of-file for license information
 
 
+/*
+ *
+ */
 class CircleSpec extends Specification {
 
     def "Circle crosses X axis With Angle Zero at Zero"() {
@@ -24,15 +24,15 @@ class CircleSpec extends Specification {
         Double actualY = onXAxis.getY()
 
         then:
-        closeTo(actualX, 1)
-        closeTo(actualY, 0)
+        assertCloseTo(actualX, 1, 0.05)
+        assertCloseTo(actualY, 0, 0.05)
     }
 
     /*
     * with angles 0, 90, 180, 270 the circle shall cross the x and y axis
      */
 
-    def "Circle crosses Axis"(int angle, int xAxis, int yAxis) {
+    def "Circle crosses Axis"(int angle, double xAxis, double yAxis) {
         given:
         Circle circle = new Circle(center: new Point(0, 0), radius: 1)
 
@@ -40,8 +40,8 @@ class CircleSpec extends Specification {
         Point2D crossingAxis = circle.getPointByAngle(angle)
 
         then:
-        closeTo(crossingAxis.getX(), xAxis)
-        closeTo(crossingAxis.getY(), yAxis)
+        assertCloseTo( (float) crossingAxis.getX(), xAxis, 0.01f )
+        assertCloseTo( (float) crossingAxis.getY(), yAxis, 0.01f )
 
         where:
         angle| xAxis | yAxis
@@ -76,7 +76,7 @@ class CircleSpec extends Specification {
     /*
     * helper method to assert-with-epsilon
      */
-    def assertCloseTo( float expected, float actual, float epsilon) {
+    def assertCloseTo( expected, actual, float epsilon) {
         return Math.abs( Math.abs( expected ) - Math.abs( actual)) < epsilon
     }
 
