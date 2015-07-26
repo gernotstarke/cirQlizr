@@ -44,7 +44,8 @@ Martin Krzywinski and Cristian Illies Vasile.
   * determines their x/y positions on the drawing canvas.
   * has a position on drawing canvas
   * has a Color
-  * is shaped like a "circle segment" 
+  * is shaped like a "circle segment" of 36 degrees (1/10th of a full circle,
+  or 0.2*&#960; in radians)
 * Line
   * corresponds to a Pair of Digits.
   * Start and end of the line are digiNodes
