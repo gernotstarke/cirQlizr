@@ -4,6 +4,7 @@ import org.junit.Before
 import org.junit.Test
 
 import java.awt.Point
+import java.awt.geom.Point2D
 
 // see end-of-file for license information
 
@@ -25,7 +26,7 @@ class CircleTest extends GroovyTestCase {
     public void testAngleZeroOnXAxis() {
         circle = new Circle( center: new Point(0,0), radius: 1)
 
-        Point onXAxis = circle.getPointByAngle( 0 )
+        Point2D onXAxis = circle.getPointByAngle( 0 )
 
         Double actualX = onXAxis.getX()
         Double actualY = onXAxis.getY()

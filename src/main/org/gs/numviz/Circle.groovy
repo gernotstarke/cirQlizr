@@ -1,12 +1,13 @@
 package org.gs.numviz
 
 import java.awt.Point
+import java.awt.geom.Point2D
 
 // see end-of-file for license information
 
 
 class Circle {
-    private Point center
+    private Point2D center
     private int radius
 
     /**
@@ -18,10 +19,10 @@ class Circle {
      * @param angle
      * @return
      */
-    public Point getPointByAngle( Float angle) {
-        int x = radius * Math.cos( angle ) + center.getX()
-        int y = radius * Math.sin( angle ) + center.getY()
-        return new Point( x , y )
+    public Point2D getPointByAngle( Float angle) {
+        Double x = radius * Math.cos( angle ) + center.getX()
+        Double y = radius * Math.sin( angle ) + center.getY()
+        return new Point2D.Double( x , y )
 
     }
 }

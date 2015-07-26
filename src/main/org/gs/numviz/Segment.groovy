@@ -2,6 +2,7 @@ package org.gs.numviz
 
 import java.awt.Color
 import java.awt.Point
+import java.awt.geom.Point2D
 import java.util.logging.Logger
 
 
@@ -13,16 +14,16 @@ class Segment {
 
     private int digit
 
-    private int centerX
-    private int centerY
-    private int radius
+    private double centerX
+    private double centerY
+    private double radius
 
     private Color color
 
     private int angleStart
     private int angleExtend // maximum 36 degrees
 
-    public Point digiPoint
+    public Point2D digiPoint
 
     private static final Logger LOGGER = Logger.getLogger(Segment.class.getName())
 
@@ -36,11 +37,11 @@ class Segment {
      * @return point in Segment, where lines will be attached
      */
     public void setDigiPoint() {
-        float angle = angleStart + angleExtend/2
+        double angle = angleStart + angleExtend/2
 
-        int x = radius * Math.cos( angle ) + centerX
-        int y = radius * Math.sin( angle ) + centerY
-        digiPoint = new Point( x , y )
+        double x = radius * Math.cos( angle ) + centerX
+        double y = radius * Math.sin( angle ) + centerY
+        digiPoint = new Point2D.Double( x , y )
 
         LOGGER.info "Segment[${digit}]: X=$x, y=$y, angle=$angle, center=($centerX, $centerY), radius=$radius"
     }

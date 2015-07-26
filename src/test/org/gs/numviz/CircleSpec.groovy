@@ -1,6 +1,9 @@
 package org.gs.numviz
 
 import spock.lang.Specification
+
+import java.awt.geom.Point2D
+
 import static spock.util.matcher.HamcrestMatchers.closeTo
 
 import java.awt.Point
@@ -15,7 +18,7 @@ class CircleSpec extends Specification {
         Circle circle = new Circle(center: new Point(0, 0), radius: 1)
 
         when:
-        Point onXAxis = circle.getPointByAngle(0)
+        Point2D onXAxis = circle.getPointByAngle(0)
 
         Double actualX = onXAxis.getX()
         Double actualY = onXAxis.getY()
@@ -34,7 +37,7 @@ class CircleSpec extends Specification {
         Circle circle = new Circle(center: new Point(0, 0), radius: 1)
 
         when:
-        Point crossingAxis = circle.getPointByAngle(angle)
+        Point2D crossingAxis = circle.getPointByAngle(angle)
 
         then:
         closeTo(crossingAxis.getX(), xAxis)
@@ -48,6 +51,34 @@ class CircleSpec extends Specification {
         270  | 0    | -1
     }
 
+
+    def "Circle Crossing at Fourty Five Degrees"() {
+        given:
+        Circle circle = new Circle(center: new Point2D.Double(0, 0), radius: 20)
+
+        when:
+        Point2D onXAxis = circle.getPointByAngle(45)
+
+        then:
+        assertCloseTo( 10.506f, (Float) onXAxis.getX(), 0.01f )
+        assertCloseTo( 17.018f, (Float) onXAxis.getY(), 0.01f) // 20 * sin(45) = 20 * 0.8509
+    }
+
+
+    /*
+    * the Java2D coordinate space has 0/0 in the upper left corner and extends downwards...
+    * (counter-intuitive)
+     */
+    def "Center in 2D Geometry Coordinates"() {
+
+    }
+
+    /*
+    * helper method to assert-with-epsilon
+     */
+    def assertCloseTo( float expected, float actual, float epsilon) {
+        return Math.abs( Math.abs( expected ) - Math.abs( actual)) < epsilon
+    }
 
 }
 

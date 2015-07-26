@@ -16,8 +16,12 @@ import java.awt.font.TextAttribute
 import java.awt.geom.Arc2D
 import java.awt.geom.Ellipse2D
 import java.awt.geom.Line2D
+import java.awt.geom.Point2D
 import java.util.logging.Logger
 
+/**
+ * Java2D based "drawing arena". Contains Segments and their connections.
+ **/
 
 class NumberGrapher extends JPanel {
 
@@ -28,8 +32,8 @@ class NumberGrapher extends JPanel {
     final Integer Y_CANVAS_SIZE
 
     // some circle properties
-    private Point center
-    private int radius
+    private Point2D center
+    private float radius
 
     // margin between (invisible) circle and JPanel border
     final Integer MARGIN = 20
@@ -58,19 +62,19 @@ class NumberGrapher extends JPanel {
      * calculates the position of the center
      */
 
-    private Point center() {
-        int min = Math.min(X_CANVAS_SIZE, Y_CANVAS_SIZE)
-        int minHalf = min.intdiv(2)
+    private Point2D center() {
+        Double min = Math.min(X_CANVAS_SIZE, Y_CANVAS_SIZE)
+        Double minHalf = min / 2
 
-        return new Point(minHalf, minHalf)
+        return new Point2D.Double(minHalf, minHalf)
     }
 
     /*
     * obvious, isn't it?
      */
 
-    private radius() {
-        return (Math.min(X_CANVAS_SIZE, Y_CANVAS_SIZE).intdiv(2)) - MARGIN
+    private double radius() {
+        return (Math.min(X_CANVAS_SIZE, Y_CANVAS_SIZE) / 2) - MARGIN
     }
 
 
@@ -116,6 +120,9 @@ class NumberGrapher extends JPanel {
 
                 arc2D.setArcByCenter(center.x, center.y, radius, angleStart, angleExtend, Arc2D.OPEN)
                 g2d.draw(arc2D)
+
+                // debugging digiPoint calculation
+                //Line2D line = new Line2D.Double( center.x, center.y)
             }
         }
     }
@@ -222,6 +229,7 @@ class NumberGrapher extends JPanel {
         g2d.drawString(SELF_PRAISE, Application.X_SIZE - width, Application.Y_SIZE - 25);
 
     }
+
 
 
     @Override
