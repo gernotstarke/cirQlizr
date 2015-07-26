@@ -24,15 +24,15 @@ class CircleSpec extends Specification {
         Double actualY = onXAxis.getY()
 
         then:
-        assertCloseTo(actualX, 1, 0.05)
-        assertCloseTo(actualY, 0, 0.05)
+        assertCloseTo(actualX, 1, 0.02)
+        assertCloseTo(actualY, 0, 0.02)
     }
 
     /*
     * with angles 0, 90, 180, 270 the circle shall cross the x and y axis
      */
 
-    def "Circle crosses Axis"(int angle, double xAxis, double yAxis) {
+    def "Circle crosses Axis"(double angle, double xAxis, double yAxis) {
         given:
         Circle circle = new Circle(center: new Point(0, 0), radius: 1)
 
@@ -44,24 +44,24 @@ class CircleSpec extends Specification {
         assertCloseTo( (float) crossingAxis.getY(), yAxis, 0.01f )
 
         where:
-        angle| xAxis | yAxis
-        0    | 1    | 0
-        90   | 0    | 1
-        180  | -1   | 0
-        270  | 0    | -1
+        angle        | xAxis | yAxis
+        0            |  1    |  0
+        1.570796327  |  0    |  1  // 90 DEG
+        3.141592655  | -1    |  0  // 180 DEG
+        4.712388980  |  0    | -1  // 270 DEG
     }
 
 
     def "Circle Crossing at Fourty Five Degrees"() {
         given:
-        Circle circle = new Circle(center: new Point2D.Double(0, 0), radius: 20)
+        Circle circle = new Circle(center: new Point2D.Double(0, 0), radius: 1)
 
         when:
-        Point2D onXAxis = circle.getPointByAngle(45)
+        Point2D onXAxis = circle.getPointByAngle( Math.toRadians( 45 ))
 
         then:
-        assertCloseTo( 10.506f, (Float) onXAxis.getX(), 0.01f )
-        assertCloseTo( 17.018f, (Float) onXAxis.getY(), 0.01f) // 20 * sin(45) = 20 * 0.8509
+        assertCloseTo( 0.7071067812f, (Float) onXAxis.getX(), 0.01f )
+        assertCloseTo( 0.7071067812f, (Float) onXAxis.getY(), 0.01f)
     }
 
 

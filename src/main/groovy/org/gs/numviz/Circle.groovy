@@ -8,7 +8,7 @@ import java.awt.geom.Point2D
 
 class Circle {
     private Point2D center
-    private int radius
+    private double radius
 
     /**
      * Determine coordinates of a point on the circle
@@ -19,11 +19,16 @@ class Circle {
      * @param angle
      * @return
      */
-    public Point2D getPointByAngle( Float angle) {
+    public Point2D getPointByAngle( double angle) {
         Double x = radius * Math.cos( angle ) + center.getX()
         Double y = radius * Math.sin( angle ) + center.getY()
         return new Point2D.Double( x , y )
+    }
 
+    public static Point2D getPointByCenterRadiusAngle( Point2D center, double radius, double angle ) {
+        Double x = radius * Math.cos( angle ) + center.getX()
+        Double y = radius * Math.sin( angle ) + center.getY()
+        return new Point2D.Double( x , y )
     }
 }
 

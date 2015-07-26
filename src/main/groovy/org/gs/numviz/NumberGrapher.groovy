@@ -9,12 +9,9 @@ import java.awt.FontMetrics
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import javax.swing.JPanel
-import java.awt.Point
 import java.awt.RenderingHints
-import java.awt.Shape
 import java.awt.font.TextAttribute
 import java.awt.geom.Arc2D
-import java.awt.geom.Ellipse2D
 import java.awt.geom.Line2D
 import java.awt.geom.Point2D
 import java.util.logging.Logger
@@ -38,8 +35,17 @@ class NumberGrapher extends JPanel {
     // margin between (invisible) circle and JPanel border
     final Integer MARGIN = 20
 
-    // one segment for every digit
+
+    // segments to attach lines to...
     List<Segment> segment
+
+    // some properties of segments
+    // what part of a circle does a segment extend
+    final Double SEGMENT_EXTEND_ANGLE = Math.toRadians( 30 )
+    // what's the distance to the next segment
+    final Double SEGMENT_PADDING_ANGLE = Math.toRadians( 3 )
+
+
 
     private static final Logger LOGGER = Logger.getLogger(NumberGrapher.class.getName())
 
@@ -79,7 +85,10 @@ class NumberGrapher extends JPanel {
 
 
     private void initSegments() {
-        segment = new ArrayList<Segment>(10)
+
+        double angleExtend = Math.toRadians( 30d )
+
+                segment = new ArrayList<Segment>(10)
         (0..9).each { thisDigit ->
             segment[thisDigit] = new Segment(
                     digit: thisDigit,
@@ -87,8 +96,9 @@ class NumberGrapher extends JPanel {
                     centerY: center.y,
                     color: NumVizColor.color[thisDigit],
                     radius: this.radius,
-                    angleStart: thisDigit * 36 + 3,
-                    angleExtend: 30)
+                    // TODO: adjust angleStart, so that segment 0 starts at top
+                    angleStart: thisDigit * (SEGMENT_EXTEND_ANGLE + 2 * SEGMENT_PADDING_ANGLE),
+                    angleExtend: SEGMENT_EXTEND_ANGLE)
 
             segment[thisDigit].setDigiPoint()
         }
