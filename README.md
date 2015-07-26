@@ -50,7 +50,15 @@ Martin Krzywinski and Cristian Illies Vasile.
   * corresponds to a Pair of Digits.
   * Start and end of the line are digiNodes
 
-#### Open Issues
+### Working With Angles
+Although it seems easier to treat a Segment as a 36 *degree* unit, 
+(instead of 0.2*&#960;, which approximates to 0.6283185307179586, 
+a pretty cumbersome number)
+working with radian units is the official standard, consistently applied in Java.
+
+So - all angles within NumViz are given in radian (remember: 180DEG = &#960;RAD).
+
+## Open Questions
 * Are lines staight or curved?
   * if curved: what is the radius of the curve drawn?
   * Is it Bezier-style?
