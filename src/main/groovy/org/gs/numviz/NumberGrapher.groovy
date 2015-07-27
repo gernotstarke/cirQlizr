@@ -146,10 +146,12 @@ class NumberGrapher extends JPanel {
      */
 
     private void drawLines(Graphics2D g2d) {
+        LOGGER.info( "entering drawLines method")
         g2d.setStroke(new BasicStroke(1.0f))
 
+        /*
         g2d.draw( new Line2D.Double( center, segment[0].digiPoint))
-        /*g2d.draw( new Line2D.Double( center, segment[1].digiPoint))
+        g2d.draw( new Line2D.Double( center, segment[1].digiPoint))
         g2d.draw( new Line2D.Double( center, segment[2].digiPoint))
         g2d.draw( new Line2D.Double( center, segment[3].digiPoint))
         g2d.draw( new Line2D.Double( center, segment[4].digiPoint))
@@ -159,13 +161,14 @@ class NumberGrapher extends JPanel {
         g2d.draw( new Line2D.Double( center, segment[8].digiPoint))
         g2d.draw( new Line2D.Double( center, segment[9].digiPoint))
 */
-        drawSingleLine(g2d, 3, 1)
+        drawLineForNumberPair(g2d, 3, 1)
 
-        drawSingleLine(g2d, 1, 4)
+        drawLineForNumberPair(g2d, 1, 4)
 
     }
 
-    private void drawSingleLine(Graphics2D g2d, int fromDigit, int toDigit) {
+
+    private void drawLineForNumberPair(Graphics2D g2d, int fromDigit, int toDigit) {
         g2d.setColor(segment[fromDigit].color)
     //    g2d.drawLine(segment[fromDigit].digiPoint.getX(), segment[fromDigit].digiPoint.getY(),
     //            segment[toDigit].digiPoint.getY(), segment[toDigit].digiPoint.getY())
@@ -175,10 +178,11 @@ class NumberGrapher extends JPanel {
         Line2D line = new Line2D.Double( segment[fromDigit].digiPoint, segment[toDigit].digiPoint )
         g2d.draw( line )
     }
+
+
     /*
     * draw the legend
      */
-
     private void drawLegend(Graphics2D g2d) {
 
         // setup some nice font parameters for the legend
@@ -245,6 +249,12 @@ class NumberGrapher extends JPanel {
     }
 
 
+    private void prepareCanvas( Graphics2D g2d ) {
+        drawLegend(g2d)
+        drawSegments(g2d)
+        someSelfPraise(g2d)
+    }
+
 
     @Override
     public void paintComponent(Graphics g) {
@@ -253,15 +263,14 @@ class NumberGrapher extends JPanel {
 
         Graphics2D g2d = (Graphics2D) g;
 
+        // prepare the canvas for drawing,
+        // translate coord system so that 0/0 is center of circle
         translateCenterToZero(g2d)
+        prepareCanvas( g2d )
 
-        drawSegments(g2d)
-
-        drawLegend(g2d)
-
+        // the actual line drawing between Pairs
         drawLines(g2d)
 
-        someSelfPraise(g2d)
 
     }
 

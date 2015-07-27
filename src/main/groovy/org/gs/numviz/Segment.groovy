@@ -43,6 +43,9 @@ class Segment {
 
         digiPoint = Circle.getPointByCenterRadiusAngle( new Point(0,0), radius, angle )
 
+        // as Java coordinate system really sucks - we need to invert the Y value
+        digiPoint.setLocation( digiPoint.getX(), -1 * digiPoint.getY())
+
         LOGGER.info "Segment[${digit}]: digiPoint: $digiPoint, angle=$angle, radius=$radius"
     }
 
