@@ -54,9 +54,16 @@ Martin Krzywinski and Cristian Illies Vasile.
 Although it seems easier to treat a Segment as a 36 *degree* unit, 
 (instead of 0.2*&#960;, which approximates to 0.6283185307179586, 
 a pretty cumbersome number)
-working with radian units is the official standard, consistently applied in Java.
+working with radian units is the official standard, 
+used in the Java Math package.
 
-So - all angles within NumViz are given in radian (remember: 180DEG = &#960;RAD).
+Alas - in Java2D, some angles are expected in *degrees*, e.g. the
+[setArcByCenter](https://docs.oracle.com/javase/8/docs/api/java/awt/geom/Arc2D.html#setArcByCenter-double-double-double-double-double-int-) method to
+draw an arc expects its angle-parameters (start, extend) in degrees... (WTF?)
+
+So: angles within NumViz are given in radian (remember: 180DEG = &#960;RAD)
+and converted where needed by Math.toRadians() resp. Math.toDegree.
+
 
 ## Open Questions
 * Are lines staight or curved?
