@@ -97,7 +97,7 @@ class NumberGrapher extends JPanel {
                     color: NumVizColor.color[thisDigit],
                     radius: this.radius,
                     // TODO: adjust angleStart, so that segment 0 starts at top
-                    angleStart: thisDigit * (SEGMENT_EXTEND_ANGLE + 2 * SEGMENT_PADDING_ANGLE),
+                    angleStart: thisDigit * ((SEGMENT_EXTEND_ANGLE + (2 * SEGMENT_PADDING_ANGLE))),
                     angleExtend: SEGMENT_EXTEND_ANGLE)
 
             segment[thisDigit].setDigiPoint()
@@ -122,13 +122,12 @@ class NumberGrapher extends JPanel {
         g2d.setStroke(new BasicStroke(12.0f))
         Arc2D arc2D = new Arc2D.Double()
 
-        (0..1).each { digit ->
+        (0..9).each { digit ->
             segment[digit].with {
                 g2d.setPaint(color)
-                //arc2D.setArcByCenter(center.x, center.y, radius, digit * 36 + 3, 30, Arc2D.OPEN)
                 //LOGGER.info "digit $digit: center.x=${center.x}, center.y=${center.y}"
 
-                arc2D.setArcByCenter(center.x, center.y, radius, angleStart, angleExtend, Arc2D.OPEN)
+                arc2D.setArcByCenter(centerX, centerY, radius, Math.toDegrees(angleStart), Math.toDegrees(angleExtend), Arc2D.OPEN)
                 g2d.draw(arc2D)
 
                 // debugging digiPoint calculation
@@ -145,19 +144,19 @@ class NumberGrapher extends JPanel {
         g2d.setStroke(new BasicStroke(1.0f))
 
         g2d.draw( new Line2D.Double( center, segment[0].digiPoint))
-//        g2d.draw( new Line2D.Double( center, segment[1].digiPoint))
-//        g2d.draw( new Line2D.Double( center, segment[2].digiPoint))
-//        g2d.draw( new Line2D.Double( center, segment[3].digiPoint))
-//        g2d.draw( new Line2D.Double( center, segment[4].digiPoint))
-//        g2d.draw( new Line2D.Double( center, segment[5].digiPoint))
-//        g2d.draw( new Line2D.Double( center, segment[6].digiPoint))
-//        g2d.draw( new Line2D.Double( center, segment[7].digiPoint))
-//        g2d.draw( new Line2D.Double( center, segment[8].digiPoint))
-//        g2d.draw( new Line2D.Double( center, segment[9].digiPoint))
+        /*g2d.draw( new Line2D.Double( center, segment[1].digiPoint))
+        g2d.draw( new Line2D.Double( center, segment[2].digiPoint))
+        g2d.draw( new Line2D.Double( center, segment[3].digiPoint))
+        g2d.draw( new Line2D.Double( center, segment[4].digiPoint))
+        g2d.draw( new Line2D.Double( center, segment[5].digiPoint))
+        g2d.draw( new Line2D.Double( center, segment[6].digiPoint))
+        g2d.draw( new Line2D.Double( center, segment[7].digiPoint))
+        g2d.draw( new Line2D.Double( center, segment[8].digiPoint))
+        g2d.draw( new Line2D.Double( center, segment[9].digiPoint))
+*/
+        drawSingleLine(g2d, 3, 1)
 
-        //drawSingleLine(g2d, 3, 1)
-
-        //drawSingleLine(g2d, 1, 4)
+        drawSingleLine(g2d, 1, 4)
 
     }
 

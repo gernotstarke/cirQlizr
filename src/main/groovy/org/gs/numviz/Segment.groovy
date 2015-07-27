@@ -8,6 +8,8 @@ import java.util.logging.Logger
 
 /**
  * Segment represents a digit and is drawn as part of a circle.
+ * When we use 10 Segments, every instance extends 36 deg, that is 0.2*&#960;rad.
+ *
  */
 
 class Segment {
@@ -20,8 +22,8 @@ class Segment {
 
     private Color color
 
-    private int angleStart
-    private int angleExtend // maximum 36 degrees
+    private double angleStart
+    private double angleExtend
 
     public Point2D digiPoint
 
@@ -37,11 +39,13 @@ class Segment {
      * @return point in Segment, where lines will be attached
      */
     public void setDigiPoint() {
+        // TODO: evenly distribute digiPoints along the segment
         double angle = angleStart + angleExtend/2
 
-        digiPoint = new Point2D.Double( x , y )
 
-        LOGGER.info "Segment[${digit}]: X=$x, y=$y, angle=$angle, center=($centerX, $centerY), radius=$radius"
+        digiPoint = Circle.getPointByCenterRadiusAngle( new Point2D.Double(centerX, centerY), radius, angle )
+
+        LOGGER.info "Segment[${digit}]: digiPoint: $digiPoint, angle=$angle, center=($centerX, $centerY), radius=$radius"
     }
 
 }
