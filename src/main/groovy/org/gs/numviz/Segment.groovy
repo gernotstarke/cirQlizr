@@ -16,8 +16,6 @@ class Segment {
 
     private int digit
 
-    private double centerX
-    private double centerY
     private double radius
 
     private Color color
@@ -43,9 +41,9 @@ class Segment {
         double angle = angleStart + angleExtend/2
 
 
-        digiPoint = Circle.getPointByCenterRadiusAngle( new Point2D.Double(centerX, centerY), radius, angle )
+        digiPoint = Circle.getPointByCenterRadiusAngle( new Point(0,0), radius, angle )
 
-        LOGGER.info "Segment[${digit}]: digiPoint: $digiPoint, angle=$angle, center=($centerX, $centerY), radius=$radius"
+        LOGGER.info "Segment[${digit}]: digiPoint: $digiPoint, angle=$angle, radius=$radius"
     }
 
 }

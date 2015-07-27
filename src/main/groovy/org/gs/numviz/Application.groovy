@@ -2,6 +2,7 @@ package org.gs.numviz
 
 import javax.swing.JFrame
 import java.awt.EventQueue
+import java.awt.MouseInfo
 
 // see end-of-file for license information
 
@@ -46,6 +47,12 @@ class Application extends JFrame {
                     ex.setVisible(true);
                 }
             });
+
+            /* display absolute coordinates
+            while(true){
+                Thread.sleep(100);
+                System.out.println("("+MouseInfo.getPointerInfo().getLocation().x+", "+MouseInfo.getPointerInfo().getLocation().y+")");
+            }*/
         }
     }
 

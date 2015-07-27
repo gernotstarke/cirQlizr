@@ -9,6 +9,7 @@ import java.awt.FontMetrics
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import javax.swing.JPanel
+import java.awt.Point
 import java.awt.RenderingHints
 import java.awt.font.TextAttribute
 import java.awt.geom.Arc2D
@@ -18,32 +19,41 @@ import java.util.logging.Logger
 
 /**
  * Java2D based "drawing arena". Contains Segments and their connections.
+ *
+ * During construction of an instance, the point-of-origin is transformed
+ * to the center of the circle!
  **/
 
 class NumberGrapher extends JPanel {
 
+
     final static String SELF_PRAISE = "Number visualizer, https://github.com/gernotstarke/num-viz  "
 
     // size of drawing canvas
-    final Integer X_CANVAS_SIZE
-    final Integer Y_CANVAS_SIZE
+    final private Integer  X_CANVAS_SIZE
+    final private Integer  Y_CANVAS_SIZE
+    final private Integer  TRANSLATION_FACTOR
 
     // some circle properties
     private Point2D center
     private float radius
 
-    // margin between (invisible) circle and JPanel border
+    // margin between Segments and JPanel border
     final Integer MARGIN = 20
 
+    // width of legend (to the right of the circle)
+    final Integer LEGEND_WIDTH = 40
 
     // segments to attach lines to...
     List<Segment> segment
 
     // some properties of segments
     // what part of a circle does a segment extend
-    final Double SEGMENT_EXTEND_ANGLE = Math.toRadians( 30 )
+    final Double SEGMENT_EXTEND_ANGLE_DEG = 30
+    final Double SEGMENT_EXTEND_ANGLE = Math.toRadians( SEGMENT_EXTEND_ANGLE_DEG )
     // what's the distance to the next segment
-    final Double SEGMENT_PADDING_ANGLE = Math.toRadians( 3 )
+    final Double SEGMENT_PADDING_ANGLE_DEG = 3
+    final Double SEGMENT_PADDING_ANGLE = Math.toRadians( SEGMENT_PADDING_ANGLE_DEG )
 
 
 
@@ -52,33 +62,32 @@ class NumberGrapher extends JPanel {
     public NumberGrapher(Integer xFrameSize, Integer yFrameSize) {
         super()
         this.X_CANVAS_SIZE = xFrameSize
-        this.Y_CANVAS_SIZE = yFrameSize - 40
+        this.Y_CANVAS_SIZE = yFrameSize - LEGEND_WIDTH
 
         // crash when dimensions are too small
         assert X_CANVAS_SIZE > 1
         assert Y_CANVAS_SIZE > 1
 
-        this.center = center()
+        this.TRANSLATION_FACTOR = Math.min(X_CANVAS_SIZE, Y_CANVAS_SIZE).intdiv(2)
+
+        center = new Point( 0,0)
+
         this.radius = radius()
 
         initSegments()
     }
 
     /*
-     * calculates the position of the center
+     * translates position of center to 0/0
      */
-
-    private Point2D center() {
-        Double min = Math.min(X_CANVAS_SIZE, Y_CANVAS_SIZE)
-        Double minHalf = min / 2
-
-        return new Point2D.Double(minHalf, minHalf)
+    private void translateCenterToZero( Graphics2D g2d ) {
+                g2d.translate( TRANSLATION_FACTOR, TRANSLATION_FACTOR )
     }
+
 
     /*
     * obvious, isn't it?
      */
-
     private double radius() {
         return (Math.min(X_CANVAS_SIZE, Y_CANVAS_SIZE) / 2) - MARGIN
     }
@@ -86,14 +95,10 @@ class NumberGrapher extends JPanel {
 
     private void initSegments() {
 
-        double angleExtend = Math.toRadians( 30d )
-
-                segment = new ArrayList<Segment>(10)
+        segment = new ArrayList<Segment>(10)
         (0..9).each { thisDigit ->
             segment[thisDigit] = new Segment(
                     digit: thisDigit,
-                    centerX: center.x,
-                    centerY: center.y,
                     color: NumVizColor.color[thisDigit],
                     radius: this.radius,
                     // TODO: adjust angleStart, so that segment 0 starts at top
@@ -127,7 +132,7 @@ class NumberGrapher extends JPanel {
                 g2d.setPaint(color)
                 //LOGGER.info "digit $digit: center.x=${center.x}, center.y=${center.y}"
 
-                arc2D.setArcByCenter(centerX, centerY, radius, Math.toDegrees(angleStart), Math.toDegrees(angleExtend), Arc2D.OPEN)
+                arc2D.setArcByCenter(0,0, radius, Math.toDegrees(angleStart), Math.toDegrees(angleExtend), Arc2D.OPEN)
                 g2d.draw(arc2D)
 
                 // debugging digiPoint calculation
@@ -184,10 +189,10 @@ class NumberGrapher extends JPanel {
             g2d.setPaint(NumVizColor.color[digit])
 
             // draw filled rectangle
-            g2d.fillRect(X_CANVAS_SIZE - 60, Y_CANVAS_SIZE - (digit + 1) * 35, 30, 30)
+            g2d.fillRect((X_CANVAS_SIZE - TRANSLATION_FACTOR) - 60, (Y_CANVAS_SIZE - TRANSLATION_FACTOR - (digit + 1) * 35), 30, 30)
 
             // show corresponding digit
-            g2d.drawString(digit.toString(), X_CANVAS_SIZE - 22, Y_CANVAS_SIZE - digit * 35 - 14)
+            g2d.drawString(digit.toString(), (X_CANVAS_SIZE - TRANSLATION_FACTOR - 22), (Y_CANVAS_SIZE - TRANSLATION_FACTOR- digit * 35 - 14))
         }
     }
 
@@ -247,6 +252,8 @@ class NumberGrapher extends JPanel {
         super.paintComponent(g);
 
         Graphics2D g2d = (Graphics2D) g;
+
+        translateCenterToZero(g2d)
 
         drawSegments(g2d)
 
