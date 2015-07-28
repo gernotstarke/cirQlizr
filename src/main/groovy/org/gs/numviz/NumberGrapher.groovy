@@ -163,25 +163,13 @@ class NumberGrapher extends JPanel {
     }
 
     /*
-    * draw the lines
+    * draw the lines for all pairs
      */
 
     private void drawLines(Graphics2D g2d) {
         LOGGER.info( "entering drawLines method")
         g2d.setStroke(new BasicStroke(1.0f))
 
-        /*
-        g2d.draw( new Line2D.Double( center, segment[0].digiNode))
-        g2d.draw( new Line2D.Double( center, segment[1].digiNode))
-        g2d.draw( new Line2D.Double( center, segment[2].digiNode))
-        g2d.draw( new Line2D.Double( center, segment[3].digiNode))
-        g2d.draw( new Line2D.Double( center, segment[4].digiNode))
-        g2d.draw( new Line2D.Double( center, segment[5].digiNode))
-        g2d.draw( new Line2D.Double( center, segment[6].digiNode))
-        g2d.draw( new Line2D.Double( center, segment[7].digiNode))
-        g2d.draw( new Line2D.Double( center, segment[8].digiNode))
-        g2d.draw( new Line2D.Double( center, segment[9].digiNode))
-*/
         (0..NR_OF_LINES_TO_DRAW).each { pairIndex ->
             Pair currentPair = Pi.pair( pairIndex )
             drawLineForNumberPair(g2d, pairIndex, currentPair.first, currentPair.second)
@@ -191,14 +179,14 @@ class NumberGrapher extends JPanel {
 
 
     /*
-    draw line for a pair of numbers
+    draw line for a single pair of numbers
      */
     private void drawLineForNumberPair(Graphics2D g2d, int pairIndex, int fromDigit, int toDigit) {
         g2d.setColor(segment[fromDigit].color)
 
-        LOGGER.info "draw line from $fromDigit (${segment[fromDigit].digiNode[pairIndex]}"
-
         g2d.draw( new Line2D.Double( segment[fromDigit].digiNode[pairIndex], segment[toDigit].digiNode[pairIndex] ) )
+
+        //LOGGER.info "draw line from $fromDigit (${segment[fromDigit].digiNode[pairIndex]}"
     }
 
 
@@ -236,9 +224,7 @@ class NumberGrapher extends JPanel {
     }
 
 
-    private void someSelfPraise(Graphics2D g2d) {
-
-        // Graphics2D g2d = (Graphics2D) g;
+    private void drawInfoLine(Graphics2D g2d) {
 
         RenderingHints rh =
                 new RenderingHints(RenderingHints.KEY_ANTIALIASING,
@@ -248,7 +234,6 @@ class NumberGrapher extends JPanel {
                 RenderingHints.VALUE_RENDER_QUALITY);
         g2d.setRenderingHints(rh);
 
-
         Hashtable<TextAttribute, Object> map =
                 new Hashtable<TextAttribute, Object>();
 
@@ -256,7 +241,7 @@ class NumberGrapher extends JPanel {
         map.put(TextAttribute.KERNING, TextAttribute.KERNING_ON);
 
         /* This colour applies just to the font, not other rendering */
-        map.put(TextAttribute.FOREGROUND, Color.BLUE);
+        map.put(TextAttribute.FOREGROUND, Color.GRAY);
 
         Font font = new Font(Font.SERIF, Font.PLAIN, 11);
 
@@ -266,16 +251,10 @@ class NumberGrapher extends JPanel {
         FontMetrics fm = getFontMetrics(font);
         int width = fm.stringWidth(SELF_PRAISE);
 
-        g2d.drawString(SELF_PRAISE, Application.X_SIZE - width, Application.Y_SIZE - 25);
+        g2d.drawString(SELF_PRAISE, (X_CANVAS_SIZE - TRANSLATION_FACTOR - width), (TRANSLATION_FACTOR + MARGIN -5))
 
     }
 
-
-    private void prepareCanvas( Graphics2D g2d ) {
-        drawLegend(g2d)
-        drawSegments(g2d)
-        someSelfPraise(g2d)
-    }
 
 
     @Override
@@ -288,12 +267,14 @@ class NumberGrapher extends JPanel {
         // prepare the canvas for drawing,
         // translate coord system so that 0/0 is center of circle
         translateCenterToZero(g2d)
-        prepareCanvas( g2d )
 
         // the actual line drawing between Pairs
         drawLines(g2d)
 
+        drawLegend(g2d)
+        drawSegments(g2d)
 
+        drawInfoLine(g2d)
     }
 
 }
