@@ -17,7 +17,7 @@ Work in progress.
 ###  Examples
 Version 0.5 has only a single digiNode per segment
 
-![V-0.5-Screenshot](doc/screenshots/NumViz-V0_5.jpg =300x)
+![V-0.5-Screenshot](https://raw.githubusercontent.com/gernotstarke/num-viz/master/doc/screenshots/NumViz-V0_5.jpg =300x)
 
 ## Goal
 The result shall at least look similar to the awesome [mother of circular pi visualisations](http://thecreatorsproject.vice.com/blog/visualising-the-infinite-data-of-pie)
