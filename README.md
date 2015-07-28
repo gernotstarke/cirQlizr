@@ -14,6 +14,11 @@ Work in progress.
 ![Tasks](https://img.shields.io/github/issues/gernotstarke/num-viz.svg)
 ![Bugs](https://badge.waffle.io/gernotstarke/num-viz.svg?label=bug&title=Bugs)
 
+###  Examples
+Version 0.5 has only a single digiNode per segment
+
+![V-0.5-Screenshot](doc/screenshots/NumViz-V0_5.jpg =300x)
+
 ## Goal
 The result shall at least look similar to the awesome [mother of circular pi visualisations](http://thecreatorsproject.vice.com/blog/visualising-the-infinite-data-of-pie)
 
