@@ -65,13 +65,7 @@ class CircleSpec extends Specification {
     }
 
 
-    /*
-    * the Java2D coordinate space has 0/0 in the upper left corner and extends downwards...
-    * (counter-intuitive)
-     */
-    def "Center in 2D Geometry Coordinates"() {
 
-    }
 
     /*
     * helper method to assert-with-epsilon
