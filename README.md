@@ -19,6 +19,10 @@ Version 0.5 has only a single digiNode per segment
 
 ![V-0.5-Screenshot](https://raw.githubusercontent.com/gernotstarke/num-viz/master/doc/screenshots/NumViz-V0_5.jpg =300x)
 
+Version 0.8 has multiple digiNodes, still straight lines
+![V-0.5-Screenshot](https://raw.githubusercontent.com/gernotstarke/num-viz/master/doc/screenshots/NumViz-V0_8.jpg =300x)
+
+
 ## Goal
 The result shall at least look similar to the awesome [mother of circular pi visualisations](http://thecreatorsproject.vice.com/blog/visualising-the-infinite-data-of-pie)
 
