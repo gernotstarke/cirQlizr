@@ -26,55 +26,77 @@ import java.util.logging.Logger
 
 class NumberGrapher extends JPanel {
 
+    // how many pairs of digits to show in visualization?
+    final private Integer NR_OF_LINES_TO_DRAW
 
-    final static String SELF_PRAISE = "Number visualizer, https://github.com/gernotstarke/num-viz  "
 
     // size of drawing canvas
-    final private Integer  X_CANVAS_SIZE
-    final private Integer  Y_CANVAS_SIZE
-    final private Integer  TRANSLATION_FACTOR
+    private Integer  X_CANVAS_SIZE
+    private Integer  Y_CANVAS_SIZE
+
+    // to relocate the point-of-origin from upper-left (which is standard in Java2D)
+    // to the center of the circle, we need a translation factor
+    private Integer  TRANSLATION_FACTOR
+
+    private Point2D center
 
     // some circle properties
-    private Point2D center
     private float radius
 
     // margin between Segments and JPanel border
-    final Integer MARGIN = 20
+    final Integer LEGEND_WIDTH = 40
 
     // width of legend (to the right of the circle)
-    final Integer LEGEND_WIDTH = 40
+    final Integer MARGIN = 20
+
 
     // segments to attach lines to...
     List<Segment> segment
+
 
     // some properties of segments
     // what part of a circle does a segment extend
     final Double SEGMENT_EXTEND_ANGLE_DEG = 30
     final Double SEGMENT_EXTEND_ANGLE = Math.toRadians( SEGMENT_EXTEND_ANGLE_DEG )
-    // what's the distance to the next segment
     final Double SEGMENT_PADDING_ANGLE_DEG = 3
+    // what's the distance to the next segment
     final Double SEGMENT_PADDING_ANGLE = Math.toRadians( SEGMENT_PADDING_ANGLE_DEG )
-
 
 
     private static final Logger LOGGER = Logger.getLogger(NumberGrapher.class.getName())
 
-    public NumberGrapher(Integer xFrameSize, Integer yFrameSize) {
+
+    final static String SELF_PRAISE = "Number visualizer, https://github.com/gernotstarke/num-viz  "
+
+
+    /*
+    Constructor contains initialization steps:
+    1.) setup canvas (with x and y size, translation-factor
+    e
+     */
+    public NumberGrapher(Integer xFrameSize, Integer yFrameSize, Integer nrOfLinesToDraw) {
         super()
-        this.X_CANVAS_SIZE = xFrameSize
-        this.Y_CANVAS_SIZE = yFrameSize - LEGEND_WIDTH
+        initCanvas(xFrameSize, yFrameSize)
+
+        this.NR_OF_LINES_TO_DRAW = nrOfLinesToDraw
+
+        initSegments()
+    }
+
+
+    private void initCanvas(int xFrameSize, int yFrameSize) {
+        X_CANVAS_SIZE = xFrameSize
+        Y_CANVAS_SIZE = yFrameSize - LEGEND_WIDTH
 
         // crash when dimensions are too small
         assert X_CANVAS_SIZE > 1
         assert Y_CANVAS_SIZE > 1
 
-        this.TRANSLATION_FACTOR = Math.min(X_CANVAS_SIZE, Y_CANVAS_SIZE).intdiv(2)
+        TRANSLATION_FACTOR = Math.min(X_CANVAS_SIZE, Y_CANVAS_SIZE).intdiv(2)
 
-        center = new Point( 0,0)
+        center = new Point(0, 0)
 
         this.radius = radius()
-
-        initSegments()
     }
 
     /*
@@ -105,7 +127,8 @@ class NumberGrapher extends JPanel {
                     angleStart: thisDigit * ((SEGMENT_EXTEND_ANGLE + (2 * SEGMENT_PADDING_ANGLE))),
                     angleExtend: SEGMENT_EXTEND_ANGLE)
 
-            segment[thisDigit].setDigiPoint()
+
+            segment[thisDigit].setDigiNodes( NR_OF_LINES_TO_DRAW )
         }
 
     }
@@ -135,8 +158,6 @@ class NumberGrapher extends JPanel {
                 arc2D.setArcByCenter(0,0, radius, Math.toDegrees(angleStart), Math.toDegrees(angleExtend), Arc2D.OPEN)
                 g2d.draw(arc2D)
 
-                // debugging digiPoint calculation
-                //Line2D line = new Line2D.Double( center.x, center.y)
             }
         }
     }
@@ -150,34 +171,34 @@ class NumberGrapher extends JPanel {
         g2d.setStroke(new BasicStroke(1.0f))
 
         /*
-        g2d.draw( new Line2D.Double( center, segment[0].digiPoint))
-        g2d.draw( new Line2D.Double( center, segment[1].digiPoint))
-        g2d.draw( new Line2D.Double( center, segment[2].digiPoint))
-        g2d.draw( new Line2D.Double( center, segment[3].digiPoint))
-        g2d.draw( new Line2D.Double( center, segment[4].digiPoint))
-        g2d.draw( new Line2D.Double( center, segment[5].digiPoint))
-        g2d.draw( new Line2D.Double( center, segment[6].digiPoint))
-        g2d.draw( new Line2D.Double( center, segment[7].digiPoint))
-        g2d.draw( new Line2D.Double( center, segment[8].digiPoint))
-        g2d.draw( new Line2D.Double( center, segment[9].digiPoint))
+        g2d.draw( new Line2D.Double( center, segment[0].digiNode))
+        g2d.draw( new Line2D.Double( center, segment[1].digiNode))
+        g2d.draw( new Line2D.Double( center, segment[2].digiNode))
+        g2d.draw( new Line2D.Double( center, segment[3].digiNode))
+        g2d.draw( new Line2D.Double( center, segment[4].digiNode))
+        g2d.draw( new Line2D.Double( center, segment[5].digiNode))
+        g2d.draw( new Line2D.Double( center, segment[6].digiNode))
+        g2d.draw( new Line2D.Double( center, segment[7].digiNode))
+        g2d.draw( new Line2D.Double( center, segment[8].digiNode))
+        g2d.draw( new Line2D.Double( center, segment[9].digiNode))
 */
-        (0..100).each { index ->
-            Pair currentPair = Pi.pair( index )
-            drawLineForNumberPair(g2d, currentPair.first, currentPair.second)
+        (0..NR_OF_LINES_TO_DRAW).each { pairIndex ->
+            Pair currentPair = Pi.pair( pairIndex )
+            drawLineForNumberPair(g2d, pairIndex, currentPair.first, currentPair.second)
         }
 
     }
 
 
-    private void drawLineForNumberPair(Graphics2D g2d, int fromDigit, int toDigit) {
+    /*
+    draw line for a pair of numbers
+     */
+    private void drawLineForNumberPair(Graphics2D g2d, int pairIndex, int fromDigit, int toDigit) {
         g2d.setColor(segment[fromDigit].color)
-    //    g2d.drawLine(segment[fromDigit].digiPoint.getX(), segment[fromDigit].digiPoint.getY(),
-    //            segment[toDigit].digiPoint.getY(), segment[toDigit].digiPoint.getY())
 
-        LOGGER.info "draw line from $fromDigit (${segment[fromDigit].digiPoint}"
+        LOGGER.info "draw line from $fromDigit (${segment[fromDigit].digiNode[pairIndex]}"
 
-        Line2D line = new Line2D.Double( segment[fromDigit].digiPoint, segment[toDigit].digiPoint )
-        g2d.draw( line )
+        g2d.draw( new Line2D.Double( segment[fromDigit].digiNode[pairIndex], segment[toDigit].digiNode[pairIndex] ) )
     }
 
 

@@ -13,6 +13,8 @@ import java.awt.MouseInfo
 
 class Application extends JFrame {
 
+        final static int NR_OF_LINES_TO_DRAW = 998
+
         final static int X_SIZE = 800
         final static int Y_SIZE = 700
 
@@ -24,7 +26,10 @@ class Application extends JFrame {
 
         private void initUI() {
 
-            add(new NumberGrapher( X_SIZE, Y_SIZE ));
+            // crash upoin misconfiguration
+            assert NR_OF_LINES_TO_DRAW >= 0
+
+            add(new NumberGrapher( X_SIZE, Y_SIZE, NR_OF_LINES_TO_DRAW ));
 
             setTitle("Number Visualizer");
             setSize(X_SIZE, Y_SIZE);
@@ -44,6 +49,7 @@ class Application extends JFrame {
                 @Override
                 public void run() {
                     Application application = new Application(  );
+
                     application.setVisible(true);
                 }
             });

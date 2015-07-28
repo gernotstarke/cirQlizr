@@ -23,7 +23,8 @@ class Segment {
     private double angleStart
     private double angleExtend
 
-    public Point2D digiPoint
+    // several "connection points" for lines
+    public List<Point2D> digiNode
 
     private static final Logger LOGGER = Logger.getLogger(Segment.class.getName())
 
@@ -36,17 +37,32 @@ class Segment {
      * x = radius * cos(t)    y = radius * sin(t) with t being the angle...
      * @return point in Segment, where lines will be attached
      */
-    public void setDigiPoint() {
-        // TODO: evenly distribute digiPoints along the segment
-        double angle = angleStart + angleExtend/2
+    public void setDigiNodes(int nrOfDigitsToShow ) {
 
+        digiNode = new ArrayList<Point2D.Double>( nrOfDigitsToShow)
 
-        digiPoint = Circle.getPointByCenterRadiusAngle( new Point(0,0), radius, angle )
+        double deltaAngle = angleExtend / (Math.max(nrOfDigitsToShow, 1) + 1)
+
+        // for each digit to show, create one digiNode
+        (0..nrOfDigitsToShow).each { nrOfCurrentDigiNode ->
+           createDigiNode( nrOfCurrentDigiNode, angleStart, deltaAngle)
+        }
+    }
+
+    private Point2D createDigiNode( int nrOfCurrentDigiNode, double angleStart, double deltaAngle) {
+
+        double angle = angleStart + deltaAngle * nrOfCurrentDigiNode
+
+        digiNode[nrOfCurrentDigiNode] = Circle.getPointByCenterRadiusAngle( new Point(0,0), radius, angle )
 
         // as Java coordinate system really sucks - we need to invert the Y value
-        digiPoint.setLocation( digiPoint.getX(), -1 * digiPoint.getY())
+        // (thx to Groovy for awesome "with" statement)
+        digiNode[nrOfCurrentDigiNode].with {
+            setLocation( getX(), -1 * getY())
+        }
 
-        LOGGER.info "Segment[${digit}]: digiPoint: $digiPoint, angle=$angle, radius=$radius"
+        // logging was only required in initial dev phase
+        // LOGGER.info "Segment[${digit}]: angle=$angleStart, radius=$radius"
     }
 
 }
