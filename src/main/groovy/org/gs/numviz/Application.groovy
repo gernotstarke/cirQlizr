@@ -43,16 +43,11 @@ class Application extends JFrame {
 
                 @Override
                 public void run() {
-                    Application ex = new Application(  );
-                    ex.setVisible(true);
+                    Application application = new Application(  );
+                    application.setVisible(true);
                 }
             });
 
-            /* display absolute coordinates
-            while(true){
-                Thread.sleep(100);
-                System.out.println("("+MouseInfo.getPointerInfo().getLocation().x+", "+MouseInfo.getPointerInfo().getLocation().y+")");
-            }*/
         }
     }
 
