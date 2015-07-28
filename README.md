@@ -17,10 +17,12 @@ Work in progress.
 ###  Examples
 Version 0.5 has only a single digiNode per segment
 
-![V-0.5-Screenshot](https://raw.githubusercontent.com/gernotstarke/num-viz/master/doc/screenshots/NumViz-V0_5.jpg =300x)
+<img src="https://raw.githubusercontent.com/gernotstarke/num-viz/master/doc/screenshots/NumViz-V0_5.jpg" width=400>
+
 
 Version 0.8 has multiple digiNodes, still straight lines
-![V-0.5-Screenshot](https://raw.githubusercontent.com/gernotstarke/num-viz/master/doc/screenshots/NumViz-V0_8.jpg =300x)
+
+<img src="https://raw.githubusercontent.com/gernotstarke/num-viz/master/doc/screenshots/NumViz-V0_8.jpg" width=400>
 
 
 ## Goal
