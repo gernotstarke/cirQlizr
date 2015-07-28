@@ -161,9 +161,10 @@ class NumberGrapher extends JPanel {
         g2d.draw( new Line2D.Double( center, segment[8].digiPoint))
         g2d.draw( new Line2D.Double( center, segment[9].digiPoint))
 */
-        drawLineForNumberPair(g2d, 3, 1)
-
-        drawLineForNumberPair(g2d, 1, 4)
+        (0..100).each { index ->
+            Pair currentPair = Pi.pair( index )
+            drawLineForNumberPair(g2d, currentPair.first, currentPair.second)
+        }
 
     }
 
