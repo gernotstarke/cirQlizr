@@ -2,7 +2,6 @@ package org.gs.numviz
 
 import javax.swing.JFrame
 import java.awt.EventQueue
-import java.awt.MouseInfo
 
 // see end-of-file for license information
 
@@ -13,49 +12,60 @@ import java.awt.MouseInfo
 
 class Application extends JFrame {
 
-        final static int NR_OF_LINES_TO_DRAW = 998
 
-        final static int X_SIZE = 800
-        final static int Y_SIZE = 700
+    // the number to visualize
+    // resolve #25 (abstract class for special numbers)
+    final SpecialNumber NUMBER
 
-
-        public Application() {
-            initUI();
-        }
+    // lines to draw = nr-of-digits + 1
+    final static int NR_OF_LINES_TO_DRAW = 3
 
 
-        private void initUI() {
 
-            // crash upoin misconfiguration
-            assert NR_OF_LINES_TO_DRAW >= 0
-
-            add(new NumberGrapher( X_SIZE, Y_SIZE, NR_OF_LINES_TO_DRAW ));
-
-            setTitle("Number Visualizer");
-            setSize(X_SIZE, Y_SIZE);
-            setLocationRelativeTo(null);
-            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-            setResizable( false ) // resolves issue #9
-        }
+    // display size on screen
+    final static int X_CANVAS_SIZE = 800
+    final static int Y_CANVAS_SIZE = 700
 
 
-        public static void main(String[] args) {
+    public Application() {
+        NUMBER = new Pi(NR_OF_LINES_TO_DRAW + 1)
 
-            // TODO: add command line parsing for color scheme, number, size
-
-            EventQueue.invokeLater(new Runnable() {
-
-                @Override
-                public void run() {
-                    Application application = new Application(  );
-
-                    application.setVisible(true);
-                }
-            });
-
-        }
+        initUI();
     }
+
+
+    private void initUI() {
+
+        // crash upoin misconfiguration
+        assert NR_OF_LINES_TO_DRAW >= 0
+
+        add(new NumberGrapher(NUMBER, NR_OF_LINES_TO_DRAW, X_CANVAS_SIZE, Y_CANVAS_SIZE, ));
+
+        setTitle("Number Visualizer - ${NR_OF_LINES_TO_DRAW} digits of ${NUMBER.name}");
+        setSize(X_CANVAS_SIZE, Y_CANVAS_SIZE);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        setResizable(false) // resolves issue #9
+    }
+
+
+    public static void main(String[] args) {
+
+        // TODO: add command line parsing for color scheme, number, size
+
+        EventQueue.invokeLater(new Runnable() {
+
+            @Override
+            public void run() {
+                Application application = new Application();
+
+                application.setVisible(true);
+            }
+        });
+
+    }
+}
 
 /*********************************************************************************
  The MIT License (MIT)

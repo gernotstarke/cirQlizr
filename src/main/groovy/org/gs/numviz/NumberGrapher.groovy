@@ -26,6 +26,9 @@ import java.util.logging.Logger
 
 class NumberGrapher extends JPanel {
 
+    // what number to show
+    final private SpecialNumber NUMBER
+
     // how many pairs of digits to show in visualization?
     final private Integer NR_OF_LINES_TO_DRAW
 
@@ -34,20 +37,23 @@ class NumberGrapher extends JPanel {
     private Integer  X_CANVAS_SIZE
     private Integer  Y_CANVAS_SIZE
 
-    // to relocate the point-of-origin from upper-left (which is standard in Java2D)
-    // to the center of the circle, we need a translation factor
-    private Integer  TRANSLATION_FACTOR
-
-    private Point2D center
-
-    // some circle properties
-    private float radius
 
     // margin between Segments and JPanel border
     final Integer LEGEND_WIDTH = 40
 
     // width of legend (to the right of the circle)
     final Integer MARGIN = 20
+
+
+    // to relocate the point-of-origin from upper-left (which is standard in Java2D)
+    // to the center of the circle, we need a translation factor
+    private Integer  TRANSLATION_FACTOR
+
+    // some circle properties:
+
+    private Point2D center
+
+    private float radius
 
 
     // segments to attach lines to...
@@ -74,11 +80,13 @@ class NumberGrapher extends JPanel {
     1.) setup canvas (with x and y size, translation-factor
     e
      */
-    public NumberGrapher(Integer xFrameSize, Integer yFrameSize, Integer nrOfLinesToDraw) {
+    public NumberGrapher(SpecialNumber number, Integer nrOfLinesToDraw, Integer xFrameSize, Integer yFrameSize ) {
         super()
-        initCanvas(xFrameSize, yFrameSize)
 
         this.NR_OF_LINES_TO_DRAW = nrOfLinesToDraw
+        this.NUMBER = number
+
+        initCanvas(xFrameSize, yFrameSize)
 
         initSegments()
     }
@@ -128,7 +136,7 @@ class NumberGrapher extends JPanel {
                     angleExtend: SEGMENT_EXTEND_ANGLE)
 
 
-            segment[thisDigit].setDigiNodes( NR_OF_LINES_TO_DRAW )
+            segment[thisDigit].setDigiNodesCoordinates( NR_OF_LINES_TO_DRAW )
         }
 
     }
@@ -170,8 +178,8 @@ class NumberGrapher extends JPanel {
         LOGGER.info( "entering drawLines method")
         g2d.setStroke(new BasicStroke(1.0f))
 
-        (0..NR_OF_LINES_TO_DRAW).each { pairIndex ->
-            Pair currentPair = Pi.pair( pairIndex )
+        (0..NR_OF_LINES_TO_DRAW-1).each { pairIndex ->
+            Pair currentPair = NUMBER.getPair( pairIndex )
             drawLineForNumberPair(g2d, pairIndex, currentPair.first, currentPair.second)
         }
 
@@ -179,7 +187,7 @@ class NumberGrapher extends JPanel {
 
 
     /*
-    draw line for a single pair of numbers
+    draw line for a single getPair of numbers
      */
     private void drawLineForNumberPair(Graphics2D g2d, int pairIndex, int fromDigit, int toDigit) {
         g2d.setColor(segment[fromDigit].color)
