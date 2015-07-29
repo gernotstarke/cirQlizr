@@ -1,5 +1,8 @@
-package org.gs.numviz
+package org.gs.numviz.numbers
 
+import org.gs.numviz.numbers.Pair
+import org.gs.numviz.numbers.Pi
+import org.gs.numviz.numbers.SpecialNumber
 import org.junit.Before
 import org.junit.Test
 

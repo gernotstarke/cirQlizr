@@ -1,4 +1,4 @@
-package org.gs.numviz
+package org.gs.numviz.numbers
 
 import groovy.transform.EqualsAndHashCode
 

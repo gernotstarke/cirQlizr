@@ -1,4 +1,7 @@
-package org.gs.numviz
+package org.gs.numviz.numbers
+
+import org.gs.numviz.numbers.Pair
+import org.gs.numviz.numbers.Pi
 
 // see end-of-file for license information
 

@@ -1,7 +1,8 @@
-package org.gs.numviz
+package org.gs.numviz.numbers
 
+import org.gs.numviz.numbers.Pi
+import org.gs.numviz.numbers.SpecialNumber
 import spock.lang.Specification
-import spock.lang.Unroll
 
 // see end-of-file for license information
 

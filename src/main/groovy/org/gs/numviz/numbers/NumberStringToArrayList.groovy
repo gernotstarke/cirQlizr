@@ -1,4 +1,4 @@
-package org.gs.numviz
+package org.gs.numviz.numbers
 
 // converts a number represented as GString to an ArrayList-able
 // representation, that can be pasted into the Pi-class-source...

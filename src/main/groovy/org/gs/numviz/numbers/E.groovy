@@ -1,4 +1,6 @@
-package org.gs.numviz
+package org.gs.numviz.numbers
+
+import org.gs.numviz.SpecialNumber
 
 // see end-of-file for license information
 
