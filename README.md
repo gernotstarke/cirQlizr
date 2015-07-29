@@ -108,6 +108,7 @@ I used the following resources for getting the numbers:
 
 and helped myself with a small script to convert the plain format to
 comma-separated digits useable as static ArrayList initializer:
+(see package `org.gs.numviz.numbers`)
 
     def numAsString =
     """3.1415926535 8979323846 2643383279 5028841971 6939937510
