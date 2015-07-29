@@ -41,7 +41,7 @@ class Segment {
 
         digiNode = new ArrayList<Point2D.Double>( nrOfDigitsToShow)
 
-        double deltaAngle = angleExtend / (Math.max(nrOfDigitsToShow, 1) + 1)
+        double deltaAngle = deltaAngle( nrOfDigitsToShow, angleExtend)
 
         // for each digit to show, create one digiNode
         (0..nrOfDigitsToShow).each { nrOfCurrentDigiNode ->
@@ -63,6 +63,18 @@ class Segment {
 
         // logging was only required in initial dev phase
         // LOGGER.info "Segment[${digit}]: angle=$angleStart, radius=$radius"
+    }
+
+    /**
+     * what is the delta-angle between digiNodes?
+     * @param nrOfDigiNodes
+     * @param angleExtend
+     * @return
+     */
+    public static double deltaAngle( int nrOfDigiNodes, double angleExtend) {
+        assert nrOfDigiNodes >= 0
+        assert angleExtend >= 0
+        return angleExtend / (Math.max(nrOfDigiNodes, 1) + 1)
     }
 
 }
