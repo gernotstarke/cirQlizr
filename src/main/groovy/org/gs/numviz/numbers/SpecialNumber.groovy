@@ -1,7 +1,4 @@
 package org.gs.numviz.numbers
-
-import org.gs.numviz.Pair
-
 // see end-of-file for license information
 
 /**
