@@ -52,7 +52,9 @@ Martin Krzywinski and Cristian Illies Vasile.
 * Segment:
   * visually represents all Lines for one specific Digit (either left or right in a Pair).
   * contains ordered list of connection points called "digiNodes" 
-  * determines their x/y positions on the drawing canvas.
+     * determines their x/y positions on the drawing canvas.
+     * number of digiNodes on segment depends on the count of the corresponding
+        digit in the number.
   * has a position on drawing canvas
   * has a Color
   * is shaped like a "circle segment" of 36 degrees (1/10th of a full circle,
@@ -102,6 +104,7 @@ Please note - this scheme is *not* colorblind safe.
 I used the following resources for getting the numbers:
 
 * [&#960; (pi): Angio.net](http://www.angio.net/pi/digits.html)
+* [e (Euler's number): University of Utah](http://www.math.utah.edu/~pa/math/e.html)
 
 and helped myself with a small script to convert the plain format to
 comma-separated digits useable as static ArrayList initializer:
