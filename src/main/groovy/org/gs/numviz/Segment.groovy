@@ -31,20 +31,24 @@ class Segment {
 
     // implicit constructor to allow named parameters
 
+
     /**
-     * calculate the DigiPoint for this Segment with the
+     * calculate the digiNodes for this Segment with the
      * <a href="http://www.mathopenref.com/coordparamcircle.html">parametric circle equation</a>:
      * x = radius * cos(t)    y = radius * sin(t) with t being the angle...
-     * @return point in Segment, where lines will be attached
+     * @return points in Segment, where lines will be attached
      */
-    public void setDigiNodes(int nrOfDigitsToShow ) {
+    public void setDigiNodesCoordinates(int nrOfDigitsToShow ) {
+
+        // we don't support 0 digits
+        assert nrOfDigitsToShow > 0
 
         digiNode = new ArrayList<Point2D.Double>( nrOfDigitsToShow)
 
         double deltaAngle = deltaAngle( nrOfDigitsToShow, angleExtend)
 
         // for each digit to show, create one digiNode
-        (0..nrOfDigitsToShow).each { nrOfCurrentDigiNode ->
+        (0..(nrOfDigitsToShow)).each { nrOfCurrentDigiNode ->
            createDigiNode( nrOfCurrentDigiNode, angleStart, deltaAngle)
         }
     }
