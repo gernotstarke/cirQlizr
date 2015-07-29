@@ -1,5 +1,6 @@
 package org.gs.numviz
 
+import org.gs.AssertHelper
 import spock.lang.Specification
 
 import java.awt.geom.Point2D
@@ -24,8 +25,8 @@ class CircleSpec extends Specification {
         Double actualY = onXAxis.getY()
 
         then:
-        assertCloseTo(actualX, 1, 0.02)
-        assertCloseTo(actualY, 0, 0.02)
+        AssertHelper.assertCloseTo(actualX, 1, 0.02)
+        AssertHelper.assertCloseTo(actualY, 0, 0.02)
     }
 
     /*
@@ -40,8 +41,8 @@ class CircleSpec extends Specification {
         Point2D crossingAxis = circle.getPointByAngle(angle)
 
         then:
-        assertCloseTo( (float) crossingAxis.getX(), xAxis, 0.01f )
-        assertCloseTo( (float) crossingAxis.getY(), yAxis, 0.01f )
+        AssertHelper.assertCloseTo( (float) crossingAxis.getX(), xAxis, 0.01f )
+        AssertHelper.assertCloseTo( (float) crossingAxis.getY(), yAxis, 0.01f )
 
         where:
         angle        | xAxis | yAxis
@@ -60,19 +61,14 @@ class CircleSpec extends Specification {
         Point2D onXAxis = circle.getPointByAngle( Math.toRadians( 45 ))
 
         then:
-        assertCloseTo( 0.7071067812f, (Float) onXAxis.getX(), 0.01f )
-        assertCloseTo( 0.7071067812f, (Float) onXAxis.getY(), 0.01f)
+        AssertHelper.assertCloseTo( 0.7071067812f, (Float) onXAxis.getX(), 0.01f )
+        AssertHelper.assertCloseTo( 0.7071067812f, (Float) onXAxis.getY(), 0.01f)
     }
 
 
 
 
-    /*
-    * helper method to assert-with-epsilon
-     */
-    def assertCloseTo( expected, actual, float epsilon) {
-        return Math.abs( Math.abs( expected ) - Math.abs( actual)) < epsilon
-    }
+
 
 }
 
