@@ -7,7 +7,15 @@ import spock.lang.Specification
 
 
 class SegmentSpec extends Specification {
-    def "DigiNodes are distributed evenly along Segment"() {
+
+    double SEGMENT_PADDING_ANGLE
+
+    def setup() {
+      SEGMENT_PADDING_ANGLE = Math.toRadians( 3 )
+    }
+
+
+    def "DigiNodes are distributed evenly along Segment Zero"() {
         given:
         Segment s = new Segment(
                 digit: 0,
@@ -16,7 +24,15 @@ class SegmentSpec extends Specification {
                 angleStart: 0 + (2 * SEGMENT_PADDING_ANGLE),
                 angleExtend: 30)
 
+        when:
+        s.setDigiNodesCoordinates(1)
+
+        then:
+            s.digiNode.size() == 1
+
     }
+
+
 
 
     def "calculate delta angle"(int nrOfNodes, double angleExtend, double deltaAngle) {
