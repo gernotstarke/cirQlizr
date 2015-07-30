@@ -1,5 +1,8 @@
 package org.gs.numviz
 
+import org.gs.numviz.numbers.Pair
+import org.gs.numviz.numbers.SpecialNumber
+
 // see end of file for licence information
 
 import java.awt.BasicStroke
@@ -46,9 +49,9 @@ class NumberGrapher extends JPanel {
 
 
     // to relocate the point-of-origin from upper-left (which is standard in Java2D)
-    // to the center of the circle, we need a translation factor
-    private Integer  TRANSLATION_FACTOR
-
+    // to the center of the circle, we need a translation offset
+    private Integer TRANSLATION_OFFSET
+    Point2
     // some circle properties:
 
     private Point2D center
@@ -72,7 +75,7 @@ class NumberGrapher extends JPanel {
     private static final Logger LOGGER = Logger.getLogger(NumberGrapher.class.getName())
 
 
-    final static String SELF_PRAISE = "Number visualizer, https://github.com/gernotstarke/num-viz  "
+    final static String INFO_TEXT = "Number Visualizer, https://github.com/gernotstarke/num-viz  "
 
 
     /*
@@ -100,7 +103,7 @@ class NumberGrapher extends JPanel {
         assert X_CANVAS_SIZE > 1
         assert Y_CANVAS_SIZE > 1
 
-        TRANSLATION_FACTOR = Math.min(X_CANVAS_SIZE, Y_CANVAS_SIZE).intdiv(2)
+        TRANSLATION_OFFSET = Math.min(X_CANVAS_SIZE, Y_CANVAS_SIZE).intdiv(2)
 
         center = new Point(0, 0)
 
@@ -111,7 +114,7 @@ class NumberGrapher extends JPanel {
      * translates position of center to 0/0
      */
     private void translateCenterToZero( Graphics2D g2d ) {
-                g2d.translate( TRANSLATION_FACTOR, TRANSLATION_FACTOR )
+                g2d.translate( TRANSLATION_OFFSET, TRANSLATION_OFFSET )
     }
 
 
@@ -136,10 +139,15 @@ class NumberGrapher extends JPanel {
                     angleExtend: SEGMENT_EXTEND_ANGLE)
 
 
-            segment[thisDigit].setDigiNodesCoordinates( NR_OF_LINES_TO_DRAW )
+            segment[thisDigit].with {
+                nrOfOccurences =  NUMBER.countDigit( thisDigit)
+                setUpDigiNodes( NR_OF_LINES_TO_DRAW )
+
+            }
         }
 
     }
+
 
     /*
      * draw segments with their circular representation
@@ -211,10 +219,10 @@ class NumberGrapher extends JPanel {
             g2d.setPaint(NumVizColor.color[digit])
 
             // draw filled rectangle
-            g2d.fillRect((X_CANVAS_SIZE - TRANSLATION_FACTOR) - 60, (Y_CANVAS_SIZE - TRANSLATION_FACTOR - (digit + 1) * 35), 30, 30)
+            g2d.fillRect((X_CANVAS_SIZE - TRANSLATION_OFFSET) - 60, (Y_CANVAS_SIZE - TRANSLATION_OFFSET - (digit + 1) * 35), 30, 30)
 
             // show corresponding digit
-            g2d.drawString(digit.toString(), (X_CANVAS_SIZE - TRANSLATION_FACTOR - 22), (Y_CANVAS_SIZE - TRANSLATION_FACTOR- digit * 35 - 14))
+            g2d.drawString(digit.toString(), (X_CANVAS_SIZE - TRANSLATION_OFFSET - 22), (Y_CANVAS_SIZE - TRANSLATION_OFFSET- digit * 35 - 14))
         }
     }
 
@@ -232,7 +240,7 @@ class NumberGrapher extends JPanel {
     }
 
 
-    private void drawInfoLine(Graphics2D g2d) {
+    private void drawInfoText(Graphics2D g2d) {
 
         RenderingHints rh =
                 new RenderingHints(RenderingHints.KEY_ANTIALIASING,
@@ -257,9 +265,9 @@ class NumberGrapher extends JPanel {
         g2d.setFont(font);
 
         FontMetrics fm = getFontMetrics(font);
-        int width = fm.stringWidth(SELF_PRAISE);
+        int width = fm.stringWidth(INFO_TEXT);
 
-        g2d.drawString(SELF_PRAISE, (X_CANVAS_SIZE - TRANSLATION_FACTOR - width), (TRANSLATION_FACTOR + MARGIN -5))
+        g2d.drawString(INFO_TEXT, (X_CANVAS_SIZE - TRANSLATION_OFFSET - width), (TRANSLATION_OFFSET + MARGIN -5))
 
     }
 
@@ -276,13 +284,15 @@ class NumberGrapher extends JPanel {
         // translate coord system so that 0/0 is center of circle
         translateCenterToZero(g2d)
 
+
+
         // the actual line drawing between Pairs
         drawLines(g2d)
 
         drawLegend(g2d)
         drawSegments(g2d)
 
-        drawInfoLine(g2d)
+        drawInfoText(g2d)
     }
 
 }

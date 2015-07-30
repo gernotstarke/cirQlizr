@@ -1,5 +1,8 @@
 package org.gs.numviz
 
+import org.gs.numviz.numbers.Pi
+import org.gs.numviz.numbers.SpecialNumber
+
 import javax.swing.JFrame
 import java.awt.EventQueue
 
@@ -18,7 +21,7 @@ class Application extends JFrame {
     final SpecialNumber NUMBER
 
     // lines to draw = nr-of-digits + 1
-    final static int NR_OF_LINES_TO_DRAW = 3
+    final static int NR_OF_LINES_TO_DRAW = 30
 
 
 
@@ -33,13 +36,19 @@ class Application extends JFrame {
         initUI();
     }
 
+    /*
+     initialize 10 segments, one for each digit.
+     */
+    private void initSegments() {
+
+    }
 
     private void initUI() {
 
-        // crash upoin misconfiguration
+        // crash upon misconfiguration
         assert NR_OF_LINES_TO_DRAW >= 0
 
-        add(new NumberGrapher(NUMBER, NR_OF_LINES_TO_DRAW, X_CANVAS_SIZE, Y_CANVAS_SIZE, ));
+        add( new NumberGrapher( NUMBER, NR_OF_LINES_TO_DRAW, X_CANVAS_SIZE, Y_CANVAS_SIZE ));
 
         setTitle("Number Visualizer - ${NR_OF_LINES_TO_DRAW} digits of ${NUMBER.name}");
         setSize(X_CANVAS_SIZE, Y_CANVAS_SIZE);
