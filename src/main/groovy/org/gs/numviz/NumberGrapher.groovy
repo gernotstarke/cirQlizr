@@ -51,7 +51,7 @@ class NumberGrapher extends JPanel {
     // to relocate the point-of-origin from upper-left (which is standard in Java2D)
     // to the center of the circle, we need a translation offset
     private Integer TRANSLATION_OFFSET
-    Point2
+
     // some circle properties:
 
     private Point2D center
