@@ -1,6 +1,7 @@
 package org.gs.numviz.ui
 
 import org.gs.numviz.NumVizColor
+import org.gs.numviz.NumberVisualizer
 import org.gs.numviz.numbers.Pair
 
 import javax.swing.JPanel
@@ -38,15 +39,17 @@ class DrawingCanvas extends JPanel {
     // program name and author, URL, shown at bottom of canvas
     private String INFO_LINE
 
+    // entry point to the "domain" - in DDD-terms: AggregateRoot
+    private NumberVisualizer nv
 
 
-    DrawingCanvas(int x_resolution, int y_resolution, String infoLine ) {
+    DrawingCanvas(int x_resolution, int y_resolution, String infoLine, NumberVisualizer numberVisualizer ) {
         super()
-        initCanvas( x_resolution, y_resolution, infoLine )
+        initCanvas( x_resolution, y_resolution, infoLine, numberVisualizer )
     }
 
 
-    private void initCanvas(int xFrameSize, int yFrameSize, String infoLine) {
+    private void initCanvas(int xFrameSize, int yFrameSize, String infoLine, NumberVisualizer numberVisualizer) {
         X_CANVAS_SIZE = xFrameSize
         Y_CANVAS_SIZE = yFrameSize - LEGEND_WIDTH
 
@@ -58,8 +61,10 @@ class DrawingCanvas extends JPanel {
 
         INFO_LINE = infoLine
 
-    }
+        assert numberVisualizer != null
+        nv = numberVisualizer
 
+    }
 
 
     /*
@@ -71,24 +76,17 @@ class DrawingCanvas extends JPanel {
     }
 
     /*
-    * draw segments with their circular representation
+    * draw segments with their circular representation in a given radius
     */
 
     private void drawSegments(Graphics2D g2d) {
-
-        //g2d.setPaint(Color.lightGray)
-        //g2d.setStroke(new BasicStroke(0.5f))
-
-        // Circle -> specialized Ellipse, coords give
-        // upper left corner of enclosing rectangle
-        // g2d.draw(new Ellipse2D.Double(MARGIN, MARGIN, 2 * radius, 2 * radius))
 
         // segments represented by Arc2D.Double or Arc2D.Float instances
         g2d.setStroke(new BasicStroke(12.0f))
         Arc2D arc2D = new Arc2D.Double()
 
         (0..9).each { digit ->
-            segment[digit].with {
+            nv.segment[digit].with {
                 g2d.setPaint(color)
                 //LOGGER.info "digit $digit: center.x=${center.x}, center.y=${center.y}"
 
@@ -222,7 +220,7 @@ class DrawingCanvas extends JPanel {
         //drawLines(g2d)
 
         drawLegend(g2d)
-        //drawSegments(g2d)
+        drawSegments(g2d)
 
     }
 

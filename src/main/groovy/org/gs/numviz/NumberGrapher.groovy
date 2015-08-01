@@ -30,21 +30,7 @@ class NumberGrapher extends JPanel {
     // how many pairs of digits to show in visualization?
     final private Integer NR_OF_LINES_TO_DRAW
 
-    // size of drawing canvas
-    private Integer X_CANVAS_SIZE
-    private Integer Y_CANVAS_SIZE
-
-    // margin between Segments and JPanel border
-    final Integer LEGEND_WIDTH = 40
-
-    // width of legend (to the right of the circle)
-    final Integer MARGIN = 20
-
-
-
     // some circle properties:
-
-    private Point2D center
 
     private float radius
 

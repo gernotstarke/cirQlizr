@@ -18,18 +18,18 @@ class Application  {
 
     // the number to visualize
     // resolve #25 (abstract class for special numbers)
+    final static SpecialNumber NUMBER = new Pi(NR_OF_CONNECTIONS_TO_SHOW+ 1)
 
-    final static SpecialNumber NUMBER = new Pi(NR_OF_LINES_TO_DRAW + 1)
 
     // lines to draw = nr-of-digits + 1
-    final static int NR_OF_LINES_TO_DRAW = 3
+    final static int NR_OF_CONNECTIONS_TO_SHOW = 3
 
 
 
     // window/canvas size
     final static int RESOLUTION = 700
 
-    final static String TITLE_TEXT = "Number Visualizer - ${NR_OF_LINES_TO_DRAW} digits of ${NUMBER.name}"
+    final static String TITLE_TEXT = "Number Visualizer - ${NR_OF_CONNECTIONS_TO_SHOW} digits of ${NUMBER.name}"
 
     final static String INFO_LINE = "Number Visualizer, https://github.com/gernotstarke/num-viz  "
 
@@ -38,11 +38,16 @@ class Application  {
     public static void main(String[] args) {
         // TODO: add command line parsing for color scheme, number, size
 
-        // domain controller
-        NumberVisualizer numberVisualizer = new NumberVisualizer( NUMBER, NR_OF_LINES_TO_DRAW )
+        // construct the domain root
+        NumberVisualizer numberVisualizer = new NumberVisualizer( NUMBER, NR_OF_CONNECTIONS_TO_SHOW, RESOLUTION)
+
+        // create and initialize segments and digiNodes
+        numberVisualizer.initSegments()
+
 
         // UI Window
-        ApplicationFrame.showApplicationFrame( TITLE_TEXT, INFO_LINE, RESOLUTION)
+        ApplicationFrame.showApplicationFrame( TITLE_TEXT, INFO_LINE, RESOLUTION, numberVisualizer)
+
 
     }
 }

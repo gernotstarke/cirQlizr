@@ -30,6 +30,8 @@ class Circle {
         Double y = radius * Math.sin( angle ) + center.getY()
         return new Point2D.Double( x , y )
     }
+
+
 }
 
 /*********************************************************************************

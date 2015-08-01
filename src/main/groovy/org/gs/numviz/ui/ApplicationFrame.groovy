@@ -1,5 +1,7 @@
 package org.gs.numviz.ui
 
+import org.gs.numviz.NumberVisualizer
+
 import javax.swing.*
 import java.awt.*
 
@@ -16,12 +18,12 @@ class ApplicationFrame extends JFrame {
     private Integer Y_CANVAS_SIZE
 
 
-    public ApplicationFrame(String titleText, String infoLine, int resolution) {
+    public ApplicationFrame(String titleText, String infoLine, int resolution, NumberVisualizer numberVisualizer) {
 
         this.X_CANVAS_SIZE = resolution + 100
         this.Y_CANVAS_SIZE = resolution
 
-        add( new DrawingCanvas( X_CANVAS_SIZE, Y_CANVAS_SIZE, infoLine ));
+        add( new DrawingCanvas( X_CANVAS_SIZE, Y_CANVAS_SIZE, infoLine, numberVisualizer ));
 
         setTitle( titleText);
         setSize( X_CANVAS_SIZE, Y_CANVAS_SIZE );
@@ -35,13 +37,13 @@ class ApplicationFrame extends JFrame {
 
 
 
-    public static showApplicationFrame( String titleText, String infoLine, int resolution) {
+    public static showApplicationFrame( String titleText, String infoLine, int resolution, NumberVisualizer nv) {
         EventQueue.invokeLater(new Runnable() {
 
             @Override
             public void run() {
                 ApplicationFrame applicationFrame =
-                        new ApplicationFrame(titleText, infoLine, resolution );
+                        new ApplicationFrame(titleText, infoLine, resolution, nv );
 
                 applicationFrame.setVisible(true);
             }
