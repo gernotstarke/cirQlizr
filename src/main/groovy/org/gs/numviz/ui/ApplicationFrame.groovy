@@ -1,51 +1,46 @@
-package org.gs.numviz
+package org.gs.numviz.ui
 
-import org.gs.numviz.numbers.Pi
-import org.gs.numviz.numbers.SpecialNumber
-import org.gs.numviz.ui.ApplicationFrame
-
+import javax.swing.*
+import java.awt.*
 
 // see end-of-file for license information
 
 /**
- * Startup class for circular number visualizations.
- *
- * Configures both domain and UI
- *
+ * The window or frame, containing the actual drawing canvas
  */
-
-class Application  {
-
-    // the number to visualize
-    // resolve #25 (abstract class for special numbers)
-
-    final static SpecialNumber NUMBER = new Pi(NR_OF_LINES_TO_DRAW + 1)
-
-    // lines to draw = nr-of-digits + 1
-    final static int NR_OF_LINES_TO_DRAW = 3
+class ApplicationFrame extends JFrame {
 
 
 
-    // window/canvas size
-    final static int X_CANVAS_SIZE = 800
-    final static int Y_CANVAS_SIZE = 700
+    public ApplicationFrame(String titleText, String infoLine, int x_canvas_size, int y_canvas_size) {
 
-    final static String TITLE_TEXT = "Number Visualizer - ${NR_OF_LINES_TO_DRAW} digits of ${NUMBER.name}"
+        add( new DrawingCanvas( x_canvas_size, y_canvas_size, infoLine ));
 
-    final static String INFO_LINE = "Number Visualizer, https://github.com/gernotstarke/num-viz  "
+        setTitle( titleText);
+        setSize(x_canvas_size, y_canvas_size);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-
-
-    public static void main(String[] args) {
-        // TODO: add command line parsing for color scheme, number, size
-
-        // domain controller
-        NumberVisualizer numberVisualizer = new NumberVisualizer( NUMBER, NR_OF_LINES_TO_DRAW )
-
-        // UI Window
-        ApplicationFrame.showApplicationFrame( TITLE_TEXT, INFO_LINE, X_CANVAS_SIZE, Y_CANVAS_SIZE)
+        setResizable(false) // resolves issue #9
 
     }
+
+
+
+
+    public static showApplicationFrame( String titleText, String infoLine, int x_canvas_size, int y_canvas_size) {
+        EventQueue.invokeLater(new Runnable() {
+
+            @Override
+            public void run() {
+                ApplicationFrame applicationFrame =
+                        new ApplicationFrame(titleText, infoLine, x_canvas_size, y_canvas_size);
+
+                applicationFrame.setVisible(true);
+            }
+        })
+    }
+
 }
 
 /*********************************************************************************
