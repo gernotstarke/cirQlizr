@@ -11,13 +11,20 @@ import java.awt.*
 class ApplicationFrame extends JFrame {
 
 
+    // size of drawing canvas in pixel-units
+    private Integer X_CANVAS_SIZE
+    private Integer Y_CANVAS_SIZE
 
-    public ApplicationFrame(String titleText, String infoLine, int x_canvas_size, int y_canvas_size) {
 
-        add( new DrawingCanvas( x_canvas_size, y_canvas_size, infoLine ));
+    public ApplicationFrame(String titleText, String infoLine, int resolution) {
+
+        this.X_CANVAS_SIZE = resolution + 100
+        this.Y_CANVAS_SIZE = resolution
+
+        add( new DrawingCanvas( X_CANVAS_SIZE, Y_CANVAS_SIZE, infoLine ));
 
         setTitle( titleText);
-        setSize(x_canvas_size, y_canvas_size);
+        setSize( X_CANVAS_SIZE, Y_CANVAS_SIZE );
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -28,13 +35,13 @@ class ApplicationFrame extends JFrame {
 
 
 
-    public static showApplicationFrame( String titleText, String infoLine, int x_canvas_size, int y_canvas_size) {
+    public static showApplicationFrame( String titleText, String infoLine, int resolution) {
         EventQueue.invokeLater(new Runnable() {
 
             @Override
             public void run() {
                 ApplicationFrame applicationFrame =
-                        new ApplicationFrame(titleText, infoLine, x_canvas_size, y_canvas_size);
+                        new ApplicationFrame(titleText, infoLine, resolution );
 
                 applicationFrame.setVisible(true);
             }

@@ -20,7 +20,7 @@ import java.awt.geom.Line2D
 
 class DrawingCanvas extends JPanel {
 
-    // size of drawing canvas
+    // size of drawing canvas in pixel-units
     private Integer X_CANVAS_SIZE
     private Integer Y_CANVAS_SIZE
 
@@ -28,7 +28,12 @@ class DrawingCanvas extends JPanel {
     // to the center of the circle, we need a translation offset
     private Integer TRANSLATION_OFFSET
 
+
     private Integer LEGEND_WIDTH = 40
+
+    // margin between circle and outer bound of canvas
+    private Integer MARGIN       = 20
+
 
     // program name and author, URL, shown at bottom of canvas
     private String INFO_LINE
@@ -53,7 +58,6 @@ class DrawingCanvas extends JPanel {
 
         INFO_LINE = infoLine
 
-        //this.radius = radius()
     }
 
 
@@ -152,7 +156,7 @@ class DrawingCanvas extends JPanel {
 
 
     private void initLegendFont(Graphics2D g2d) {
-        Font font = new Font(Font.SERIF, Font.TRUETYPE_FONT, 15);
+        Font font = new Font(Font.SERIF, Font.TRUETYPE_FONT, 16);
         Hashtable<TextAttribute, Object> map =
                 new Hashtable<TextAttribute, Object>();
 
@@ -165,7 +169,7 @@ class DrawingCanvas extends JPanel {
 
 
 
-    private void showInfoLine(Graphics2D g2d, String infoLine) {
+    private void showInfoLine(Graphics2D g2d) {
 
         RenderingHints rh =
                 new RenderingHints(RenderingHints.KEY_ANTIALIASING,
@@ -190,11 +194,12 @@ class DrawingCanvas extends JPanel {
         g2d.setFont(font);
 
         FontMetrics fm = getFontMetrics(font);
+        int infoLineStringWidth = fm.stringWidth( INFO_LINE )
 
+        int infoLine_x_coord = X_CANVAS_SIZE - TRANSLATION_OFFSET - infoLineStringWidth
+        int infoLine_y_coord = TRANSLATION_OFFSET + MARGIN - 5
 
-        g2d.drawString(INFO_LINE,
-                    (X_CANVAS_SIZE - TRANSLATION_OFFSET - fm.stringWidth(INFO_LINE)),
-                    (TRANSLATION_OFFSET + LEGEND_WIDTH- 5))
+        g2d.drawString(INFO_LINE, infoLine_x_coord, infoLine_y_coord)
 
     }
 
@@ -210,13 +215,15 @@ class DrawingCanvas extends JPanel {
         // translate coord system so that 0/0 is center of circle
         translateCenterToZero(g2d)
 
+        // display project name & URL
+        showInfoLine( g2d )
+
         // the actual line drawing between Pairs
         //drawLines(g2d)
 
         drawLegend(g2d)
         //drawSegments(g2d)
 
-        showInfoLine( g2d )
     }
 
 }

@@ -27,8 +27,7 @@ class Application  {
 
 
     // window/canvas size
-    final static int X_CANVAS_SIZE = 800
-    final static int Y_CANVAS_SIZE = 700
+    final static int RESOLUTION = 700
 
     final static String TITLE_TEXT = "Number Visualizer - ${NR_OF_LINES_TO_DRAW} digits of ${NUMBER.name}"
 
@@ -43,7 +42,7 @@ class Application  {
         NumberVisualizer numberVisualizer = new NumberVisualizer( NUMBER, NR_OF_LINES_TO_DRAW )
 
         // UI Window
-        ApplicationFrame.showApplicationFrame( TITLE_TEXT, INFO_LINE, X_CANVAS_SIZE, Y_CANVAS_SIZE)
+        ApplicationFrame.showApplicationFrame( TITLE_TEXT, INFO_LINE, RESOLUTION)
 
     }
 }
