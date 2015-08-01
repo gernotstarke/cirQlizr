@@ -22,3 +22,5 @@ groovy.iml
 .gradle
 .da*
 build
+*.vpp~*
+NumberVisualization-Model.vpp.working
