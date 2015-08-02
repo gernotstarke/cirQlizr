@@ -13,7 +13,6 @@ import java.util.logging.Logger
  */
 class ApplicationFrame extends JFrame {
 
-
     // size of drawing canvas in pixel-units
     private Integer X_CANVAS_SIZE
     private Integer Y_CANVAS_SIZE
@@ -21,16 +20,15 @@ class ApplicationFrame extends JFrame {
     private static final Logger LOGGER = Logger.getLogger(ApplicationFrame.class.getName())
 
 
-
     public ApplicationFrame(String titleText, String infoLine, int resolution, NumberVisualizer numberVisualizer) {
 
         this.X_CANVAS_SIZE = resolution + 100
         this.Y_CANVAS_SIZE = resolution
 
-        add( new DrawingCanvas( X_CANVAS_SIZE, Y_CANVAS_SIZE, infoLine, numberVisualizer ));
+        add(new DrawingCanvas(X_CANVAS_SIZE, Y_CANVAS_SIZE, infoLine, numberVisualizer));
 
-        setTitle( titleText);
-        setSize( X_CANVAS_SIZE, Y_CANVAS_SIZE );
+        setTitle(titleText);
+        setSize(X_CANVAS_SIZE, Y_CANVAS_SIZE);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -39,20 +37,20 @@ class ApplicationFrame extends JFrame {
     }
 
 
+    public static showApplicationFrame(String titleText, String infoLine, int resolution, NumberVisualizer nv) {
 
-
-    public static showApplicationFrame( String titleText, String infoLine, int resolution, NumberVisualizer nv) {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         double width = screenSize.getWidth();
         double height = screenSize.getHeight();
-        println "available screen size: width=$width, height=$height"
+
+        LOGGER.info "available screen size: width=$width, height=$height"
 
         EventQueue.invokeLater(new Runnable() {
 
             @Override
             public void run() {
                 ApplicationFrame applicationFrame =
-                        new ApplicationFrame(titleText, infoLine, resolution, nv );
+                        new ApplicationFrame(titleText, infoLine, resolution, nv);
 
                 applicationFrame.setVisible(true);
             }
