@@ -51,13 +51,13 @@ class DrawingCanvas extends JPanel {
 
     private void initCanvas(int xFrameSize, int yFrameSize, String infoLine, NumberVisualizer numberVisualizer) {
         X_CANVAS_SIZE = xFrameSize
-        Y_CANVAS_SIZE = yFrameSize - LEGEND_WIDTH
+        Y_CANVAS_SIZE = yFrameSize
 
         // crash when dimensions are too small
         assert X_CANVAS_SIZE > 1
         assert Y_CANVAS_SIZE > 1
 
-        TRANSLATION_OFFSET = Math.min(X_CANVAS_SIZE, Y_CANVAS_SIZE).intdiv(2)
+        TRANSLATION_OFFSET = Math.min(X_CANVAS_SIZE, Y_CANVAS_SIZE - MARGIN).intdiv(2)
 
         INFO_LINE = infoLine
 
