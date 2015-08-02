@@ -4,6 +4,7 @@ import org.gs.numviz.NumberVisualizer
 
 import javax.swing.*
 import java.awt.*
+import java.util.logging.Logger
 
 // see end-of-file for license information
 
@@ -16,6 +17,9 @@ class ApplicationFrame extends JFrame {
     // size of drawing canvas in pixel-units
     private Integer X_CANVAS_SIZE
     private Integer Y_CANVAS_SIZE
+
+    private static final Logger LOGGER = Logger.getLogger(ApplicationFrame.class.getName())
+
 
 
     public ApplicationFrame(String titleText, String infoLine, int resolution, NumberVisualizer numberVisualizer) {
@@ -38,6 +42,11 @@ class ApplicationFrame extends JFrame {
 
 
     public static showApplicationFrame( String titleText, String infoLine, int resolution, NumberVisualizer nv) {
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        double width = screenSize.getWidth();
+        double height = screenSize.getHeight();
+        println "available screen size: width=$width, height=$height"
+
         EventQueue.invokeLater(new Runnable() {
 
             @Override
