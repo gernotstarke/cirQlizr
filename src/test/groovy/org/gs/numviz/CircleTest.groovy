@@ -15,7 +15,7 @@ class CircleTest extends GroovyTestCase {
 
     @Before
     public void setUp() {
-        circle = new Circle( center: new Point(0,0), radius: 1)
+        circle = new Circle( center: new Coordinate2D(0,0), radius: 1)
     }
 
     /**
@@ -24,9 +24,9 @@ class CircleTest extends GroovyTestCase {
      */
     @Test
     public void testAngleZeroOnXAxis() {
-        circle = new Circle( center: new Point(0,0), radius: 1)
+        circle = new Circle( center: new Coordinate2D(0,0), radius: 1)
 
-        Point2D onXAxis = circle.getPointByAngle( 0 )
+        Coordinate2D onXAxis = circle.getPointByAngle( 0 )
 
         Double actualX = onXAxis.getX()
         Double actualY = onXAxis.getY()

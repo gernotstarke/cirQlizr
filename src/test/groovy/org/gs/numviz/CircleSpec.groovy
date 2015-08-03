@@ -16,10 +16,10 @@ class CircleSpec extends Specification {
 
     def "Circle crosses X axis With Angle Zero at Zero"() {
         given:
-        Circle circle = new Circle(center: new Point(0, 0), radius: 1)
+        Circle circle = new Circle(center: new Coordinate2D(0, 0), radius: 1)
 
         when:
-        Point2D onXAxis = circle.getPointByAngle(0)
+        Coordinate2D onXAxis = circle.getPointByAngle(0)
 
         Double actualX = onXAxis.getX()
         Double actualY = onXAxis.getY()
@@ -35,10 +35,10 @@ class CircleSpec extends Specification {
 
     def "Circle crosses Axis"(double angle, double xAxis, double yAxis) {
         given:
-        Circle circle = new Circle(center: new Point(0, 0), radius: 1)
+        Circle circle = new Circle(center: new Coordinate2D(0, 0), radius: 1)
 
         when:
-        Point2D crossingAxis = circle.getPointByAngle(angle)
+        Coordinate2D crossingAxis = circle.getPointByAngle(angle)
 
         then:
         AssertHelper.assertCloseTo( (float) crossingAxis.getX(), xAxis, 0.01f )
@@ -55,10 +55,10 @@ class CircleSpec extends Specification {
 
     def "Circle Crossing at Fourty Five Degrees"() {
         given:
-        Circle circle = new Circle(center: new Point2D.Double(0, 0), radius: 1)
+        Circle circle = new Circle(center: new Coordinate2D(0, 0), radius: 1)
 
         when:
-        Point2D onXAxis = circle.getPointByAngle( Math.toRadians( 45 ))
+        Coordinate2D onXAxis = circle.getPointByAngle( Math.toRadians( 45 ))
 
         then:
         AssertHelper.assertCloseTo( 0.7071067812f, (Float) onXAxis.getX(), 0.01f )
