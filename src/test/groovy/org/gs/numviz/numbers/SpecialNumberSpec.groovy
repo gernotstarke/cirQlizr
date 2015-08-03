@@ -1,8 +1,7 @@
 package org.gs.numviz.numbers
 
-import org.gs.numviz.numbers.Pi
-import org.gs.numviz.numbers.SpecialNumber
 import spock.lang.Specification
+import spock.lang.Unroll
 
 // see end-of-file for license information
 
@@ -24,8 +23,73 @@ class SpecialNumberSpec extends Specification {
             number.countDigit( 2 ) == 0 // does not occur
     }
 
+    /**
+     *
+     * @param precision
+     * @param digit
+     * @param count
+     * @return
+     */
+    def "get all pairs"() {
+        when:
+        number = new Pi(3) // 3.14
 
-    //@Unroll
+        then:
+        number.getAllPairsUpTo(1) == [new Pair(3,1), new Pair(1,4)]
+
+        when:
+        number = new Pi(5) // 3.1415
+
+        then:
+        number.NUMBER_OF_DIGITS == 5
+        number.getAllPairsUpTo( 3 ) == [new Pair(3,1), new Pair(1,4), new Pair( 4,1), new Pair(1,5)]
+    }
+
+    /**
+     * count occurences of digits in pairs. E.g. in "3.14", 1 occurs in two pairs
+     */
+    @Unroll
+    def "count occurence of digit in first two pairs"() {
+        when:
+        number = new Pi(3) // 3.14
+
+        then:
+            // 3 occurs in one pair
+            number.countOccurencesInPairs( 3, 1) == 1
+
+            // 1 occurs in two pairs
+            number.countOccurencesInPairs( 1, 1) == 2
+
+            // 4 occurs in one pair
+            number.countOccurencesInPairs( 4, 1) == 1
+
+            // 5 does not occur
+            number.countOccurencesInPairs( 5,1)  == 0
+
+    }
+
+    def "count occurence in first N pairs"() {
+        when:
+        number = new Pi(11) // 3.1415926535
+
+        then:
+        // 3 occurs in three pairs
+           number.countOccurencesInPairs( 3, 9) == 3
+
+           number.countOccurencesInPairs( 5, 9) == 5 // 5 pairs
+
+         // 1 occures once in first pair
+           number.countOccurencesInPairs( 1, 0) == 1
+
+         //... and again in second pair
+           number.countOccurencesInPairs( 1, 1) == 2
+
+
+
+    }
+
+
+    @Unroll
     def "count digits works for different precisions of PI"(int precision, int digit, int count) {
         when:
             number = new Pi( precision )
@@ -65,7 +129,7 @@ class SpecialNumberSpec extends Specification {
         10        |   3   | 2
         10        |   4   | 1
         10        |   5   | 2
-        10        |   6   | 2
+        10        |   6   | 1
         10        |   7   | 0
         10        |   8   | 0
         10        |   9   | 1
