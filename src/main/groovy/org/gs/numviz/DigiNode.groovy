@@ -23,7 +23,7 @@ class DigiNode {
      * @param radius
      */
     public DigiNode( double angle, double radius) {
-        this.angle = 0
+        this.angle = angle
         this.radius = radius
 
         this.coordinate = calcCoordinate( angle, radius)

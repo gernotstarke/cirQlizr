@@ -15,23 +15,63 @@ class SegmentSpec extends Specification {
     }
 
 
-    def "DigiNodes are distributed evenly along Segment Zero"() {
+    def "Correct number of digiNodes is created for Segment"() {
         given:
+        // segment where digit "0" occurs once!
         Segment s = new Segment(
                 digit: 0,
-                color: NumVizColor.color[0],
+                nrOfRequiredDigiNodes: 1,
                 radius: 100,
                 angleStart: 0 + (2 * SEGMENT_PADDING_ANGLE),
-                angleExtend: 30)
+                angleExtend: Math.toRadians(30))
 
         when:
-        s.setDigiNodesCoordinates(1)
+        s.setUpDigiNodes()
 
         then:
+            // exactly ONE digiNode needs to be created
             s.digiNode.size() == 1
 
     }
 
+
+    /*
+    digiNodes shall be evenly spread across segments
+     */
+    //@Unroll
+    def "actual angles are evenly spread across segment"(int nrOfNodes, List<Double> expectedAngles) {
+        given:
+
+        double angleStart = 0
+        double angleExtend = Math.toRadians(30)
+
+        Segment s = new Segment(
+                digit: 0,
+                nrOfRequiredDigiNodes: nrOfNodes,
+                radius: 1,
+                angleStart: angleStart,
+                angleExtend: angleExtend)
+
+        List<Double> actualAngles = new ArrayList<Double>(nrOfNodes)
+
+        when:
+            s.setUpDigiNodes()
+
+        s.digiNode.each {
+            actualAngles.add( it.angle )
+        }
+
+        then:
+            //actualAngles == expectedAngles
+            actualAngles.size() == expectedAngles.size()
+            AssertHelper.assertCloseTo(actualAngles, expectedAngles, 0.1)
+
+
+        where:
+        nrOfNodes | expectedAngles
+        1         | [0.26]
+        2         | [0.17, 0.35]
+    }
 
 
 

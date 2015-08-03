@@ -16,6 +16,13 @@ class Segment {
 
     private int digit
 
+    // how often does this digit occur in pairs?
+    // how many connections will start or end in this segment?
+    private int nrOfRequiredDigiNodes
+
+    // what is the number of the next free digiNode
+    private int nextFreeDigiNode = -1
+
     private double radius
 
     private Color color
@@ -24,12 +31,30 @@ class Segment {
     private double angleExtend
 
     // several "connection points" for lines
-    public List<Point2D> digiNode
+    public List<DigiNode> digiNode
 
     private static final Logger LOGGER = Logger.getLogger(Segment.class.getName())
 
 
     // implicit constructor to allow named parameters
+
+    /**
+     * returns the next free digiNode
+     **/
+    public int getNextFreeDigiNode() {
+
+        assert nextFreeDigiNode <= digiNode.size() : "Segment $digit has no free digiNodes after $nextFreeDigiNode"
+        return nextFreeDigiNode
+    }
+
+    /**
+     * increments the pointer to next available digiNode
+     */
+    public void advanceToNextAvailableDigiNode() {
+
+        assert nextFreeDigiNode < digiNode.size() : "cannot advance digiNode pointer, as segment $digit has no free digiNodes after $nextFreeDigiNode"
+
+    }
 
 
     /**
@@ -38,42 +63,53 @@ class Segment {
      * x = radius * cos(t)    y = radius * sin(t) with t being the angle...
      * @return points in Segment, where lines will be attached
      */
-    public void setDigiNodesCoordinates(int nrOfDigitsToShow ) {
+    public void setUpDigiNodes( ) {
 
-        // we don't support 0 digits
-        assert nrOfDigitsToShow > 0
+        // digit does not occur in number -> no digiNodes
+        assert this.nrOfRequiredDigiNodes > 0 : "setUpDigiNodes error: Segment[${this.digit}] cannot create $nrOfRequiredDigiNodes digiNodes"
 
-        digiNode = new ArrayList<Point2D.Double>( nrOfDigitsToShow)
 
-        double deltaAngle = deltaAngle( nrOfDigitsToShow, angleExtend)
+        // as Lists start at index 0:
+        digiNode = new ArrayList<DigiNode>( nrOfRequiredDigiNodes )
+
+        // where to start attaching connections
+        nextFreeDigiNode = 0
+
+        double deltaAngle = deltaAngle( this.nrOfRequiredDigiNodes, angleExtend)
+
+        LOGGER.info "will create ${nrOfRequiredDigiNodes} digiNodes with deltaAngle=${deltaAngle} for angleExtend=${angleExtend} and angleStart=${angleStart}"
 
         // for each digit to show, create one digiNode
-        (0..(nrOfDigitsToShow)).each { nrOfCurrentDigiNode ->
-           createDigiNode( nrOfCurrentDigiNode, angleStart, deltaAngle)
-        }
-    }
+        (1..nrOfRequiredDigiNodes).each { nrOfCurrentDigiNode ->
 
-    private Point2D createDigiNode( int nrOfCurrentDigiNode, double angleStart, double deltaAngle) {
+            // digiNode constructor is responsible for calculating Coordinates/Points
+            digiNode[nrOfCurrentDigiNode-1] =
+                    new DigiNode( angleForThisDigiNode( angleStart, deltaAngle, nrOfCurrentDigiNode),
+                                  radius)
 
-        double angle = angleStart + deltaAngle * nrOfCurrentDigiNode
-
-        digiNode[nrOfCurrentDigiNode] = Circle.getPointByCenterRadiusAngle( new Point(0,0), radius, angle )
-
-        // as Java coordinate system really sucks - we need to invert the Y value
-        // (thx to Groovy for awesome "with" statement)
-        digiNode[nrOfCurrentDigiNode].with {
-            setLocation( getX(), -1 * getY())
         }
 
-        // logging was only required in initial dev phase
-        // LOGGER.info "Segment[${digit}]: angle=$angleStart, radius=$radius"
     }
 
     /**
-     * what is the delta-angle between digiNodes?
+     * what is the actual angle for this digiNode?
+     */
+    public static double angleForThisDigiNode( double angleStart, double deltaAngle, int nrOfCurrentDigiNode) {
+
+        double theAngle = angleStart + deltaAngle * (nrOfCurrentDigiNode)
+        return theAngle
+    }
+
+
+
+    /**
+     * what is the delta-angle between digiNodes? Does NOT depend on starting angle,
+     * only on angleExtend and nrOfDigiNodes
      * @param nrOfDigiNodes
      * @param angleExtend
-     * @return
+     * @return delta-angle between digiNodes within this segment
+     * for examples, {@link SegmentSpec#"DigiNodes are distributed evenly along Segment Zero"}:
+     *
      */
     public static double deltaAngle( int nrOfDigiNodes, double angleExtend) {
         assert nrOfDigiNodes >= 0
@@ -81,6 +117,9 @@ class Segment {
         return angleExtend / (Math.max(nrOfDigiNodes, 1) + 1)
     }
 
+    /**
+     * returns a readable version of this segment
+     */
 }
 
 /*********************************************************************************
