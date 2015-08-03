@@ -8,8 +8,11 @@ class AssertHelper {
      * helper method to assert-with-epsilon
      */
     public static boolean assertCloseTo(expected, actual, float epsilon) {
-        return Math.abs(Math.abs(expected) - Math.abs(actual)) < epsilon
+        assert epsilon>0 : "epsilon must be > 0, was $epsilon"
+
+        return Math.abs(Math.abs(expected) - Math.abs(actual)) <= epsilon
     }
+
 
     /**
      * helper method to assertEquals with epsilon to every element of two lists
