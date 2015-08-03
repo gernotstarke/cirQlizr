@@ -6,8 +6,8 @@ import groovy.transform.EqualsAndHashCode
 
 @EqualsAndHashCode
 class Pair {
-    int first
-    int second
+    final int first
+    final int second
 
     public Pair( int first, int second) {
         this.first = first
