@@ -16,8 +16,10 @@ class PairTest extends GroovyTestCase {
     }
 
 
-    public void testGetPairWithQuasiFluentApi() {
-        assertEquals( Pi.getPair(0), new Pair( 3,1) )
+    public void testGetPair() {
+        def pi = new Pi(5)
+        assertEquals( "pair 0 should be 3,1", pi.getPair(0), new Pair( 3,1) )
+        assertEquals( "pair 1 should be 1,4", pi.getPair(1), new Pair( 1,4) )
 
 
     }
