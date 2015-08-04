@@ -48,7 +48,10 @@ Martin Krzywinski and Cristian Illies Vasile.
 
 * The number to be visualized consists of ordered Digits.
 * Pair consists of left ("from") and right ("to") Digit,
-* Line represents graphical connection of "from" (left) and "to" (right) Digit of a Pair.
+* Connection represents graphical connection of "from" (left) and "to" (right)  
+Digit of a Pair.
+  * Connection can be a straight line or curve, maybe 
+     (quadratic or higher degree) Bézier curve.
 * Segment:
   * visually represents all Lines for one specific Digit (either left or right in a Pair).
   * contains ordered list of connection points called "digiNodes" 
