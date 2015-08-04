@@ -1,11 +1,14 @@
-# num-viz: Number visualization 
+# Circulizr: Circular visualization of data
+ 
 A simple experiment with 2D graphics to create circular visualisations of numbers
-like &#960; (pi), e (Euler number) or similar.
+like &#960; (pi), e (Euler number) or similar - that might grow 
+into something more general.
 
 Inspired by [Martin Krzywinski](http://mkweb.bcgsc.ca/pi/art/method.mhtml) and his
 website "The art of Pi".
 
-Currently implemented using [Java2D](https://docs.oracle.com/javase/tutorial/2d/).
+Currently implemented using [Java2D](https://docs.oracle.com/javase/tutorial/2d/),
+but architected to supply other 2D toolkits (like JavaFX or HTML5/WebGL).
 
 ## Status
 Work in progress. 
@@ -15,14 +18,18 @@ Work in progress.
 ![Bugs](https://badge.waffle.io/gernotstarke/num-viz.svg?label=bug&title=Bugs)
 
 ###  Examples
-Version 0.5 has only a single digiNode per segment
+Version 0.5 has only a single digiNode per segment and only straight connections
+between segments.
 
 <img src="https://raw.githubusercontent.com/gernotstarke/num-viz/master/doc/screenshots/NumViz-V0_5.jpg" width=400>
 
 
-Version 0.8 has multiple digiNodes, still straight lines
+Version 0.8 has multiple digiNodes, still only straight connections. 
 
 <img src="https://raw.githubusercontent.com/gernotstarke/num-viz/master/doc/screenshots/NumViz-V0_8.jpg" width=400>
+
+Version 0.9 will have multiple digiNodes, evenly spaced along segments,
+maybe enhanced by curved connections. Will visualize numbers only.
 
 
 ## Goal
