@@ -2,6 +2,7 @@ package org.gs.numviz
 
 import org.gs.AssertHelper
 import spock.lang.Specification
+import static groovy.test.GroovyAssert.shouldFail
 
 // see end-of-file for license information
 
@@ -11,7 +12,7 @@ class SegmentSpec extends Specification {
     double SEGMENT_PADDING_ANGLE
 
     def setup() {
-      SEGMENT_PADDING_ANGLE = Math.toRadians( 3 )
+        SEGMENT_PADDING_ANGLE = Math.toRadians(3)
     }
 
 
@@ -29,11 +30,10 @@ class SegmentSpec extends Specification {
         s.setUpDigiNodes()
 
         then:
-            // exactly ONE digiNode needs to be created
-            s.digiNode.size() == 1
+        // exactly ONE digiNode needs to be created
+        s.digiNode.size() == 1
 
     }
-
 
     /*
     digiNodes shall be evenly spread across segments
@@ -55,25 +55,50 @@ class SegmentSpec extends Specification {
         List<Double> actualAngles = new ArrayList<Double>(nrOfNodes)
 
         when:
-            s.setUpDigiNodes()
+        s.setUpDigiNodes()
 
         s.digiNode.each {
-            actualAngles.add( it.angle )
+            actualAngles.add(it.angle)
         }
 
         then:
-            //actualAngles == expectedAngles
-            actualAngles.size() == expectedAngles.size()
-            AssertHelper.assertCloseTo(actualAngles, expectedAngles, 0.1)
+        //actualAngles == expectedAngles
+        actualAngles.size() == expectedAngles.size()
+        AssertHelper.assertCloseTo(actualAngles, expectedAngles, 0.1)
 
 
         where:
         nrOfNodes | expectedAngles
         1         | [0.26]
         2         | [0.17, 0.35]
+        3         | [0.13, 0.26, 0.39]
+
     }
 
 
+    /* zero digiNodes shall fail
+    
+     */
+    def "zero digiNodes shall fail"() {
+        given:
+
+        double angleStart = 0
+        double angleExtend = Math.toRadians(30)
+
+        Segment s = new Segment(
+                digit: 0,
+                nrOfRequiredDigiNodes: 0,
+                radius: 1,
+                angleStart: angleStart,
+                angleExtend: angleExtend)
+
+
+        expect:
+        shouldFail(AssertionError) {
+            s.setUpDigiNodes()
+
+        }
+    }
 
     def "calculate delta angle"(int nrOfNodes, double angleExtend, double deltaAngle) {
 
@@ -97,4 +122,5 @@ class SegmentSpec extends Specification {
 
         100       | Math.toRadians(30) | Math.toRadians(0.297029703)
     }
+
 }
