@@ -18,7 +18,7 @@ class Application  {
 
     // the number to visualize
     // resolve #25 (abstract class for special numbers)
-    final static SpecialNumber NUMBER = new Pi(NR_OF_CONNECTIONS_TO_SHOW+ 1)
+    final static SpecialNumber NUMBER = new Pi(NR_OF_CONNECTIONS_TO_SHOW + 1)
 
 
     // lines to draw = nr-of-digits + 1
@@ -29,9 +29,9 @@ class Application  {
     // window/canvas size
     final static int RESOLUTION = 700
 
-    final static String TITLE_TEXT = "Number Visualizer - ${NR_OF_CONNECTIONS_TO_SHOW} digits of ${NUMBER.name}"
+    final static String TITLE_TEXT = "CIRCULIZR - ${NR_OF_CONNECTIONS_TO_SHOW} digits of ${NUMBER.name}"
 
-    final static String INFO_LINE = "Number Visualizer, https://github.com/gernotstarke/num-viz  "
+    final static String INFO_LINE = "Circular Visualizer, https://github.com/gernotstarke/circulizr  "
 
 
 
