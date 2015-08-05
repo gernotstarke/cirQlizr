@@ -77,7 +77,7 @@ class SegmentSpec extends Specification {
 
 
     /* zero digiNodes shall fail
-    
+
      */
     def "zero digiNodes shall fail"() {
         given:
