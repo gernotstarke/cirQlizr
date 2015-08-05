@@ -15,7 +15,7 @@ class NumberVisualizer {
     final private SpecialNumber NUMBER
 
     // how many pairs of digits to show in visualization?
-    final private Integer NR_OF_CONNECTIONS_TO_SHOW
+    final protected Integer NR_OF_CONNECTIONS_TO_SHOW
 
     // some circle properties:
     private float radius
@@ -39,10 +39,15 @@ class NumberVisualizer {
 
     public NumberVisualizer( SpecialNumber NUMBER, Integer NR_OF_CONNECTIONS_TO_SHOW, Integer resolution) {
 
+        assert NUMBER != null
+        assert NR_OF_CONNECTIONS_TO_SHOW >= 0
+        assert resolution > MARGIN
+
         // the most important property: what number shall we visualize?
         this.NUMBER = NUMBER
 
         this.NR_OF_CONNECTIONS_TO_SHOW = NR_OF_CONNECTIONS_TO_SHOW
+
 
         this.radius = (resolution- 2*MARGIN).intdiv(2)
 
@@ -58,7 +63,7 @@ class NumberVisualizer {
         (0..9).each { thisDigit ->
             segment[thisDigit] = new Segment(
                     digit: thisDigit,
-                    nrOfOccurences: NUMBER.countDigit(thisDigit),
+                    nrOfRequiredDigiNodes: NUMBER.countOccurencesInPairs(thisDigit, NR_OF_CONNECTIONS_TO_SHOW-1),
                     color: NumVizColor.color[thisDigit],
                     radius: this.radius,
                     // TODO: adjust angleStart, so that segment 0 starts at top
@@ -66,10 +71,10 @@ class NumberVisualizer {
                     angleExtend: SEGMENT_EXTEND_ANGLE)
 
             // create digiNodes (== lineEndings) only if this digit occurs once or more
-            if (segment[thisDigit].nrOfOccurences > 0) {
+            if (segment[thisDigit].nrOfRequiredDigiNodes > 0) {
                 segment[thisDigit].with {
 
-                    // LOGGER.info "setting up ${nrOfOccurences} digiNodes for Segment[${thisDigit}]: angleStart=${angleStart}, angleExtend=${angleExtend} and radius=${radius}"
+                    println "setting up ${nrOfRequiredDigiNodes} digiNodes for Segment[${thisDigit}]: angleStart=${angleStart}, angleExtend=${angleExtend} and radius=${radius}"
                     setUpDigiNodes()
                 }
             }

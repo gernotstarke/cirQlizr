@@ -1,6 +1,7 @@
 package org.gs.numviz
 
 import java.awt.Color
+import java.awt.Point
 import java.awt.geom.Point2D
 
 // see end-of-file for license information
@@ -30,6 +31,9 @@ class Coordinate2D {
         return point.getY()
     }
 
+    public Point2D toPoint() {
+        return point
+    }
     /**
      * Mirrors a coord at x-axis by inverting its y value
      * @param origin

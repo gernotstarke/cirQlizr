@@ -1,18 +1,11 @@
 package org.gs.numviz
 
-import org.gs.numviz.numbers.Pair
 import org.gs.numviz.numbers.SpecialNumber
 
 // see end of file for licence information
 
 
 import javax.swing.JPanel
-import java.awt.Point
-import java.awt.RenderingHints
-import java.awt.font.TextAttribute
-import java.awt.geom.Arc2D
-import java.awt.geom.Line2D
-import java.awt.geom.Point2D
 import java.util.logging.Logger
 
 /**
@@ -77,7 +70,7 @@ class NumberGrapher extends JPanel {
         (0..9).each { thisDigit ->
             segment[thisDigit] = new Segment(
                     digit: thisDigit,
-                    nrOfOccurences: NUMBER.countDigit(thisDigit),
+                    nrOfRequiredDigiNodes: NUMBER.countDigit(thisDigit),
                     color: NumVizColor.color[thisDigit],
                     radius: this.radius,
                     // TODO: adjust angleStart, so that segment 0 starts at top
@@ -85,10 +78,10 @@ class NumberGrapher extends JPanel {
                     angleExtend: SEGMENT_EXTEND_ANGLE)
 
             // create digiNodes (== lineEndings) only if this digit occurs once or more
-            if (segment[thisDigit].nrOfOccurences > 0) {
+            if (segment[thisDigit].nrOfRequiredDigiNodes > 0) {
                 segment[thisDigit].with {
 
-                    // LOGGER.info "setting up ${nrOfOccurences} digiNodes for Segment[${thisDigit}]: angleStart=${angleStart}, angleExtend=${angleExtend} and radius=${radius}"
+                    // LOGGER.info "setting up ${nrOfRequiredDigiNodes} digiNodes for Segment[${thisDigit}]: angleStart=${angleStart}, angleExtend=${angleExtend} and radius=${radius}"
                     setUpDigiNodes()
                 }
             }
