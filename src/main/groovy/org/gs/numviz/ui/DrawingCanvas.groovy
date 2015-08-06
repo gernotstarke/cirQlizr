@@ -1,5 +1,6 @@
 package org.gs.numviz.ui
 
+import org.gs.numviz.DigiNode
 import org.gs.numviz.NumVizColor
 import org.gs.numviz.NumberVisualizer
 import org.gs.numviz.numbers.Pair
@@ -36,8 +37,7 @@ class DrawingCanvas extends JPanel {
     private Integer LEGEND_WIDTH = 40
 
     // margin between circle and outer bound of canvas
-    private Integer MARGIN       = 20
-
+    private Integer MARGIN = 20
 
     // program name and author, URL, shown at bottom of canvas
     private String INFO_LINE
@@ -49,9 +49,9 @@ class DrawingCanvas extends JPanel {
     private static final Logger LOGGER = Logger.getLogger(DrawingCanvas.class.getName())
 
 
-    DrawingCanvas(int x_resolution, int y_resolution, String infoLine, NumberVisualizer numberVisualizer ) {
+    DrawingCanvas(int x_resolution, int y_resolution, String infoLine, NumberVisualizer numberVisualizer) {
         super()
-        initCanvas( x_resolution, y_resolution, infoLine, numberVisualizer )
+        initCanvas(x_resolution, y_resolution, infoLine, numberVisualizer)
     }
 
 
@@ -71,7 +71,6 @@ class DrawingCanvas extends JPanel {
         nv = numberVisualizer
 
     }
-
 
     /*
      * translates position of center to 0/0
@@ -98,22 +97,36 @@ class DrawingCanvas extends JPanel {
 
                 arc2D.setArcByCenter(0, 0, radius, Math.toDegrees(angleStart), Math.toDegrees(angleExtend), Arc2D.OPEN)
                 g2d.draw(arc2D)
-
+                
+                // draw dot for all digiNode-instances
+                drawDotForDigiNodes( g2d, digiNode)
             }
         }
     }
 
-    /*
-    * draw the lines for all pairs
+    /**
+     *
      */
+    private void drawDotForDigiNodes(Graphics2D g2d, List<DigiNode> nodes) {
+        g2d.setPaint(Color.darkGray)
+        nodes.each { node ->
+            double xCoord = node.coordinate.x
+            double yCoord = node.coordinate.y
+            Ellipse2D nodeCircle = new Ellipse2D.Double(xCoord - 3, yCoord - 3, 6, 6)
+            g2d.fill(nodeCircle)
+        }
+    }
+
+    /*
+   * draw the lines for all pairs
+    */
 
     private void drawLines(Graphics2D g2d) {
-        LOGGER.info("entering drawLines method")
         g2d.setStroke(new BasicStroke(1.0f))
 
         (0..nv.NR_OF_CONNECTIONS_TO_SHOW - 1).each { pairIndex ->
             Pair currentPair = nv.NUMBER.getPair(pairIndex)
-            drawConnectionForNumberPair(g2d, pairIndex, currentPair.first, currentPair.second)
+            drawConnectionForNumberPair(g2d, currentPair.first, currentPair.second)
         }
 
     }
@@ -122,7 +135,7 @@ class DrawingCanvas extends JPanel {
     draw line for a single getPair of numbers
      */
 
-    private void drawConnectionForNumberPair(Graphics2D g2d, int pairIndex, int fromDigit, int toDigit) {
+    private void drawConnectionForNumberPair(Graphics2D g2d, int fromDigit, int toDigit) {
         g2d.setColor(nv.segment[fromDigit].color)
 
         int fromDigiNodeIndex = nv.segment[fromDigit].getNextFreeDigiNode()
@@ -153,11 +166,11 @@ class DrawingCanvas extends JPanel {
 
             // draw filled rectangle
             g2d.fillRect((X_CANVAS_SIZE - TRANSLATION_OFFSET) - 55,
-                    (Y_CANVAS_SIZE - TRANSLATION_OFFSET - 2*MARGIN - (digit + 1) * 35), 30, 30)
+                    (Y_CANVAS_SIZE - TRANSLATION_OFFSET - 2 * MARGIN - (digit + 1) * 35), 30, 30)
 
             // show corresponding digit
             g2d.drawString(digit.toString(), (X_CANVAS_SIZE - TRANSLATION_OFFSET - 20),
-                    (Y_CANVAS_SIZE - TRANSLATION_OFFSET - 2*MARGIN - digit * 35 - 14))
+                    (Y_CANVAS_SIZE - TRANSLATION_OFFSET - 2 * MARGIN - digit * 35 - 14))
         }
     }
 
@@ -173,7 +186,6 @@ class DrawingCanvas extends JPanel {
         font = font.deriveFont(map);
         g2d.setFont(font);
     }
-
 
 
     private void showInfoLine(Graphics2D g2d) {
@@ -201,7 +213,7 @@ class DrawingCanvas extends JPanel {
         g2d.setFont(font);
 
         FontMetrics fm = getFontMetrics(font);
-        int infoLineStringWidth = fm.stringWidth( INFO_LINE )
+        int infoLineStringWidth = fm.stringWidth(INFO_LINE)
 
         int infoLine_x_coord = X_CANVAS_SIZE - TRANSLATION_OFFSET - infoLineStringWidth
         int infoLine_y_coord = TRANSLATION_OFFSET - 5
@@ -211,7 +223,7 @@ class DrawingCanvas extends JPanel {
     }
 
 
-    private void drawRaster( Graphics2D g2d) {
+    private void drawRaster(Graphics2D g2d) {
         int RASTER = 20
 
         g2d.setStroke(new BasicStroke(0.5f))
@@ -223,27 +235,29 @@ class DrawingCanvas extends JPanel {
 
         0.step TRANSLATION_OFFSET, RASTER, { coord ->
             // raster parallel to y-axis
-            g2d.draw( new Line2D.Float( coord, -TRANSLATION_OFFSET, coord, TRANSLATION_OFFSET))
-            g2d.drawString( coord.toString(), coord, -TRANSLATION_OFFSET+20)
+            g2d.draw(new Line2D.Float(coord, -TRANSLATION_OFFSET, coord, TRANSLATION_OFFSET))
+            g2d.drawString(coord.toString(), coord, -TRANSLATION_OFFSET + 20)
 
             // raster parallel to x-axis
-            g2d.draw( new Line2D.Float( -TRANSLATION_OFFSET, coord, TRANSLATION_OFFSET, coord))
-            g2d.drawString( coord.toString(), -TRANSLATION_OFFSET+15, coord)
+            g2d.draw(new Line2D.Float(-TRANSLATION_OFFSET, coord, TRANSLATION_OFFSET, coord))
+            g2d.drawString(coord.toString(), -TRANSLATION_OFFSET + 15, coord)
 
         }
 
-        (-1*TRANSLATION_OFFSET).step 0, RASTER, { coord ->
-            g2d.draw( new Line2D.Float( coord, -TRANSLATION_OFFSET, coord, TRANSLATION_OFFSET))
-            g2d.drawString( coord.toString(), coord, -TRANSLATION_OFFSET+15)
+        (-1 * TRANSLATION_OFFSET).step 0, RASTER, { coord ->
+            g2d.draw(new Line2D.Float(coord, -TRANSLATION_OFFSET, coord, TRANSLATION_OFFSET))
+            g2d.drawString(coord.toString(), coord, -TRANSLATION_OFFSET + 15)
 
             // raster parallel to x-axis
-            g2d.draw( new Line2D.Float( -TRANSLATION_OFFSET, coord, TRANSLATION_OFFSET, coord))
-            g2d.drawString( coord.toString(), -TRANSLATION_OFFSET+15, coord)
+            g2d.draw(new Line2D.Float(-TRANSLATION_OFFSET, coord, TRANSLATION_OFFSET, coord))
+            g2d.drawString(coord.toString(), -TRANSLATION_OFFSET + 15, coord)
         }
 
-        g2d.setPaint( Color.darkGray)
-        Ellipse2D center = new Ellipse2D.Float(-3,-3,6,6)
-        g2d.fill( center )
+        // draw point-of-origin
+        g2d.setPaint(Color.darkGray)
+        Ellipse2D pointOfOrigin = new Ellipse2D.Float(-3, -3, 6, 6)
+        g2d.fill(pointOfOrigin)
+
 
     }
 
@@ -260,18 +274,20 @@ class DrawingCanvas extends JPanel {
         translateCenterToZero(g2d)
 
         // display project name & URL
-        showInfoLine( g2d )
-
+        showInfoLine(g2d)
 
         // to debug the damned digiNode coordinate problem
-        drawRaster( g2d)
-
+        // if RUN_MODE <= DEVELOP
+        drawRaster(g2d)
 
         // the actual line drawing between Pairs
         drawLines(g2d)
 
-      //  drawLegend(g2d)
+        drawLegend(g2d)
         drawSegments(g2d)
+
+        // if RUN_MODE <= DEVELOP
+        // "draw dots for digiNodes (currently in drawRaster)
 
     }
 

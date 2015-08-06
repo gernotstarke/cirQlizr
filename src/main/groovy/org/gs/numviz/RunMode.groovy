@@ -4,5 +4,7 @@ package org.gs.numviz
 
 
 enum RunMode {
-
+    DEBUG,
+    DEVELOP,
+    PRODUCTION
 }

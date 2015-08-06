@@ -118,6 +118,11 @@ class Segment {
     /**
      * returns a readable version of this segment
      */
+    public String toString() {
+        return """Segment $digit requires $nrOfRequiredDigiNodes connections
+      angleStart=${sprintf("%3.3fRAD (%3.3f°)", angleStart, Math.toDegrees(angleStart))}, extend=${sprintf("%3.3fRAD (%3.3f°)", angleExtend, Math.toDegrees(angleExtend))}
+"""
+    }
 }
 
 /*********************************************************************************
