@@ -38,5 +38,9 @@ class DigiNode {
     }
 
 
+    public String toString() {
+        return """radius = $radius, angle=${sprintf("%3.1f (%3.1f°)", angle, Math.toDegrees(angle))}, coord=(${sprintf("%3.1f", coordinate.x)}, ${sprintf("%3.1f", coordinate.y)}})
+"""
+    }
 
 }
