@@ -50,5 +50,6 @@ class Coordinate2D {
     public void mirrorAtXAxis() {
         point.setLocation( this.getX(), -1 * this.getY())
     }
+
 }
 

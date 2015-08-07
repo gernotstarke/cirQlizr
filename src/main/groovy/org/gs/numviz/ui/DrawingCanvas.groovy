@@ -1,5 +1,6 @@
 package org.gs.numviz.ui
 
+import org.gs.numviz.Coordinate2D
 import org.gs.numviz.DigiNode
 import org.gs.numviz.NumVizColor
 import org.gs.numviz.NumberVisualizer
@@ -19,6 +20,8 @@ import java.awt.font.TextAttribute
 import java.awt.geom.Arc2D
 import java.awt.geom.Ellipse2D
 import java.awt.geom.Line2D
+import java.awt.geom.Point2D
+import java.awt.geom.QuadCurve2D
 import java.util.logging.Logger
 
 // see end-of-file for license information
@@ -49,7 +52,8 @@ class DrawingCanvas extends JPanel {
     // accounting which connectionPoint within which Segment is currently active
     private List<Integer> currentConnectionPointInSegment
 
-    private RunMode RUNMODE = RunMode.DEVELOP
+    // default: development mode
+    private RunMode RUNMODE = RunMode.PRODUCTION
 
     private static final Logger LOGGER = Logger.getLogger(DrawingCanvas.class.getName())
 
@@ -57,6 +61,8 @@ class DrawingCanvas extends JPanel {
 
     DrawingCanvas(int x_resolution, int y_resolution, String infoLine, NumberVisualizer numberVisualizer, RunMode mode) {
         super()
+        this.RUNMODE = mode
+
         initCanvas(x_resolution, y_resolution, infoLine, numberVisualizer)
 
 
@@ -107,8 +113,10 @@ class DrawingCanvas extends JPanel {
                 arc2D.setArcByCenter(0, 0, radius, Math.toDegrees(angleStart), Math.toDegrees(angleExtend), Arc2D.OPEN)
                 g2d.draw(arc2D)
 
-                // draw dot for all digiNode-instances
-                drawDotForDigiNodes( g2d, digiNode)
+                if (RUNMODE < RunMode.PRODUCTION) {
+                    // draw dot for all digiNode-instances
+                    drawDotForDigiNodes(g2d, digiNode)
+                }
             }
         }
     }
@@ -158,9 +166,18 @@ class DrawingCanvas extends JPanel {
         int fromDigiNodeIndex = nv.segment[fromDigit].getNextFreeDigiNode()
         int toDigiNodeIndex = nv.segment[toDigit].getNextFreeDigiNode()
 
-        g2d.draw(new Line2D.Double(
-                nv.segment[fromDigit].digiNode[fromDigiNodeIndex].coordinate.toPoint(),
-                nv.segment[toDigit].digiNode[toDigiNodeIndex].coordinate.toPoint()))
+        // QuadCurve arguments: startX, startY, ctrlX, ctrlY, endX, endY)
+        g2d.draw(new QuadCurve2D.Double(
+                nv.segment[fromDigit].digiNode[fromDigiNodeIndex].coordinate.getX(),
+                nv.segment[fromDigit].digiNode[fromDigiNodeIndex].coordinate.getY(),
+                0,0,
+                nv.segment[toDigit].digiNode[toDigiNodeIndex].coordinate.getX(),
+                nv.segment[toDigit].digiNode[toDigiNodeIndex].coordinate.getY())
+                )
+
+        //g2d.draw(new Line2D.Double(
+        //        nv.segment[fromDigit].digiNode[fromDigiNodeIndex].coordinate.toPoint(),
+        //        nv.segment[toDigit].digiNode[toDigiNodeIndex].coordinate.toPoint()))
 
         nv.segment[fromDigit].advanceToNextAvailableDigiNode()
         nv.segment[toDigit].advanceToNextAvailableDigiNode()
@@ -293,9 +310,6 @@ class DrawingCanvas extends JPanel {
         // display project name & URL
         showInfoLine(g2d)
 
-        // to debug the damned digiNode coordinate problem
-        // if RUN_MODE <= DEVELOP
-        drawRaster(g2d)
 
         // the actual line drawing between Pairs
         drawLines(g2d)
@@ -303,7 +317,8 @@ class DrawingCanvas extends JPanel {
         drawLegend(g2d)
         drawSegments(g2d)
 
-        if (RUNMODE <= RUNMODE.DEVELOP) {
+        // if in debug or devel mode, draw raster
+        if (RUNMODE < RUNMODE.PRODUCTION) {
             drawRaster(g2d)
         }
 
