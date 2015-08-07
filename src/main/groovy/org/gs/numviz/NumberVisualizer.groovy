@@ -54,7 +54,7 @@ class NumberVisualizer {
     }
 
     /**
-     * initialize the segments
+     * initialize the segments, including digiNodes
      */
     public void initSegments() {
 
@@ -82,4 +82,24 @@ class NumberVisualizer {
         }
 
     }
+
+    /**
+     * output a domain report, might be useful for debugging
+     */
+    public void domainReport() {
+
+        println "="*80 + "\n"
+        println "Circulizr Domain Report for ${NR_OF_CONNECTIONS_TO_SHOW} connections for ${NUMBER.name} (${NUMBER.digits})"
+
+        // print segment information
+        segment.each { oneSegment ->
+            println oneSegment.toString()
+            // print digiNode information
+            oneSegment.digiNode.each { thisNode ->
+                println "    " + thisNode.toString()
+            }
+            println "="*80
+        }
+    }
+
 }
