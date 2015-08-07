@@ -1,8 +1,4 @@
-package org.gs.numviz
-
-import java.awt.Point
-import java.awt.geom.Point2D
-
+package org.circulizr
 // see end-of-file for license information
 
 /**

@@ -1,11 +1,10 @@
-package org.gs.numviz.ui
+package org.circulizr.ui
 
-import org.gs.numviz.Coordinate2D
-import org.gs.numviz.DigiNode
-import org.gs.numviz.NumVizColor
-import org.gs.numviz.NumberVisualizer
-import org.gs.numviz.RunMode
-import org.gs.numviz.numbers.Pair
+import org.circulizr.DigiNode
+import org.circulizr.NumVizColor
+import org.circulizr.NumberVisualizer
+import org.circulizr.RunMode
+import org.circulizr.numbers.Pair
 
 import javax.swing.JPanel
 import java.awt.BasicStroke
@@ -14,13 +13,11 @@ import java.awt.Font
 import java.awt.FontMetrics
 import java.awt.Graphics
 import java.awt.Graphics2D
-import java.awt.Point
 import java.awt.RenderingHints
 import java.awt.font.TextAttribute
 import java.awt.geom.Arc2D
 import java.awt.geom.Ellipse2D
 import java.awt.geom.Line2D
-import java.awt.geom.Point2D
 import java.awt.geom.QuadCurve2D
 import java.util.logging.Logger
 

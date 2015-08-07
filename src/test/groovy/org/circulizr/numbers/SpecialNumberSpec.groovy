@@ -1,4 +1,4 @@
-package org.gs.numviz.numbers
+package org.circulizr.numbers
 
 import spock.lang.Specification
 import spock.lang.Unroll

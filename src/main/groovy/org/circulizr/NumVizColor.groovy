@@ -1,4 +1,4 @@
-package org.gs.numviz
+package org.circulizr
 
 import java.awt.Color
 

@@ -1,7 +1,6 @@
-package org.gs
+package org.circulizr
 
 import spock.lang.Specification
-import spock.lang.Unroll
 
 // see end-of-file for license information
 

@@ -1,6 +1,6 @@
-package org.gs.numviz
+package org.circulizr
 
-import org.gs.numviz.numbers.SpecialNumber
+import org.circulizr.numbers.SpecialNumber
 
 import java.util.logging.Logger
 
@@ -26,9 +26,9 @@ class NumberVisualizer {
 
     // some properties of (all) segments
     // over what angle does a segment extend
-    final Double SEGMENT_EXTEND_ANGLE_DEG = 30
+    final Double SEGMENT_EXTEND_ANGLE_DEG = 32
     final Double SEGMENT_EXTEND_ANGLE = Math.toRadians(SEGMENT_EXTEND_ANGLE_DEG)
-    final Double SEGMENT_PADDING_ANGLE_DEG = 3
+    final Double SEGMENT_PADDING_ANGLE_DEG = 2
     // what's the distance to the next segment
     final Double SEGMENT_PADDING_ANGLE = Math.toRadians(SEGMENT_PADDING_ANGLE_DEG)
 

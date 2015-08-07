@@ -1,10 +1,7 @@
-package org.gs.numviz
+package org.circulizr
 
 import org.junit.Before
 import org.junit.Test
-
-import java.awt.Point
-import java.awt.geom.Point2D
 
 // see end-of-file for license information
 

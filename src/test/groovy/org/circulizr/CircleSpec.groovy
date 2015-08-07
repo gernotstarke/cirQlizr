@@ -1,10 +1,7 @@
-package org.gs.numviz
+package org.circulizr
 
 import org.gs.AssertHelper
 import spock.lang.Specification
-
-import java.awt.geom.Point2D
-import java.awt.Point
 
 // see end-of-file for license information
 

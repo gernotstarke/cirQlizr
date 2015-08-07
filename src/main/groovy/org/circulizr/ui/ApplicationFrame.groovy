@@ -1,7 +1,7 @@
-package org.gs.numviz.ui
+package org.circulizr.ui
 
-import org.gs.numviz.NumberVisualizer
-import org.gs.numviz.RunMode
+import org.circulizr.NumberVisualizer
+import org.circulizr.RunMode
 
 import javax.swing.*
 import java.awt.*
@@ -31,7 +31,7 @@ class ApplicationFrame extends JFrame {
 
         this.RUNMODE = mode
 
-        add(new DrawingCanvas(X_CANVAS_SIZE, Y_CANVAS_SIZE, infoLine, numberVisualizer, RUNMODE ));
+        add(new DrawingCanvas(X_CANVAS_SIZE, Y_CANVAS_SIZE, infoLine, numberVisualizer, mode));
 
         setTitle(titleText);
         setSize(X_CANVAS_SIZE, Y_CANVAS_SIZE);
@@ -43,13 +43,17 @@ class ApplicationFrame extends JFrame {
     }
 
 
-    public static showApplicationFrame(String titleText, String infoLine, int resolution, NumberVisualizer nv, RunMode runmode) {
+    public
+    static showApplicationFrame(String titleText, String infoLine, int resolution, NumberVisualizer nv, RunMode runmode) {
 
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        double width = screenSize.getWidth();
-        double height = screenSize.getHeight();
 
-        LOGGER.info "available screen size: width=$width, height=$height"
+        if (runmode < RunMode.PRODUCTION) {
+            Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+            double width = screenSize.getWidth();
+            double height = screenSize.getHeight();
+
+            LOGGER.info "available screen size: width=$width, height=$height"
+        }
 
         EventQueue.invokeLater(new Runnable() {
 

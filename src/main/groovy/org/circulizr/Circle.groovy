@@ -1,22 +1,32 @@
-package org.gs.numviz.numbers
-
-import groovy.transform.EqualsAndHashCode
-
+package org.circulizr
 // see end-of-file for license information
 
-@EqualsAndHashCode
-class Pair {
-    final int first
-    final int second
 
-    public Pair( int first, int second) {
-        this.first = first
-        this.second = second
+class Circle {
+    private Coordinate2D center
+    private double radius
+
+    /**
+     * Determine coordinates of a point on the circle
+     * as a function of its center coords, the radius
+     * and the angle.
+     * Result derived by the <a href="href="http://www.mathopenref.com/coordparamcircle.html">
+     *     parametric circle equation</a>
+     * @param angle
+     * @return
+     */
+    public Coordinate2D getPointByAngle( double angle) {
+        Double x = radius * Math.cos( angle ) + center.getX()
+        Double y = radius * Math.sin( angle ) + center.getY()
+        return new Coordinate2D( x , y )
     }
 
-    public String toString() {
-        return "("+first + ", " + second + ")"
+    public static Coordinate2D getPointByCenterRadiusAngle( Coordinate2D center, double radius, double angle ) {
+        Double x = radius * Math.cos( angle ) + center.getX()
+        Double y = radius * Math.sin( angle ) + center.getY()
+        return new Coordinate2D( x , y )
     }
+
 
 }
 
@@ -44,3 +54,5 @@ class Pair {
  SOFTWARE.
 
  *********************************************************************************/
+
+

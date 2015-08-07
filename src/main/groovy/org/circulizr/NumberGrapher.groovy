@@ -1,6 +1,6 @@
-package org.gs.numviz
+package org.circulizr
 
-import org.gs.numviz.numbers.SpecialNumber
+import org.circulizr.numbers.SpecialNumber
 
 // see end of file for licence information
 

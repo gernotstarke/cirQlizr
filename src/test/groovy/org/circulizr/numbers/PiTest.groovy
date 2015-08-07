@@ -1,8 +1,5 @@
-package org.gs.numviz.numbers
+package org.circulizr.numbers
 
-import org.gs.numviz.numbers.Pair
-import org.gs.numviz.numbers.Pi
-import org.gs.numviz.numbers.SpecialNumber
 import org.junit.Before
 import org.junit.Test
 
@@ -20,7 +17,7 @@ class PiTest extends GroovyTestCase {
 
     @Test
     public void testFirstDigitIsThree() {
-        assertEquals( "first digit must be three", 3, pi.getDigit(0))
+        GroovyTestCase.assertEquals( "first digit must be three", 3, pi.getDigit(0))
     }
 
 

@@ -1,7 +1,5 @@
-package org.gs.numviz
+package org.circulizr
 
-import java.awt.Color
-import java.awt.Point
 import java.awt.geom.Point2D
 
 // see end-of-file for license information

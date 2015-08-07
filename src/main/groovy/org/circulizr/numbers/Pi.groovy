@@ -1,4 +1,4 @@
-package org.gs.numviz.numbers
+package org.circulizr.numbers
 
 // see end-of-file for license information
 

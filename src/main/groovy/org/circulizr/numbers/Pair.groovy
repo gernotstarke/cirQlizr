@@ -1,55 +1,23 @@
-package org.gs.numviz
+package org.circulizr.numbers
 
-import org.gs.numviz.numbers.Pi
-import org.gs.numviz.numbers.SpecialNumber
-import org.gs.numviz.ui.ApplicationFrame
-
+import groovy.transform.EqualsAndHashCode
 
 // see end-of-file for license information
 
-/**
- * Startup class for circular number visualizations.
- *
- * Configures both domain and UI
- *
- */
+@EqualsAndHashCode
+class Pair {
+    final int first
+    final int second
 
-class Application  {
-
-    // the number to visualize
-    // resolve #25 (abstract class for special numbers)
-    final static SpecialNumber NUMBER = new Pi(NR_OF_CONNECTIONS_TO_SHOW + 1)
-
-
-    // lines to draw = nr-of-digits + 1
-    final static int NR_OF_CONNECTIONS_TO_SHOW = 3
-
-
-
-    // window/canvas size
-    final static int RESOLUTION = 700
-
-    final static String TITLE_TEXT = "CIRCULIZR - ${NR_OF_CONNECTIONS_TO_SHOW} digits of ${NUMBER.name}"
-
-    final static String INFO_LINE = "Circular Visualizer, https://github.com/gernotstarke/circulizr  "
-
-
-
-    public static void main(String[] args) {
-        // TODO: add command line parsing for color scheme, number, size
-
-        // construct the domain root
-        NumberVisualizer numberVisualizer = new NumberVisualizer( NUMBER, NR_OF_CONNECTIONS_TO_SHOW, RESOLUTION)
-
-        // create and initialize segments and digiNodes
-        numberVisualizer.initSegments()
-
-
-        // UI Window
-        ApplicationFrame.showApplicationFrame( TITLE_TEXT, INFO_LINE, RESOLUTION, numberVisualizer)
-
-
+    public Pair( int first, int second) {
+        this.first = first
+        this.second = second
     }
+
+    public String toString() {
+        return "("+first + ", " + second + ")"
+    }
+
 }
 
 /*********************************************************************************
@@ -76,5 +44,3 @@ class Application  {
  SOFTWARE.
 
  *********************************************************************************/
-
-
