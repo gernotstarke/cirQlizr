@@ -1,6 +1,7 @@
 package org.gs.numviz.ui
 
 import org.gs.numviz.NumberVisualizer
+import org.gs.numviz.RunMode
 
 import javax.swing.*
 import java.awt.*
@@ -19,13 +20,18 @@ class ApplicationFrame extends JFrame {
 
     private static final Logger LOGGER = Logger.getLogger(ApplicationFrame.class.getName())
 
+    // default: development mode, some debug info
+    private final RUNMODE = RunMode.DEVELOP
 
-    public ApplicationFrame(String titleText, String infoLine, int resolution, NumberVisualizer numberVisualizer) {
+
+    public ApplicationFrame(String titleText, String infoLine, int resolution, NumberVisualizer numberVisualizer, RunMode mode) {
 
         this.X_CANVAS_SIZE = resolution + 100
         this.Y_CANVAS_SIZE = resolution
 
-        add(new DrawingCanvas(X_CANVAS_SIZE, Y_CANVAS_SIZE, infoLine, numberVisualizer));
+        this.RUNMODE = mode
+
+        add(new DrawingCanvas(X_CANVAS_SIZE, Y_CANVAS_SIZE, infoLine, numberVisualizer, RUNMODE ));
 
         setTitle(titleText);
         setSize(X_CANVAS_SIZE, Y_CANVAS_SIZE);
@@ -37,7 +43,7 @@ class ApplicationFrame extends JFrame {
     }
 
 
-    public static showApplicationFrame(String titleText, String infoLine, int resolution, NumberVisualizer nv) {
+    public static showApplicationFrame(String titleText, String infoLine, int resolution, NumberVisualizer nv, RunMode runmode) {
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         double width = screenSize.getWidth();
@@ -50,7 +56,7 @@ class ApplicationFrame extends JFrame {
             @Override
             public void run() {
                 ApplicationFrame applicationFrame =
-                        new ApplicationFrame(titleText, infoLine, resolution, nv);
+                        new ApplicationFrame(titleText, infoLine, resolution, nv, runmode);
 
                 applicationFrame.setVisible(true);
             }

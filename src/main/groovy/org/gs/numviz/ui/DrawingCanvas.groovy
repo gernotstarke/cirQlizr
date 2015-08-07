@@ -3,6 +3,7 @@ package org.gs.numviz.ui
 import org.gs.numviz.DigiNode
 import org.gs.numviz.NumVizColor
 import org.gs.numviz.NumberVisualizer
+import org.gs.numviz.RunMode
 import org.gs.numviz.numbers.Pair
 
 import javax.swing.JPanel
@@ -45,13 +46,20 @@ class DrawingCanvas extends JPanel {
     // entry point to the "domain" - in DDD-terms: AggregateRoot
     private NumberVisualizer nv
 
+    // accounting which connectionPoint within which Segment is currently active
+    private List<Integer> currentConnectionPointInSegment
+
+    private RunMode RUNMODE = RunMode.DEVELOP
 
     private static final Logger LOGGER = Logger.getLogger(DrawingCanvas.class.getName())
 
 
-    DrawingCanvas(int x_resolution, int y_resolution, String infoLine, NumberVisualizer numberVisualizer) {
+
+    DrawingCanvas(int x_resolution, int y_resolution, String infoLine, NumberVisualizer numberVisualizer, RunMode mode) {
         super()
         initCanvas(x_resolution, y_resolution, infoLine, numberVisualizer)
+
+
     }
 
 
@@ -70,6 +78,7 @@ class DrawingCanvas extends JPanel {
         assert numberVisualizer != null
         nv = numberVisualizer
 
+        currentConnectionPointInSegment = new ArrayList<Integer>(10)
     }
 
     /*
@@ -97,7 +106,7 @@ class DrawingCanvas extends JPanel {
 
                 arc2D.setArcByCenter(0, 0, radius, Math.toDegrees(angleStart), Math.toDegrees(angleExtend), Arc2D.OPEN)
                 g2d.draw(arc2D)
-                
+
                 // draw dot for all digiNode-instances
                 drawDotForDigiNodes( g2d, digiNode)
             }
@@ -122,6 +131,8 @@ class DrawingCanvas extends JPanel {
     */
 
     private void drawLines(Graphics2D g2d) {
+        resetConnectionPoints()
+
         g2d.setStroke(new BasicStroke(1.0f))
 
         (0..nv.NR_OF_CONNECTIONS_TO_SHOW - 1).each { pairIndex ->
@@ -129,6 +140,12 @@ class DrawingCanvas extends JPanel {
             drawConnectionForNumberPair(g2d, currentPair.first, currentPair.second)
         }
 
+    }
+
+    private void resetConnectionPoints() {
+        nv.segment.each {
+            currentConnectionPointInSegment[it.digit] = 0
+        }
     }
 
     /*
@@ -286,8 +303,9 @@ class DrawingCanvas extends JPanel {
         drawLegend(g2d)
         drawSegments(g2d)
 
-        // if RUN_MODE <= DEVELOP
-        // "draw dots for digiNodes (currently in drawRaster)
+        if (RUNMODE <= RUNMODE.DEVELOP) {
+            drawRaster(g2d)
+        }
 
     }
 
