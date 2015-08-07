@@ -53,6 +53,7 @@ class Segment {
 
         assert nextFreeDigiNode < digiNode.size(): "cannot advance digiNode pointer, as segment $digit has no free digiNodes after $nextFreeDigiNode"
 
+        nextFreeDigiNode += 1
     }
 
     /**

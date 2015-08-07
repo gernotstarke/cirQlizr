@@ -96,4 +96,6 @@ abstract class SpecialNumber {
 
         return (0..pairNr).collect { getPair( it ) }
     }
+
+
 }
