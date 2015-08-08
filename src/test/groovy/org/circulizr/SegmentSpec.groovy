@@ -1,6 +1,5 @@
 package org.circulizr
 
-import org.gs.AssertHelper
 import spock.lang.Specification
 import static groovy.test.GroovyAssert.shouldFail
 
