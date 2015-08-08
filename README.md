@@ -30,10 +30,10 @@ Version 0.8 has multiple digiNodes, still only straight connections:
 
 
 Version 0.9 has multiple digiNodes per segment, evenly spaced,
-enhanced by curved (Bezier) connections. It can visualize numbers only.
+enhanced by curved (Bezier) connections. It can visualize numbers only. In the following screenshot you can see the (light-gray) configurable debugging raster.
 
 
-<img src="https://raw.githubusercontent.com/gernotstarke/circulizr/master/doc/screenshots/CIRCULIZR_0_9___DEBUG-mode__1000_digits_of_π" width=400>
+<img src="https://raw.githubusercontent.com/gernotstarke/circulizr/master/doc/screenshots/CIRCULIZR_0_9___DEBUG-mode__1000_digits_of_π.jpg" width=400>
 
 
 ## Goal
