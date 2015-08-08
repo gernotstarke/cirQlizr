@@ -24,12 +24,16 @@ between segments.
 <img src="https://raw.githubusercontent.com/gernotstarke/circulizr/master/doc/screenshots/circulizr-V0_5.jpg" width=400>
 
 
-Version 0.8 has multiple digiNodes, still only straight connections. 
+Version 0.8 has multiple digiNodes, still only straight connections: 
 
 <img src="https://raw.githubusercontent.com/gernotstarke/circulizr/master/doc/screenshots/circulizr-V0_8.jpg" width=400>
 
-Version 0.9 will have multiple digiNodes, evenly spaced along segments,
-maybe enhanced by curved connections. Will visualize numbers only.
+
+Version 0.9 has multiple digiNodes per segment, evenly spaced,
+enhanced by curved (Bezier) connections. It can visualize numbers only.
+
+
+<img src="https://raw.githubusercontent.com/gernotstarke/circulizr/master/doc/screenshots/CIRCULIZR_0_9___DEBUG-mode__1000_digits_of_π" width=400>
 
 
 ## Goal
