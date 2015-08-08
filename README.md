@@ -13,20 +13,20 @@ but architected to supply other 2D toolkits (like JavaFX or HTML5/WebGL).
 ## Status
 Work in progress. 
 
-![License](https://img.shields.io/github/license/gernotstarke/num-viz.svg)
-![Tasks](https://img.shields.io/github/issues/gernotstarke/num-viz.svg)
-![Bugs](https://badge.waffle.io/gernotstarke/num-viz.svg?label=bug&title=Bugs)
+![License](https://img.shields.io/github/license/gernotstarke/circulizr.svg)
+![Tasks](https://img.shields.io/github/issues/gernotstarke/circulizr.svg)
+![Bugs](https://badge.waffle.io/gernotstarke/circulizr.svg?label=bug&title=Bugs)
 
 ###  Examples
 Version 0.5 has only a single digiNode per segment and only straight connections
 between segments.
 
-<img src="https://raw.githubusercontent.com/gernotstarke/num-viz/master/doc/screenshots/NumViz-V0_5.jpg" width=400>
+<img src="https://raw.githubusercontent.com/gernotstarke/circulizr/master/doc/screenshots/circulizr-V0_5.jpg" width=400>
 
 
 Version 0.8 has multiple digiNodes, still only straight connections. 
 
-<img src="https://raw.githubusercontent.com/gernotstarke/num-viz/master/doc/screenshots/NumViz-V0_8.jpg" width=400>
+<img src="https://raw.githubusercontent.com/gernotstarke/circulizr/master/doc/screenshots/circulizr-V0_8.jpg" width=400>
 
 Version 0.9 will have multiple digiNodes, evenly spaced along segments,
 maybe enhanced by curved connections. Will visualize numbers only.
@@ -51,7 +51,7 @@ Martin Krzywinski and Cristian Illies Vasile.
 
 ## Domain Terminology
 
-![number visualization domain](numviz-domain.jpg)
+![number visualization domain](circulizr-domain.jpg)
 
 * The number to be visualized consists of ordered Digits.
 * Pair consists of left ("from") and right ("to") Digit,
@@ -84,14 +84,11 @@ Alas - in Java2D, some angles are expected in *degrees*, e.g. the
 [setArcByCenter](https://docs.oracle.com/javase/8/docs/api/java/awt/geom/Arc2D.html#setArcByCenter-double-double-double-double-double-int-) method to
 draw an arc expects its angle-parameters (start, extend) in degrees... (WTF?)
 
-So: angles within NumViz are given in radian (remember: 180DEG = &#960;RAD)
+So: angles within Circulizr are internally treated in radian (remember: 180DEG = &#960;RAD)
 and converted where needed by Math.toRadians() resp. Math.toDegree.
 
 
 ## Open Questions
-* Are lines staight or curved?
-  * if curved: what is the radius of the curve drawn?
-  * Is it Bezier-style?
 * What to do with lines from i to i?
 * how to change the color scheme
 * Enable command line parameters to determine size, colors etc.
