@@ -27,12 +27,12 @@ class Application  {
 
 
     // lines to draw = nr-of-digits + 1
-    final static int NR_OF_CONNECTIONS_TO_SHOW = 50
+    final static int NR_OF_CONNECTIONS_TO_SHOW = 2051
 
 
 
     // window/canvas size
-    final static int RESOLUTION = 700
+    final static int RESOLUTION = 1400
 
     final static String TITLE_TEXT = "CIRCULIZR - ${NR_OF_CONNECTIONS_TO_SHOW} digits of ${NUMBER.name}"
 
@@ -86,5 +86,3 @@ class Application  {
  SOFTWARE.
 
  *********************************************************************************/
-
-

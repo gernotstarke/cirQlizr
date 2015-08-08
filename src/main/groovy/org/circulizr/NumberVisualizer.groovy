@@ -26,9 +26,9 @@ class NumberVisualizer {
 
     // some properties of (all) segments
     // over what angle does a segment extend
-    final Double SEGMENT_EXTEND_ANGLE_DEG = 26
+    final Double SEGMENT_EXTEND_ANGLE_DEG = 34
     final Double SEGMENT_EXTEND_ANGLE = Math.toRadians(SEGMENT_EXTEND_ANGLE_DEG)
-    final Double SEGMENT_PADDING_ANGLE_DEG = 5
+    final Double SEGMENT_PADDING_ANGLE_DEG = 1
     // what's the distance to the next segment
     final Double SEGMENT_PADDING_ANGLE = Math.toRadians(SEGMENT_PADDING_ANGLE_DEG)
 
