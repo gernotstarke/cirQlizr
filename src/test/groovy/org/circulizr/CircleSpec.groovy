@@ -1,6 +1,5 @@
 package org.circulizr
 
-import org.gs.AssertHelper
 import spock.lang.Specification
 
 // see end-of-file for license information

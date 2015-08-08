@@ -115,7 +115,9 @@ class Pi extends SpecialNumber {
     create Pi instance with default precision
      **/
 
-
+    public Pi() {
+        this(10)
+    }
 }
 
 /*********************************************************************************
