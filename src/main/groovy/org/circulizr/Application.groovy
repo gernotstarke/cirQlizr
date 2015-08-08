@@ -1,5 +1,6 @@
 package org.circulizr
 
+import org.circulizr.numbers.E
 import org.circulizr.numbers.Pi
 import org.circulizr.numbers.SpecialNumber
 import org.circulizr.ui.ApplicationFrame
@@ -22,7 +23,7 @@ class Application  {
 
     // the number to visualize
     // resolve #25 (abstract class for special numbers)
-    final static SpecialNumber NUMBER = new Pi(NR_OF_CONNECTIONS_TO_SHOW + 1)
+    final static SpecialNumber NUMBER = new E(NR_OF_CONNECTIONS_TO_SHOW + 1)
 
 
     // lines to draw = nr-of-digits + 1

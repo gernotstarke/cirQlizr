@@ -7,6 +7,7 @@ import org.circulizr.RunMode
 import org.circulizr.numbers.Pair
 
 import javax.swing.JPanel
+import javax.swing.Scrollable
 import java.awt.BasicStroke
 import java.awt.Color
 import java.awt.Font
