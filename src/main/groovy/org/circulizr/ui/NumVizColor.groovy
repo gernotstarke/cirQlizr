@@ -1,4 +1,4 @@
-package org.circulizr
+package org.circulizr.ui
 
 import java.awt.Color
 
