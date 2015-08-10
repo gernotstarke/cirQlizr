@@ -1,4 +1,7 @@
-# Circulizr: Circular visualization of data
+# ![logo](./circulizr-logo.png) 
+# Circular visualization of data
+ 
+ 
  
 A simple experiment with 2D graphics to create circular visualisations of numbers
 like &#960; (pi), e (Euler number) or similar - that might grow 
