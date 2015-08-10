@@ -1,13 +1,12 @@
 package org.circulizr.ui
 
 import org.circulizr.DigiNode
-import org.circulizr.NumVizColor
+import org.circulizr.ui.NumVizColor
 import org.circulizr.NumberVisualizer
 import org.circulizr.RunMode
 import org.circulizr.numbers.Pair
 
 import javax.swing.JPanel
-import javax.swing.Scrollable
 import java.awt.BasicStroke
 import java.awt.Color
 import java.awt.Font
