@@ -1,3 +1,8 @@
+
+plugins {
+    id "com.github.hierynomus.license" version "0.11.0"
+}
+
 apply plugin: 'groovy'
 apply plugin: 'application'
 
@@ -11,4 +16,17 @@ dependencies {
     testCompile "org.spockframework:spock-core:1.0-groovy-2.4"
 }
 
+// define the main class to start the application
 mainClassName="org.circulizr.Application"
+
+
+// configure the license plugin
+license {
+    header = file('LICENSE.txt')
+
+    ext.year = Calendar.getInstance().get(Calendar.YEAR)
+    ext.name = 'Dr. Gernot Starke'
+
+    include "**/*.groovy"
+    includes(["**/*.java", "**/*.config"])
+}
