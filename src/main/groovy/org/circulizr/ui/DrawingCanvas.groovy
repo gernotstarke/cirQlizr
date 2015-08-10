@@ -1,13 +1,12 @@
 package org.circulizr.ui
 
 import org.circulizr.DigiNode
-import org.circulizr.NumVizColor
 import org.circulizr.NumberVisualizer
 import org.circulizr.RunMode
 import org.circulizr.numbers.Pair
 
+import javax.imageio.ImageIO
 import javax.swing.JPanel
-import javax.swing.Scrollable
 import java.awt.BasicStroke
 import java.awt.Color
 import java.awt.Font
@@ -20,6 +19,7 @@ import java.awt.geom.Arc2D
 import java.awt.geom.Ellipse2D
 import java.awt.geom.Line2D
 import java.awt.geom.QuadCurve2D
+import java.awt.image.BufferedImage
 import java.util.logging.Logger
 
 // see end-of-file for license information
@@ -78,6 +78,8 @@ class DrawingCanvas extends JPanel {
         TRANSLATION_OFFSET = Math.min(X_CANVAS_SIZE, Y_CANVAS_SIZE - MARGIN).intdiv(2)
 
         INFO_LINE = infoLine
+
+        setBackground( Color.darkGray )
 
         assert numberVisualizer != null
         nv = numberVisualizer
@@ -141,7 +143,7 @@ class DrawingCanvas extends JPanel {
 
         g2d.setStroke(new BasicStroke(1.0f))
 
-        (0..nv.NR_OF_CONNECTIONS_TO_SHOW - 1).each { pairIndex ->
+        (0..nv.NR_OF_CONNECTIONS_TO_SHOW - 2).each { pairIndex ->
             Pair currentPair = nv.NUMBER.getPair(pairIndex)
             drawConnectionForNumberPair(g2d, currentPair.first, currentPair.second)
         }
@@ -213,7 +215,7 @@ class DrawingCanvas extends JPanel {
                 new Hashtable<TextAttribute, Object>();
 
         /* This colour applies just to the font, not other rendering */
-        map.put(TextAttribute.FOREGROUND, Color.DARK_GRAY);
+        map.put(TextAttribute.FOREGROUND, NumVizColor.foregroundLight);
 
         font = font.deriveFont(map);
         g2d.setFont(font);
@@ -299,7 +301,10 @@ class DrawingCanvas extends JPanel {
 
         super.paintComponent(g);
 
+        // for printing...BufferedImage bufferedImage = new BufferedImage(700, 700, BufferedImage.TYPE_INT_RGB);
+
         Graphics2D g2d = (Graphics2D) g;
+        //Graphics2D g2d = (Graphics2D) bufferedImage.createGraphics();
 
         // prepare the canvas for drawing,
         // translate coord system so that 0/0 is center of circle
@@ -320,6 +325,13 @@ class DrawingCanvas extends JPanel {
             drawRaster(g2d)
         }
 
+        //saveImageToFile( g2d )
     }
 
+
+    private void saveImageToFile(BufferedImage bi ) {
+
+        ImageIO.write( bi, "PNG", new File("./circulizr.png"))
+
+    }
 }

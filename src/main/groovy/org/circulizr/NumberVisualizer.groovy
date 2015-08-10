@@ -1,6 +1,7 @@
 package org.circulizr
 
 import org.circulizr.numbers.SpecialNumber
+import org.circulizr.ui.NumVizColor
 
 import java.util.logging.Logger
 

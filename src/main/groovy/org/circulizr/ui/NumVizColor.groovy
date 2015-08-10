@@ -26,6 +26,10 @@ class NumVizColor {
             new Color(94, 79, 162)
     )
 
+    public final static Color backgroundDark = Color.darkGray
+    public final static Color foregroundLight = Color.white
+
+
     // scheme for qualitative data, more colors
     // see: http://colorbrewer2.org/?type=qualitative&scheme=Paired&n=10
     public final static List<Color> qualitativeColor = Arrays.asList(

@@ -32,7 +32,7 @@ class Application  {
 
 
     // window/canvas size
-    final static int RESOLUTION = 1400
+    final static int RESOLUTION = 700
 
     final static String TITLE_TEXT = "CIRCULIZR - ${NR_OF_CONNECTIONS_TO_SHOW} digits of ${NUMBER.name}"
 
