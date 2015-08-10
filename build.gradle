@@ -28,5 +28,5 @@ license {
     ext.name = 'Dr. Gernot Starke'
 
     include "**/*.groovy"
-    includes(["**/*.java", "**/*.config"])
+    //includes(["**/*.java", "**/*.config"])
 }
