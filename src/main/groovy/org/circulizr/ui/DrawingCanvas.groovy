@@ -24,11 +24,10 @@
 
 package org.circulizr.ui
 
-import org.circulizr.DigiNode
-import org.circulizr.ui.NumVizColor
+import org.circulizr.domain.DigiNode
 import org.circulizr.NumberVisualizer
-import org.circulizr.RunMode
-import org.circulizr.numbers.Pair
+import org.circulizr.configuration.RunMode
+import org.circulizr.domain.numbers.Pair
 
 import javax.swing.JPanel
 import java.awt.BasicStroke
@@ -97,6 +96,8 @@ class DrawingCanvas extends JPanel {
         assert X_CANVAS_SIZE > 1
         assert Y_CANVAS_SIZE > 1
 
+        setBackground( Color.white )
+
         TRANSLATION_OFFSET = Math.min(X_CANVAS_SIZE, Y_CANVAS_SIZE - MARGIN).intdiv(2)
 
         INFO_LINE = infoLine
@@ -161,7 +162,7 @@ class DrawingCanvas extends JPanel {
     private void drawLines(Graphics2D g2d) {
         resetConnectionPoints()
 
-        g2d.setStroke(new BasicStroke(1.0f))
+        g2d.setStroke(new BasicStroke(1.2f))
 
         (0..nv.NR_OF_CONNECTIONS_TO_SHOW - 1).each { pairIndex ->
             Pair currentPair = nv.NUMBER.getPair(pairIndex)
@@ -328,13 +329,13 @@ class DrawingCanvas extends JPanel {
         translateCenterToZero(g2d)
 
         // display project name & URL
-        showInfoLine(g2d)
+        //showInfoLine(g2d)
 
 
         // the actual line drawing between Pairs
         drawLines(g2d)
 
-        drawLegend(g2d)
+        //drawLegend(g2d)
         drawSegments(g2d)
 
         // if in debug or devel mode, draw raster

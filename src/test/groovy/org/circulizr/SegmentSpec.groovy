@@ -23,6 +23,7 @@
  */
 package org.circulizr
 
+import org.circulizr.domain.Segment
 import spock.lang.Specification
 import static groovy.test.GroovyAssert.shouldFail
 

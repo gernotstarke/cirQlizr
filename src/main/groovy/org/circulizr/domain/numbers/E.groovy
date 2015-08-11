@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.circulizr.numbers
+package org.circulizr.domain.numbers
 // see end-of-file for license information
 
 /**

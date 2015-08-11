@@ -21,44 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.circulizr
+package org.circulizr.configuration
 
-/**
- * DigiNode represents an endpoint for a visual connection (e.g. line or curve).
- *
- */
-
-class DigiNode {
-
-    Coordinate2D coordinate
-
-    double angle
-    double radius
-
-    /**
-     * completely create a digiNode instance with its coordinates
-     * @param angle
-     * @param radius
-     */
-    public DigiNode( double angle, double radius) {
-        this.angle = angle
-        this.radius = radius
-
-        this.coordinate = calcCoordinate( angle, radius)
-
-    }
+// see end-of-file for license information
 
 
-    public Coordinate2D calcCoordinate( double angle, double radius) {
-
-        return Circle.getPointByCenterRadiusAngle( new Coordinate2D(0,0), radius, angle )
-
-    }
-
-
-    public String toString() {
-        return """radius = $radius, angle=${sprintf("%3.1f (%3.1f°)", angle, Math.toDegrees(angle))}, coord=(${sprintf("%3.1f", coordinate.x)}, ${sprintf("%3.1f", coordinate.y)}})
-"""
-    }
-
+enum RunMode {
+    DEBUG,
+    DEVELOP,
+    PRODUCTION
 }

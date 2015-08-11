@@ -21,24 +21,55 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.circulizr.numbers
+package org.circulizr.domain
 
-import groovy.transform.EqualsAndHashCode
+import java.awt.geom.Point2D
 
-// see end-of-file for license information
 
-@EqualsAndHashCode
-class Pair {
-    final int first
-    final int second
+/**
+ * represents a point within a 2-dimensional coordinate system.
+ * In reality will be subclassed by something like
+ * @see java.awt.Point2D or @see javafx.geomentry.Point2D
+ */
+class Coordinate2D {
 
-    public Pair( int first, int second) {
-        this.first = first
-        this.second = second
+    private Point2D point
+
+
+    public Coordinate2D(Number x, Number y) {
+        assert (x != null) && (y != null): "parameters must not be null, x=${x}, y=${y}"
+        this.point = new Point2D.Double(x, y)
+
     }
 
-    public String toString() {
-        return "("+first + ", " + second + ")"
+
+    public double getX() {
+        return point.getX()
+    }
+
+    public double getY() {
+        return point.getY()
+    }
+
+    public Point2D toPoint() {
+        return point
+    }
+    /**
+     * Mirrors a coord at x-axis by inverting its y value
+     * @param origin
+     * @return
+     */
+    public Coordinate2D mirrorAtXAxis(Coordinate2D origin) {
+        // as Java coordinate system really sucks - we need to invert the Y value
+        return new Coordinate2D(origin.getX(), -1 * origin.getY()())
+    }
+
+    /**
+     * mirror itself at x-axis
+     */
+    public void mirrorAtXAxis() {
+        point.setLocation( this.getX(), -1 * this.getY())
     }
 
 }
+

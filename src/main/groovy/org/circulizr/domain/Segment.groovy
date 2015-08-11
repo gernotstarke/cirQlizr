@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.circulizr
+package org.circulizr.domain
 
 import java.awt.Color
 import java.util.logging.Logger

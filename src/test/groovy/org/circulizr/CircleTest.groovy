@@ -23,6 +23,8 @@
  */
 package org.circulizr
 
+import org.circulizr.domain.Circle
+import org.circulizr.domain.Coordinate2D
 import org.junit.Before
 import org.junit.Test
 

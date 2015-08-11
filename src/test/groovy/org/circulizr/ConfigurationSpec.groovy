@@ -23,13 +23,9 @@
  */
 package org.circulizr
 
-import org.circulizr.numbers.Pi
-import org.circulizr.numbers.SpecialNumber
+import org.circulizr.domain.numbers.Pi
+import org.circulizr.domain.numbers.SpecialNumber
 import spock.lang.Specification
-
-import java.lang.reflect.Constructor
-
-
 
 class ConfigurationSpec extends Specification {
 
@@ -47,7 +43,7 @@ class ConfigurationSpec extends Specification {
 
     def "can convert configuration string to class instance by no-arc constructor"() {
         given:
-        def specialNumberConfig = """ number="org.circulizr.numbers.Pi"  """
+        def specialNumberConfig = """ number="org.circulizr.domain.numbers.Pi"  """
         def config = new ConfigSlurper().parse(specialNumberConfig)
         def precision = 10
 
@@ -57,7 +53,7 @@ class ConfigurationSpec extends Specification {
 
         then:
         // found the right configuration string
-        config.number == "org.circulizr.numbers.Pi"
+        config.number == "org.circulizr.domain.numbers.Pi"
 
         // we created an instance of the correct class
         [Pi.class, SpecialNumber.class].each {
@@ -72,7 +68,7 @@ class ConfigurationSpec extends Specification {
 
     def "can convert configuration string to class instance by specific constructor"() {
         given:
-        def specialNumberConfig = """ number="org.circulizr.numbers.Pi"  """
+        def specialNumberConfig = """ number="org.circulizr.domain.numbers.Pi"  """
         def config = new ConfigSlurper().parse(specialNumberConfig)
         def precision = 7
 

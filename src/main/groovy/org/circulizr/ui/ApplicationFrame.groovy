@@ -24,7 +24,7 @@
 package org.circulizr.ui
 
 import org.circulizr.NumberVisualizer
-import org.circulizr.RunMode
+import org.circulizr.configuration.RunMode
 
 import javax.swing.*
 import java.awt.*

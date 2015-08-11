@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.circulizr.numbers
+package org.circulizr.domain.numbers
 
 /**
  * This is an abstract class that cannot be instantiated directly.

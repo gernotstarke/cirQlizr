@@ -21,25 +21,44 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.circulizr.numbers
-// see end-of-file for license information
+package org.circulizr.domain
 
+/**
+ * DigiNode represents an endpoint for a visual connection (e.g. line or curve).
+ *
+ */
 
-class PairTest extends GroovyTestCase {
+class DigiNode {
 
-    public void testEqualPair() {
-        def p1 = new Pair(3,1)
-        def p2 = new Pair(3,1)
+    Coordinate2D coordinate
 
-        assertEquals( "$p1 and $p2 should be equal", p1, p2)
+    double angle
+    double radius
+
+    /**
+     * completely create a digiNode instance with its coordinates
+     * @param angle
+     * @param radius
+     */
+    public DigiNode( double angle, double radius) {
+        this.angle = angle
+        this.radius = radius
+
+        this.coordinate = calcCoordinate( angle, radius)
+
     }
 
 
-    public void testGetPair() {
-        def pi = new Pi(5)
-        assertEquals( "pair 0 should be 3,1", pi.getPair(0), new Pair( 3,1) )
-        assertEquals( "pair 1 should be 1,4", pi.getPair(1), new Pair( 1,4) )
+    public Coordinate2D calcCoordinate( double angle, double radius) {
 
+        return Circle.getPointByCenterRadiusAngle( new Coordinate2D(0,0), radius, angle )
 
     }
+
+
+    public String toString() {
+        return """radius = $radius, angle=${sprintf("%3.1f (%3.1f°)", angle, Math.toDegrees(angle))}, coord=(${sprintf("%3.1f", coordinate.x)}, ${sprintf("%3.1f", coordinate.y)}})
+"""
+    }
+
 }

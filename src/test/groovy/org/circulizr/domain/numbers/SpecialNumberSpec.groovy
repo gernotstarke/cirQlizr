@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.circulizr.numbers
+package org.circulizr.domain.numbers
 
 import spock.lang.Specification
 import spock.lang.Unroll
