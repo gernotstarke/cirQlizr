@@ -27,7 +27,7 @@ import org.circulizr.domain.numbers.Pi
 import org.circulizr.domain.numbers.SpecialNumber
 import spock.lang.Specification
 
-class ConfigurationSpec extends Specification {
+class ConfigurationSlurperSpec extends Specification {
 
 
     def "can read string configuration"() {
@@ -40,6 +40,16 @@ class ConfigurationSpec extends Specification {
 
     }
 
+
+    def "can read numeric configuration"() {
+        given:
+        def numberConfig = """x_resolution = 700 """
+        def config = new ConfigSlurper().parse(numberConfig)
+
+        expect:
+        config.x_resolution == 700
+
+    }
 
     def "can convert configuration string to class instance by no-arc constructor"() {
         given:
