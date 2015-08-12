@@ -21,8 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.circulizr
+package org.circulizr.configuration
 
+import org.circulizr.AssertHelper
+import org.circulizr.configuration.RunMode
 import org.circulizr.domain.numbers.Pi
 import org.circulizr.domain.numbers.SpecialNumber
 import spock.lang.Specification
@@ -32,22 +34,56 @@ class ConfigurationSlurperSpec extends Specification {
 
     def "can read string configuration"() {
         given:
-        def stringConfig = """runmode="PRODUCTION" """
+        def stringConfig = """title="arc42" """
         def config = new ConfigSlurper().parse(stringConfig)
 
         expect:
-        config.runmode == "PRODUCTION"
+        config.title == "arc42"
 
     }
 
 
-    def "can read numeric configuration"() {
+    def "can read integer configuration"() {
         given:
         def numberConfig = """x_resolution = 700 """
         def config = new ConfigSlurper().parse(numberConfig)
 
         expect:
         config.x_resolution == 700
+
+    }
+
+
+    def "can read double configuration"() {
+        given:
+        def numberConfig = """angle = 3.141592653589793d """
+        def config = new ConfigSlurper().parse(numberConfig)
+
+        expect:
+        AssertHelper.assertCloseTo(config.angle, Math.PI, 0.00000001)
+    }
+
+
+
+    def "can read runmode enum configuration"() {
+        given:
+        def runmodeConfig = """runmode = "PRODUCTION" """
+        def config = new ConfigSlurper().parse(runmodeConfig)
+
+        expect:
+
+        config.runmode == "PRODUCTION"
+        RunMode.PRODUCTION == config.runmode as RunMode
+    }
+
+    def "can read set configuration"() {
+        given:
+        def setConfig = """valueSet = [0,1,2]"""
+        def config = new ConfigSlurper().parse( setConfig)
+
+        expect:
+        config.valueSet == [0,1,2]
+
 
     }
 
