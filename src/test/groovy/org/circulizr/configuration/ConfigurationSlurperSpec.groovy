@@ -24,7 +24,6 @@
 package org.circulizr.configuration
 
 import org.circulizr.AssertHelper
-import org.circulizr.configuration.RunMode
 import org.circulizr.domain.numbers.Pi
 import org.circulizr.domain.numbers.SpecialNumber
 import spock.lang.Specification
@@ -64,25 +63,33 @@ class ConfigurationSlurperSpec extends Specification {
     }
 
 
-
-    def "can read runmode enum configuration"() {
+    def "can read runmode PRODUCTION configuration"() {
         given:
         def runmodeConfig = """runmode = "PRODUCTION" """
         def config = new ConfigSlurper().parse(runmodeConfig)
 
         expect:
-
         config.runmode == "PRODUCTION"
-        RunMode.PRODUCTION == config.runmode as RunMode
+        RunMode.PRODUCTION == (config.runmode as RunMode)
+    }
+
+    def "can read runmode DEBUG configuration"() {
+        given:
+        def runmodeConfig = """runmode = "DEBUG" """
+        def config = new ConfigSlurper().parse(runmodeConfig)
+
+        expect:
+        config.runmode == "DEBUG"
+        RunMode.DEBUG == (config.runmode as RunMode)
     }
 
     def "can read set configuration"() {
         given:
         def setConfig = """valueSet = [0,1,2]"""
-        def config = new ConfigSlurper().parse( setConfig)
+        def config = new ConfigSlurper().parse(setConfig)
 
         expect:
-        config.valueSet == [0,1,2]
+        config.valueSet == [0, 1, 2]
 
 
     }
