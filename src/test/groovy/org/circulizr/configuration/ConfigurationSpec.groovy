@@ -4,15 +4,36 @@ import spock.lang.Specification
 
 class ConfigurationSpec extends Specification {
 
-    def "can configure typesafe RunMode"() {
+    def "can configure numeric valueSet"() {
+        given:
+        def config = new ConfigSlurper().parse(""" valueSet = []  """ )
+        Configuration configuration = new Configuration( config )
+
+        expect:
+        false
+    }
+
+
+    def "can configure typesafe PRODUCTION RunMode"() {
         given:
         def config = new ConfigSlurper().parse("""runmode = "PRODUCTION"  """ )
         Configuration configuration = new Configuration( config )
 
         expect:
         RunMode.PRODUCTION == configuration.RUNMODE
-
     }
+
+
+    def "can configure typesafe DEBUG RunMode"() {
+        given:
+        def config = new ConfigSlurper().parse("""runmode = "DEBUG"  """ )
+        Configuration configuration = new Configuration( config )
+
+        expect:
+        RunMode.DEBUG == configuration.RUNMODE
+    }
+
+
 }
 
 /************************************************************************
