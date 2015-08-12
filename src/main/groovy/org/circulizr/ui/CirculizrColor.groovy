@@ -30,7 +30,7 @@ import java.awt.Color
  * http://colorbrewer2.org/?type=diverging&scheme=Spectral&n=10
  */
 
-class NumVizColor {
+class CirculizrColor {
 
     // private static final List<Integer> colNumbers =
     //         Arrays.asList(0x67001F,0xb2182B,0xb2182B,0xb2182B, 0xf4a582, 0xfddbc7, 0xd1e5f0 )
