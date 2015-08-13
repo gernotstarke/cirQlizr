@@ -21,18 +21,18 @@ Work in progress.
 ![Bugs](https://badge.waffle.io/gernotstarke/circulizr.svg?label=bug&title=Bugs)
 
 ###  Examples
-Version 0.5 has only a single digiNode per segment and only straight connections
+Version 0.5 has only a single connectionNode per segment and only straight connections
 between segments.
 
 <img src="https://raw.githubusercontent.com/gernotstarke/circulizr/master/doc/screenshots/circulizr-V0_5.jpg" width=400>
 
 
-Version 0.8 has multiple digiNodes, still only straight connections: 
+Version 0.8 has multiple connectionNodes, still only straight connections: 
 
 <img src="https://raw.githubusercontent.com/gernotstarke/circulizr/master/doc/screenshots/circulizr-V0_8.jpg" width=400>
 
 
-Version 0.9 has multiple digiNodes per segment, evenly spaced,
+Version 0.9 has multiple connectionNodes per segment, evenly spaced,
 enhanced by curved (Bezier) connections. It can visualize numbers only. In the following screenshot you can see the (light-gray) configurable debugging raster.
 
 
@@ -58,7 +58,7 @@ Martin Krzywinski and Cristian Illies Vasile.
 
 ## Domain Terminology
 
-![number visualization domain](circulizr-domain.jpg)
+![number visualization domain](circulizr-domain.png)
 
 * The number to be visualized consists of ordered Digits.
 * Pair consists of left ("from") and right ("to") Digit,
@@ -68,9 +68,9 @@ Digit of a Pair.
      (quadratic or higher degree) Bézier curve.
 * Segment:
   * visually represents all Lines for one specific Digit (either left or right in a Pair).
-  * contains ordered list of connection points called "digiNodes" 
+  * contains ordered list of connection points called "connectionNodes" 
      * determines their x/y positions on the drawing canvas.
-     * number of digiNodes on segment depends on the count of the corresponding
+     * number of connectionNodes on segment depends on the count of the corresponding
         digit in the number.
   * has a position on drawing canvas
   * has a Color
@@ -78,7 +78,7 @@ Digit of a Pair.
   or 0.2*&#960; in radians)
 * Line
   * corresponds to a Pair of Digits.
-  * Start and end of the line are digiNodes
+  * Start and end of the line are connectionNodes
 
 ### Working With Angles
 Although it seems easier to treat a Segment as a 36 *degree* unit, 
