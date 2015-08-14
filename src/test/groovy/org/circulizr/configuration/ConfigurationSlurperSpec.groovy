@@ -83,13 +83,23 @@ class ConfigurationSlurperSpec extends Specification {
         RunMode.DEBUG == (config.runmode as RunMode)
     }
 
-    def "can read set configuration"() {
+    def "can read numerical set configuration"() {
         given:
         def setConfig = """valueSet = [0,1,2]"""
         def config = new ConfigSlurper().parse(setConfig)
 
         expect:
         config.valueSet == [0, 1, 2]
+    }
+
+
+    def "can read string set configuration"() {
+        given:
+        def setConfig = """valueSet = ["a", "b", "c" ]"""
+        def config = new ConfigSlurper().parse(setConfig)
+
+        expect:
+        config.valueSet == ["a", "b", "c"]
 
 
     }
@@ -98,7 +108,6 @@ class ConfigurationSlurperSpec extends Specification {
         given:
         def specialNumberConfig = """ number="org.circulizr.domain.numbers.Pi"  """
         def config = new ConfigSlurper().parse(specialNumberConfig)
-        def precision = 10
 
         when:
         // newInstance() invokes no-arg constructor

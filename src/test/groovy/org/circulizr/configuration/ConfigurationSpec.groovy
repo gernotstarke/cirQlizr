@@ -1,39 +1,100 @@
 package org.circulizr.configuration
 
+import org.circulizr.domain.numbers.SpecialNumber
 import spock.lang.Specification
 
 class ConfigurationSpec extends Specification {
 
-    def "can configure numeric valueSet"() {
-        given:
-        def config = new ConfigSlurper().parse(""" valueSet = []  """ )
-        Configuration configuration = new Configuration( config )
+    String configString = """
+    runmode = "PRODUCTION"
 
-        expect:
-        false
+    ui_toolkit = "JAVA2D"
+
+    valueSet = ["0", "1", "2", "3"]
+
+    number="org.circulizr.domain.numbers.Pi"
+
+    nr_of_connections_to_show = 42
+
+    colors {
+        // use java.awt.Color names here,
+        // alternatively use hex values...
+        background = DARKGRAY
+    }
+
+    segments {
+
+        // padding angle == angle between segments in degrees
+        padding_angle = 1.5d
+
+        // if same_size == false, all segments may have different size
+        same_size     = true
+
+        // sum of entries in sizes-array should be 360 (degrees)!
+        // if sum is smaller, padding_angle is increased
+        // larger sum results in errors
+        extend = 30d
+
+        //extends = [30, 50, 70, 120, 120]
+
+        connection_distance = 0
+
+        // distance between Bezier control point (BCP) and point-of-origin (POO)
+         // default value is zero -> BCP for all segments == POO
+        bcp_poo_distance = 0
+    }
+
+    connections {
+        style = "BEZIER" // "STRAIGHT"
     }
 
 
-    def "can configure typesafe PRODUCTION RunMode"() {
+    legend {
+        show = true
+        statistics = true
+
+    }
+
+
+    resolution {
+       output = 700
+       internal = 1000
+    }
+
+
+
+    layout {
+        // the margin between outer edge of drawing area and canvas/frame edge
+        // given in physical coordinates
+        margin = 20
+    }
+
+
+
+"""
+
+    // specifiy a more-or-less complete configuration
+    def "can configure completely"() {
         given:
-        def config = new ConfigSlurper().parse("""runmode = "PRODUCTION"  """ )
+        def config = new ConfigSlurper().parse( configString )
         Configuration configuration = new Configuration( config )
 
         expect:
         RunMode.PRODUCTION == configuration.RUNMODE
+
+        ["0", "1", "2", "3"] == configuration.VALUESET
+
+        // can configure number
+        configuration.NUMBER instanceof SpecialNumber
+
+        42 == configuration.NR_OF_CONNECTIONS_TO_SHOW
     }
 
 
-    def "can configure typesafe DEBUG RunMode"() {
-        given:
-        def config = new ConfigSlurper().parse("""runmode = "DEBUG"  """ )
-        Configuration configuration = new Configuration( config )
-
+    def "can convert configuration string to SpecialNumber instance"() {
         expect:
-        RunMode.DEBUG == configuration.RUNMODE
+        Configuration.convertStringToSpecialNumberInstance( "org.circulizr.domain.numbers.Pi") instanceof SpecialNumber
     }
-
-
 }
 
 /************************************************************************
