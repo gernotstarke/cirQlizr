@@ -16,4 +16,13 @@ straight connections between segments. Nothing was configurable.
 | Version 0.8 had multiple connectionNodes, but still only straight
 connections.
 
+|image:CIRCULIZR_0_8_5_DEBUG-mode.jpg[V0.8.5, 400, circulizr-V0_8_5]
+| Version 0.8.5 has multiple connectionNodes per segment, evenly spaced, +
+enhanced by curved (Bezier) connections. It can visualize numbers only.
+In the screenshot you can see the (light-gray) configurable
+debugging raster.
+
+|image:CIRCULIZR_0.8.5_2051-nrs-of-e.jpg[V0.8.5-grey, 400, circulizr-V0_8_5]
+| same source version, different background setting, no debug raster.
+
 |===
