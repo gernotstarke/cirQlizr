@@ -25,7 +25,7 @@ image:https://badge.waffle.io/gernotstarke/circulizr.svg?label=bug&title=Bugs[Bu
 
 [[examples]]
 == Examples
-See our  <<doc/asciidoc/gallery#,Gallery>>
+See our  <<doc/asciidoc/gallery.adoc#,Gallery>>
 
 
 [[goal]]
