@@ -2,6 +2,7 @@
 plugins {
     id "com.github.hierynomus.license" version "0.11.0"
     id "org.kordamp.gradle.stats" version "0.1.5"
+    id 'org.asciidoctor.convert' version '1.5.2'
 }
 
 apply plugin: 'groovy'
@@ -30,4 +31,25 @@ license {
 
     include "**/*.groovy"
     //includes(["**/*.java", "**/*.config"])
+}
+
+apply plugin: 'org.asciidoctor.convert'
+
+ext {
+    adocSrcDir = "$projectDir/doc/asciidoc"
+}
+
+asciidoctor {
+    outputDir "${buildDir}/docs"
+    sourceDir "${adocSrcDir}"
+
+    sources {
+        include "gallery.adoc"
+    }
+
+    attributes = [
+            doctype    : 'book',
+            icons      : 'font',
+            sectlink   : true,
+            sectanchors: true]
 }
