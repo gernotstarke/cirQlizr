@@ -19,8 +19,8 @@ HTML5/WebGL).
 
 Work in progress.
 
-image:https://img.shields.io/github/license/gernotstarke/circulizr.svg[License] +
-image:https://img.shields.io/github/issues/gernotstarke/circulizr.svg[Tasks] +
+image:https://img.shields.io/github/license/gernotstarke/circulizr.svg[License]
+image:https://img.shields.io/github/issues/gernotstarke/circulizr.svg[Tasks]
 image:https://badge.waffle.io/gernotstarke/circulizr.svg?label=bug&title=Bugs[Bugs]
 
 [[examples]]

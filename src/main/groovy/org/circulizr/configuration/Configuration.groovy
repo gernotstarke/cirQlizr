@@ -25,9 +25,10 @@ class Configuration {
 
     // TODO: rename number to pairProvider
     SpecialNumber NUMBER
+    Integer       PRECISION
 
     // how many connections (==lines) to show?
-    Double NR_OF_CONNECTIONS_TO_SHOW
+    Integer NR_OF_CONNECTIONS_TO_SHOW
 
     // INFO_LINE is currently not configurable
     final String INFO_LINE = "Circular Visualizer, https://github.com/gernotstarke/circulizr  "
@@ -92,7 +93,7 @@ class Configuration {
 
         this.VALUESET = (List<String>) validListOfStrings(config.valueSet)
 
-        this.NUMBER = convertStringToSpecialNumberInstance(config.number)
+        this.NUMBER = convertStringToSpecialNumberInstance(config.number, config.precision)
 
         this.NR_OF_CONNECTIONS_TO_SHOW = (Integer) validNumber(config.nr_of_connections_to_show)
 
@@ -115,7 +116,7 @@ class Configuration {
      * @param filename
      */
     public Configuration( String filename) {
-        this( new ConfigSlurper().parse(new File('circulizr.config').toURL()))
+        this( new ConfigSlurper().parse(new File('cirQlizr.config').toURL()))
     }
 
 
@@ -203,8 +204,11 @@ class Configuration {
      * @param configuredSpecialNumber
      * @return
      */
-    public static SpecialNumber convertStringToSpecialNumberInstance(String configuredSpecialNumber) {
-        return Class.forName(configuredSpecialNumber).newInstance()
+    public SpecialNumber convertStringToSpecialNumberInstance(String configuredSpecialNumber, Integer precision) {
+        assert precision > 0 : "precision 0 makes no sense - aborted!"
+        this.PRECISION = precision
+
+        return Class.forName(configuredSpecialNumber).newInstance( precision )
     }
 
 

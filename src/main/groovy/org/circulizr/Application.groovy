@@ -38,7 +38,7 @@ import org.circulizr.ui.ApplicationFrame
 
 class Application  {
 
-    final static String configFileName = "./circulizr.config"
+    final static String configFileName = "./cirQlizr.config"
     static Configuration configuration
 
 
@@ -48,7 +48,7 @@ class Application  {
     public static void main(String[] args) {
         // TODO: add command line parsing for color scheme, number, size
 
-        // read configuration file (default filename: "circulizr.config")
+        // read configuration file (default filename: "cirQlizr.config")
         configuration = new Configuration( configFileName )
 
 

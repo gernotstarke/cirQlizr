@@ -19,7 +19,7 @@ dependencies {
 }
 
 // define the main class to start the application
-mainClassName="org.circulizr.Application"
+mainClassName="org.cirqlizr.Application"
 
 
 // configure the license plugin

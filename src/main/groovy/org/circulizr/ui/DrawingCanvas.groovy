@@ -96,7 +96,7 @@ class DrawingCanvas extends JPanel {
         assert X_CANVAS_SIZE > 1
         assert Y_CANVAS_SIZE > 1
 
-        setBackground( Color.white )
+        setBackground( Color.black )
 
         TRANSLATION_OFFSET = Math.min(X_CANVAS_SIZE, Y_CANVAS_SIZE - MARGIN).intdiv(2)
 
@@ -132,7 +132,7 @@ class DrawingCanvas extends JPanel {
                 //LOGGER.info "digit $digit: center.x=${center.x}, center.y=${center.y}"
 
                 arc2D.setArcByCenter(0, 0, radius, Math.toDegrees(angleStart), Math.toDegrees(angleExtend), Arc2D.OPEN)
-                //g2d.draw(arc2D)
+                g2d.draw(arc2D)
 
                 if (RUNMODE < RunMode.PRODUCTION) {
                     // draw dot for all digiNode-instances
@@ -162,7 +162,7 @@ class DrawingCanvas extends JPanel {
     private void drawLines(Graphics2D g2d) {
         resetConnectionPoints()
 
-        g2d.setStroke(new BasicStroke(12.0f))
+        g2d.setStroke(new BasicStroke(5.0f))
 
         (0..nv.NR_OF_CONNECTIONS_TO_SHOW - 1).each { pairIndex ->
             Pair currentPair = nv.NUMBER.getPair(pairIndex)
@@ -329,7 +329,7 @@ class DrawingCanvas extends JPanel {
         translateCenterToZero(g2d)
 
         // display project name & URL
-        //showInfoLine(g2d)
+        showInfoLine(g2d)
 
 
         // the actual line drawing between Pairs

@@ -16,6 +16,7 @@ class ConfigurationSpec extends Specification {
     valueSet = ["0", "1", "2", "3"]
 
     number="org.circulizr.domain.numbers.Pi"
+    precision=123
 
     nr_of_connections_to_show = 42
 
@@ -92,6 +93,7 @@ class ConfigurationSpec extends Specification {
 
         // can configure number
         configuration.NUMBER instanceof SpecialNumber
+        123 == configuration.PRECISION
 
         42 == configuration.NR_OF_CONNECTIONS_TO_SHOW
 
