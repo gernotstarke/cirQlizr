@@ -23,9 +23,10 @@
  */
 package org.circulizr
 
+import org.circulizr.configuration.Configuration
 import org.circulizr.domain.Segment
 import org.circulizr.domain.numbers.SpecialNumber
-import org.circulizr.ui.NumVizColor
+import org.circulizr.ui.CirculizrColor
 
 import java.util.logging.Logger
 
@@ -57,24 +58,22 @@ class NumberVisualizer {
     // what's the distance to the next segment
     final Double SEGMENT_PADDING_ANGLE = Math.toRadians(SEGMENT_PADDING_ANGLE_DEG)
 
-    final Integer MARGIN = 20
 
     private static final Logger LOGGER = Logger.getLogger(NumberVisualizer.class.getName())
 
 
-    public NumberVisualizer( SpecialNumber NUMBER, Integer NR_OF_CONNECTIONS_TO_SHOW, Integer resolution) {
+    public NumberVisualizer( Configuration config) {
 
-        assert NUMBER != null
-        assert NR_OF_CONNECTIONS_TO_SHOW >= 0
-        assert resolution > MARGIN
+        assert config.NUMBER != null : "cannot visualize null value"
+        assert config.NR_OF_CONNECTIONS_TO_SHOW >= 0 : "cannot visualize 0 connections"
 
         // the most important property: what number shall we visualize?
-        this.NUMBER = NUMBER
+        this.NUMBER = config.NUMBER
 
-        this.NR_OF_CONNECTIONS_TO_SHOW = NR_OF_CONNECTIONS_TO_SHOW
+        this.NR_OF_CONNECTIONS_TO_SHOW = config.NR_OF_CONNECTIONS_TO_SHOW
 
 
-        this.radius = (resolution- 2*MARGIN).intdiv(2)
+        this.radius = (config.OUTPUT_RESOLUTION- 2 * config.MARGIN).intdiv(2)
 
     }
 
@@ -89,7 +88,7 @@ class NumberVisualizer {
             segment[thisDigit] = new Segment(
                     digit: thisDigit,
                     nrOfRequiredDigiNodes: NUMBER.countOccurencesInPairs(thisDigit, NR_OF_CONNECTIONS_TO_SHOW-1),
-                    color: NumVizColor.color[thisDigit],
+                    color: CirculizrColor.color[thisDigit],
                     radius: this.radius,
                     // TODO: adjust angleStart, so that segment 0 starts at top
                     angleStart: thisDigit * ((SEGMENT_EXTEND_ANGLE + (2 * SEGMENT_PADDING_ANGLE))),

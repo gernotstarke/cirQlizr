@@ -49,6 +49,7 @@ class CirculizrColor {
             new Color(94, 79, 162)
     )
 
+
     public final static Color backgroundDark = Color.darkGray
     public final static Color foregroundLight = Color.white
 

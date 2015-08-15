@@ -24,6 +24,7 @@
 package org.circulizr.ui
 
 import org.circulizr.NumberVisualizer
+import org.circulizr.configuration.Configuration
 import org.circulizr.configuration.RunMode
 
 import javax.swing.*
@@ -37,6 +38,8 @@ import java.util.logging.Logger
  */
 class ApplicationFrame extends JFrame {
 
+    final static String INFO_LINE = "Circular Visualizer, https://github.com/gernotstarke/cirQlizr  "
+
     // size of drawing canvas in pixel-units
     private Integer X_CANVAS_SIZE
     private Integer Y_CANVAS_SIZE
@@ -47,30 +50,34 @@ class ApplicationFrame extends JFrame {
     private final RUNMODE = RunMode.DEVELOP
 
 
-    public ApplicationFrame(String titleText, String infoLine, int resolution, NumberVisualizer numberVisualizer, RunMode mode) {
+    public ApplicationFrame(Configuration configuration, NumberVisualizer numberVisualizer) {
 
-        this.X_CANVAS_SIZE = resolution + 100
-        this.Y_CANVAS_SIZE = resolution
+        this.X_CANVAS_SIZE = configuration.OUTPUT_RESOLUTION + 100
+        this.Y_CANVAS_SIZE = configuration.OUTPUT_RESOLUTION
 
-        this.RUNMODE = mode
+        this.RUNMODE = configuration.RUNMODE
 
-        add(new DrawingCanvas(X_CANVAS_SIZE, Y_CANVAS_SIZE, infoLine, numberVisualizer, mode));
+        String TITLE_TEXT = "cirQlizr - ${configuration.NR_OF_CONNECTIONS_TO_SHOW} digits of ${configuration.NUMBER.name}"
 
-        setTitle(titleText);
+        setTitle(TITLE_TEXT);
         setSize(X_CANVAS_SIZE, Y_CANVAS_SIZE);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         setResizable(false) // resolves issue #9
 
+
+        add(new DrawingCanvas(X_CANVAS_SIZE, Y_CANVAS_SIZE, INFO_LINE, numberVisualizer, RUNMODE));
+
     }
 
 
     public
-    static showApplicationFrame(String titleText, String infoLine, int resolution, NumberVisualizer nv, RunMode runmode) {
+    //static showApplicationFrame(String titleText, String infoLine, int resolution, NumberVisualizer nv, RunMode runmode) {
+    static showApplicationFrame(Configuration configuration, NumberVisualizer nv) {
 
 
-        if (runmode < RunMode.PRODUCTION) {
+        if (configuration.RUNMODE < RunMode.PRODUCTION) {
             Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
             double width = screenSize.getWidth();
             double height = screenSize.getHeight();
@@ -83,7 +90,7 @@ class ApplicationFrame extends JFrame {
             @Override
             public void run() {
                 ApplicationFrame applicationFrame =
-                        new ApplicationFrame(titleText, infoLine, resolution, nv, runmode);
+                        new ApplicationFrame(configuration, nv);
 
                 applicationFrame.setVisible(true);
             }

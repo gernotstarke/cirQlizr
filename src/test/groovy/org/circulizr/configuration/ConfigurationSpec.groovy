@@ -1,7 +1,10 @@
 package org.circulizr.configuration
 
+import org.circulizr.domain.ConnectionStyle
 import org.circulizr.domain.numbers.SpecialNumber
 import spock.lang.Specification
+
+import java.awt.Color
 
 class ConfigurationSpec extends Specification {
 
@@ -16,10 +19,11 @@ class ConfigurationSpec extends Specification {
 
     nr_of_connections_to_show = 42
 
+
     colors {
         // use java.awt.Color names here,
         // alternatively use hex values...
-        background = DARKGRAY
+        background = DARK_GRAY
     }
 
     segments {
@@ -46,6 +50,8 @@ class ConfigurationSpec extends Specification {
 
     connections {
         style = "BEZIER" // "STRAIGHT"
+
+        stroke_width = 0.75d
     }
 
 
@@ -88,6 +94,19 @@ class ConfigurationSpec extends Specification {
         configuration.NUMBER instanceof SpecialNumber
 
         42 == configuration.NR_OF_CONNECTIONS_TO_SHOW
+
+        Color.DARK_GRAY == configuration.BACKGROUND_COLOR
+
+        0.75d == configuration.STROKE_WIDTH
+
+        ConnectionStyle.BEZIER == configuration.CONNECTION_STYLE
+
+        1000 == configuration.INTERNAL_RESOLUTION
+         700 == configuration.OUTPUT_RESOLUTION
+
+          20 == configuration.MARGIN
+
+
     }
 
 

@@ -21,6 +21,6 @@ package org.circulizr.domain
  *********************************************************************** */
 
 enum ConnectionStyle {
-    QUADRATIC_BEZIER,
+    BEZIER,
     STRAIGHT
 }

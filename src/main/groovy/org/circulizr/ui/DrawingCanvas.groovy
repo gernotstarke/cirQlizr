@@ -132,7 +132,7 @@ class DrawingCanvas extends JPanel {
                 //LOGGER.info "digit $digit: center.x=${center.x}, center.y=${center.y}"
 
                 arc2D.setArcByCenter(0, 0, radius, Math.toDegrees(angleStart), Math.toDegrees(angleExtend), Arc2D.OPEN)
-                g2d.draw(arc2D)
+                //g2d.draw(arc2D)
 
                 if (RUNMODE < RunMode.PRODUCTION) {
                     // draw dot for all digiNode-instances
@@ -162,7 +162,7 @@ class DrawingCanvas extends JPanel {
     private void drawLines(Graphics2D g2d) {
         resetConnectionPoints()
 
-        g2d.setStroke(new BasicStroke(1.2f))
+        g2d.setStroke(new BasicStroke(12.0f))
 
         (0..nv.NR_OF_CONNECTIONS_TO_SHOW - 1).each { pairIndex ->
             Pair currentPair = nv.NUMBER.getPair(pairIndex)
@@ -217,7 +217,7 @@ class DrawingCanvas extends JPanel {
 
         (0..9).each { digit ->
             // set color scheme
-            g2d.setPaint(NumVizColor.color[digit])
+            g2d.setPaint(CirculizrColor.color[digit])
 
             // draw filled rectangle
             g2d.fillRect((X_CANVAS_SIZE - TRANSLATION_OFFSET) - 55,

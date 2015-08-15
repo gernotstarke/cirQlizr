@@ -23,9 +23,8 @@
  */
 package org.circulizr
 
+import org.circulizr.configuration.Configuration
 import org.circulizr.configuration.RunMode
-import org.circulizr.domain.numbers.Pi
-import org.circulizr.domain.numbers.SpecialNumber
 import org.circulizr.ui.ApplicationFrame
 
 
@@ -39,46 +38,35 @@ import org.circulizr.ui.ApplicationFrame
 
 class Application  {
 
-    // DEVEL mode adds debugging info
-    final static RunMode RUNMODE = RunMode.PRODUCTION
+    final static String configFileName = "./circulizr.config"
+    static Configuration configuration
 
 
-    // the number to visualize
-    // resolve #25 (abstract class for special numbers)
-    final static SpecialNumber NUMBER = new Pi(NR_OF_CONNECTIONS_TO_SHOW + 1)
-
-
-    // lines to draw = nr-of-digits + 1
-    final static int NR_OF_CONNECTIONS_TO_SHOW = 50
-
-
-
-    // window/canvas size
-    final static int RESOLUTION = 500
-
-    final static String TITLE_TEXT = "CIRCULIZR - ${NR_OF_CONNECTIONS_TO_SHOW} digits of ${NUMBER.name}"
-
-    final static String INFO_LINE = "Circular Visualizer, https://github.com/gernotstarke/circulizr  "
 
 
 
     public static void main(String[] args) {
         // TODO: add command line parsing for color scheme, number, size
 
+        // read configuration file (default filename: "circulizr.config")
+        configuration = new Configuration( configFileName )
+
+
+
         // construct the domain root
-        NumberVisualizer numberVisualizer = new NumberVisualizer( NUMBER, NR_OF_CONNECTIONS_TO_SHOW, RESOLUTION)
+        NumberVisualizer numberVisualizer = new NumberVisualizer( configuration )
 
         // create and initialize segments and digiNodes
         numberVisualizer.initSegments()
 
         // generate report only in DEBUG and DEVELOP mode
-        if (RUNMODE < RunMode.PRODUCTION) {
+        if (configuration.RUNMODE < RunMode.PRODUCTION) {
             numberVisualizer.domainReport()
         }
 
 
         // UI Window
-        ApplicationFrame.showApplicationFrame( TITLE_TEXT, INFO_LINE, RESOLUTION, numberVisualizer, RUNMODE)
+        ApplicationFrame.showApplicationFrame( configuration, numberVisualizer)
 
 
     }

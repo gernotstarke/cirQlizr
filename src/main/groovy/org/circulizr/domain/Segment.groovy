@@ -54,6 +54,9 @@ class Segment {
     // several "connection points" for lines
     public List<DigiNode> digiNode
 
+    // a Bezier Control Point
+    public Coordinate2D bezierControlPoint
+
     private static final Logger LOGGER = Logger.getLogger(Segment.class.getName())
 
     // implicit constructor to allow named parameters
