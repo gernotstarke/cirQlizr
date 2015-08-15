@@ -1,9 +1,5 @@
 = image:./cirQlizr-logo.png[CIRCULIZR,200] Circular visualization of data
-
-
 Gernot Starke <gernot.starke@innoq.com>
-:experimental:
-:source-highlighter: coderay
 :imagesdir: ../images
 
 [.lead]
@@ -29,19 +25,8 @@ image:https://badge.waffle.io/gernotstarke/circulizr.svg?label=bug&title=Bugs[Bu
 
 [[examples]]
 == Examples
-See also the Gallery
+See our  <<doc/asciidoc/gallery#,Gallery>>
 
-Version 0.5 had only a single connectionNode per segment and only
-straight connections +
-between segments.
-
-Version 0.8 had multiple connectionNodes, but still only straight
-connections:
-
-Version 0.9 has multiple connectionNodes per segment, evenly spaced, +
-enhanced by curved (Bezier) connections. It can visualize numbers only.
-In the following screenshot you can see the (light-gray) configurable
-debugging raster.
 
 [[goal]]
 == Goal
