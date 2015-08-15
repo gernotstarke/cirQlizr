@@ -1,4 +1,4 @@
-= image:./cirQlizr-logo.png[CIRCULIZR,100] Circular visualization of data
+= image:./cirQlizr-logo.png[CIRCULIZR,200] Circular visualization of data
 
 
 Gernot Starke <gernot.starke@innoq.com>
