@@ -10,6 +10,19 @@ A simple experiment with 2D graphics to create circular visualisations
 of numbers, like π (pi), e (Euler number) or similar - that might grow
 into something more general.
 
+[small]#Version of {docdate}.
+
+[cols="4a,1"]
+|===
+| == Goal
+The result shall at least look similar to the awesome
+http://thecreatorsproject.vice.com/blog/visualising-the-infinite-data-of-pie[mother
+of circular pi visualisations]
+
+There's even a nice
+https://www.youtube.com/watch?v=NPoj8lk9Fo4[Numberphile video] on this
+kind of graphics.
+
 Inspired by http://mkweb.bcgsc.ca/pi/art/method.mhtml[Martin Krzywinski]
 and his website "The art of Pi".
 
@@ -26,25 +39,14 @@ image:https://img.shields.io/github/license/gernotstarke/circulizr.svg[License]
 image:https://img.shields.io/github/issues/gernotstarke/circulizr.svg[Tasks]
 image:https://badge.waffle.io/gernotstarke/circulizr.svg?label=bug&title=Bugs[Bugs]
 
-
-
 == Examples
 See our link:doc/asciidoc/gallery{outfilesuffix}[Gallery]
 
-
-== Goal
-
-
-|===
-|The result shall at least look similar to the awesome
-http://thecreatorsproject.vice.com/blog/visualising-the-infinite-data-of-pie[mother
-of circular pi visualisations]
-
-There's even a nice
-https://www.youtube.com/watch?v=NPoj8lk9Fo4[Numberphile video] on this
-kind of graphics.
 | image:pi-original-slice.png[preview, 200]
+  [small]#(sliced version from
+    http://thecreatorsproject.vice.com/blog/visualising-the-infinite-data-of-pie[creatorsproject])#
 |===
+
 
 == Principle
 
