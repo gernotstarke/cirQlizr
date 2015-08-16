@@ -70,5 +70,17 @@ class CirculizrColor {
 
 
     public static List<Color> color = qualitativeColor
+
+    /**
+     * find a contrasting color for @param color,
+     * by simply taking the "opposite" of every component (r,g,b)
+     * @return a contrasting color
+     */
+    static Color findContrastingColorFor(Color color) {
+        def newRed = 255 - color.red
+        def newGreen = 255 - color.green
+        def newBlue = 255 - color.blue
+        return new Color( newRed, newGreen, newBlue)
+    }
 }
 

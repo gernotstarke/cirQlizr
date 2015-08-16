@@ -24,6 +24,7 @@
 package org.circulizr
 
 import org.circulizr.configuration.Configuration
+import org.circulizr.configuration.RunMode
 import org.circulizr.domain.Segment
 import org.circulizr.domain.numbers.SpecialNumber
 import org.circulizr.ui.CirculizrColor
@@ -42,6 +43,9 @@ class NumberVisualizer {
 
     // how many pairs of digits to show in visualization?
     final protected Integer NR_OF_CONNECTIONS_TO_SHOW
+
+    // some more configuration stuff
+    private Configuration configuration
 
     // some circle properties:
     private float radius
@@ -75,7 +79,9 @@ class NumberVisualizer {
 
         this.radius = (config.OUTPUT_RESOLUTION- 2 * config.MARGIN).intdiv(2)
 
+        this.configuration = config
     }
+
 
     /**
      * initialize the segments, including digiNodes
@@ -98,7 +104,9 @@ class NumberVisualizer {
             if (segment[thisDigit].nrOfRequiredDigiNodes > 0) {
                 segment[thisDigit].with {
 
-                    println "setting up ${nrOfRequiredDigiNodes} digiNodes for Segment[${thisDigit}]: angleStart=${angleStart}, angleExtend=${angleExtend} and radius=${radius}"
+                    if (configuration.RUNMODE < RunMode.PRODUCTION) {
+                        LOGGER.info "setting up ${nrOfRequiredDigiNodes} digiNodes for Segment[${thisDigit}]: angleStart=${angleStart}, angleExtend=${angleExtend} and radius=${radius}"
+                    }
                     setUpDigiNodes()
                 }
             }

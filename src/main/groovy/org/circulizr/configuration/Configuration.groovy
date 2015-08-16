@@ -31,10 +31,10 @@ class Configuration {
     Integer NR_OF_CONNECTIONS_TO_SHOW
 
     // INFO_LINE is currently not configurable
-    final String INFO_LINE = "Circular Visualizer, https://github.com/gernotstarke/circulizr  "
+    final String INFO_LINE = "Circular Visualizer, https://github.com/gernotstarke/cirQlizr  "
 
     // window title
-    String TITLE_TEXT = "CIRCULIZR"
+    String TITLE_TEXT = "cirQlizr"
 
 
     // background color of canvas/drawing-area
@@ -105,6 +105,7 @@ class Configuration {
         configureResolution( config )
 
         configureLayout( config )
+
 
         this.BACKGROUND_COLOR = Color.DARK_GRAY
 

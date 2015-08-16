@@ -24,6 +24,7 @@
 
 package org.circulizr.ui
 
+import org.circulizr.configuration.Configuration
 import org.circulizr.domain.DigiNode
 import org.circulizr.NumberVisualizer
 import org.circulizr.configuration.RunMode
@@ -56,14 +57,11 @@ class DrawingCanvas extends JPanel {
     // to the center of the circle, we need a translation offset
     private Integer TRANSLATION_OFFSET
 
+    private Configuration configuration
+
 
     private Integer LEGEND_WIDTH = 40
 
-    // margin between circle and outer bound of canvas
-    private Integer MARGIN = 20
-
-    // program name and author, URL, shown at bottom of canvas
-    private String INFO_LINE
 
     // entry point to the "domain" - in DDD-terms: AggregateRoot
     private NumberVisualizer nv
@@ -71,24 +69,22 @@ class DrawingCanvas extends JPanel {
     // accounting which connectionPoint within which Segment is currently active
     private List<Integer> currentConnectionPointInSegment
 
-    // default: development mode
-    private RunMode RUNMODE = RunMode.PRODUCTION
 
     private static final Logger LOGGER = Logger.getLogger(DrawingCanvas.class.getName())
 
 
 
-    DrawingCanvas(int x_resolution, int y_resolution, String infoLine, NumberVisualizer numberVisualizer, RunMode mode) {
+    DrawingCanvas(int x_resolution, int y_resolution, NumberVisualizer numberVisualizer, Configuration config) {
         super()
-        this.RUNMODE = mode
+        this.configuration = config
 
-        initCanvas(x_resolution, y_resolution, infoLine, numberVisualizer)
+        initCanvas(x_resolution, y_resolution, numberVisualizer)
 
 
     }
 
 
-    private void initCanvas(int xFrameSize, int yFrameSize, String infoLine, NumberVisualizer numberVisualizer) {
+    private void initCanvas(int xFrameSize, int yFrameSize, NumberVisualizer numberVisualizer) {
         X_CANVAS_SIZE = xFrameSize
         Y_CANVAS_SIZE = yFrameSize
 
@@ -96,11 +92,9 @@ class DrawingCanvas extends JPanel {
         assert X_CANVAS_SIZE > 1
         assert Y_CANVAS_SIZE > 1
 
-        setBackground( Color.black )
+        setBackground( configuration.BACKGROUND_COLOR )
 
-        TRANSLATION_OFFSET = Math.min(X_CANVAS_SIZE, Y_CANVAS_SIZE - MARGIN).intdiv(2)
-
-        INFO_LINE = infoLine
+        TRANSLATION_OFFSET = Math.min(X_CANVAS_SIZE, Y_CANVAS_SIZE - configuration.MARGIN).intdiv(2)
 
         assert numberVisualizer != null
         nv = numberVisualizer
@@ -134,7 +128,7 @@ class DrawingCanvas extends JPanel {
                 arc2D.setArcByCenter(0, 0, radius, Math.toDegrees(angleStart), Math.toDegrees(angleExtend), Arc2D.OPEN)
                 g2d.draw(arc2D)
 
-                if (RUNMODE < RunMode.PRODUCTION) {
+                if (configuration.RUNMODE < RunMode.PRODUCTION) {
                     // draw dot for all digiNode-instances
                     drawDotForDigiNodes(g2d, digiNode)
                 }
@@ -162,7 +156,7 @@ class DrawingCanvas extends JPanel {
     private void drawLines(Graphics2D g2d) {
         resetConnectionPoints()
 
-        g2d.setStroke(new BasicStroke(5.0f))
+        g2d.setStroke(new BasicStroke(1.3f))
 
         (0..nv.NR_OF_CONNECTIONS_TO_SHOW - 1).each { pairIndex ->
             Pair currentPair = nv.NUMBER.getPair(pairIndex)
@@ -221,22 +215,27 @@ class DrawingCanvas extends JPanel {
 
             // draw filled rectangle
             g2d.fillRect((X_CANVAS_SIZE - TRANSLATION_OFFSET) - 55,
-                    (Y_CANVAS_SIZE - TRANSLATION_OFFSET - 2 * MARGIN - (digit + 1) * 35), 30, 30)
+                    (Y_CANVAS_SIZE - TRANSLATION_OFFSET - 2 * configuration.MARGIN - (digit + 1) * 35), 30, 30)
 
             // show corresponding digit
             g2d.drawString(digit.toString(), (X_CANVAS_SIZE - TRANSLATION_OFFSET - 20),
-                    (Y_CANVAS_SIZE - TRANSLATION_OFFSET - 2 * MARGIN - digit * 35 - 14))
+                    (Y_CANVAS_SIZE - TRANSLATION_OFFSET - 2 * configuration.MARGIN - digit * 35 - 14))
         }
     }
 
 
     private void initLegendFont(Graphics2D g2d) {
-        Font font = new Font(Font.SERIF, Font.TRUETYPE_FONT, 16);
+        Font font = new Font(Font.SANS_SERIF, Font.TRUETYPE_FONT, 16);
         Hashtable<TextAttribute, Object> map =
                 new Hashtable<TextAttribute, Object>();
 
+
+        // find contrasting color so legend font will always be readable
+        Color contrastingColor = CirculizrColor.findContrastingColorFor( configuration.BACKGROUND_COLOR )
+
         /* This colour applies just to the font, not other rendering */
-        map.put(TextAttribute.FOREGROUND, Color.DARK_GRAY);
+
+        map.put(TextAttribute.FOREGROUND, contrastingColor);
 
         font = font.deriveFont(map);
         g2d.setFont(font);
@@ -268,12 +267,12 @@ class DrawingCanvas extends JPanel {
         g2d.setFont(font);
 
         FontMetrics fm = getFontMetrics(font);
-        int infoLineStringWidth = fm.stringWidth(INFO_LINE)
+        int infoLineStringWidth = fm.stringWidth(configuration.INFO_LINE)
 
         int infoLine_x_coord = X_CANVAS_SIZE - TRANSLATION_OFFSET - infoLineStringWidth
         int infoLine_y_coord = TRANSLATION_OFFSET - 5
 
-        g2d.drawString(INFO_LINE, infoLine_x_coord, infoLine_y_coord)
+        g2d.drawString(configuration.INFO_LINE, infoLine_x_coord, infoLine_y_coord)
 
     }
 
@@ -335,11 +334,11 @@ class DrawingCanvas extends JPanel {
         // the actual line drawing between Pairs
         drawLines(g2d)
 
-        //drawLegend(g2d)
+        drawLegend(g2d)
         drawSegments(g2d)
 
         // if in debug or devel mode, draw raster
-        if (RUNMODE < RUNMODE.PRODUCTION) {
+        if (configuration.RUNMODE < RunMode.PRODUCTION) {
             drawRaster(g2d)
         }
 

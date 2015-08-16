@@ -38,8 +38,6 @@ import java.util.logging.Logger
  */
 class ApplicationFrame extends JFrame {
 
-    final static String INFO_LINE = "Circular Visualizer, https://github.com/gernotstarke/cirQlizr  "
-
     // size of drawing canvas in pixel-units
     private Integer X_CANVAS_SIZE
     private Integer Y_CANVAS_SIZE
@@ -67,7 +65,7 @@ class ApplicationFrame extends JFrame {
         setResizable(false) // resolves issue #9
 
 
-        add(new DrawingCanvas(X_CANVAS_SIZE, Y_CANVAS_SIZE, INFO_LINE, numberVisualizer, RUNMODE));
+        add(new DrawingCanvas(X_CANVAS_SIZE, Y_CANVAS_SIZE, numberVisualizer, configuration));
 
     }
 
