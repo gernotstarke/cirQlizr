@@ -1,6 +1,6 @@
-= image:./cirQlizr-logo.png[CIRCULIZR,200] Circular visualization of data
+= image:cirQlizr-logo.png[CIRCULIZR,200] Circular visualization of data
 Gernot Starke <gernot.starke@innoq.com>
-:imagesdir: ../images
+:imagesdir: ./images
 ifdef::env-github[:outfilesuffix: .adoc]
 
 [.lead]
@@ -26,8 +26,6 @@ image:https://badge.waffle.io/gernotstarke/circulizr.svg?label=bug&title=Bugs[Bu
 
 [[examples]]
 == Examples
-See our  <<doc/asciidoc/gallery.adoc#,Gallery>>
-
 See our link:doc/asciidoc/gallery{outfilesuffix}[Gallery]
 
 
@@ -45,7 +43,7 @@ kind of graphics.
 == Principle
 
 A coarse overview by the
-http://mkweb.bcgsc.ca/pi/art/method.mhtml[original authors], +
+http://mkweb.bcgsc.ca/pi/art/method.mhtml[original authors],
 Martin Krzywinski and Cristian Illies Vasile.
 
 1.  divide circle into 10 segments, one for each digit
@@ -55,7 +53,7 @@ first-to-second.
 4.  the position of the curve on the segment is determined by the
 position of the digits
 
-[[domain-terminology]]
+
 == Domain Terminology
 
 image:circulizr-domain.png[number visualization domain]
