@@ -99,7 +99,7 @@ class Segment {
 
         double deltaAngle = deltaAngle(this.nrOfRequiredDigiNodes, angleExtend)
 
-        println "will create ${nrOfRequiredDigiNodes} digiNodes with deltaAngle=${deltaAngle} for angleExtend=${angleExtend} and angleStart=${angleStart}"
+        // println "will create ${nrOfRequiredDigiNodes} digiNodes with deltaAngle=${deltaAngle} for angleExtend=${angleExtend} and angleStart=${angleStart}"
 
         // for each digit to show, create one digiNode
         (1..nrOfRequiredDigiNodes).each { nrOfCurrentDigiNode ->
@@ -112,7 +112,6 @@ class Segment {
 
 
         }
-
 
     }
 
