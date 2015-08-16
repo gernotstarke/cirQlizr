@@ -40,8 +40,7 @@ image:https://badge.waffle.io/gernotstarke/circulizr.svg?label=bug&title=Bugs[Bu
 
 | image:pi-original-slice.png[preview, 200]
 
-  [small]#(sliced version from
-    http://thecreatorsproject.vice.com/blog/visualising-the-infinite-data-of-pie[creatorsproject])#
+  http://thecreatorsproject.vice.com/blog/visualising-the-infinite-data-of-pie[image credits]
 |===
 
 
