@@ -1,7 +1,9 @@
 = image:cirQlizr-logo.png[CIRCULIZR,200] Circular visualization of data
 Gernot Starke <gernot.starke@innoq.com>
 :imagesdir: ./images
-:icons: font
+:linkattrs:
+:experimental:
+:source-highlighter: pygments
 
 ifdef::env-github[:outfilesuffix: .adoc]
 
@@ -9,43 +11,51 @@ A simple experiment with 2D graphics to create circular visualizations
 of numbers, like π (pi), e (Euler number) or similar. Designed to grow
 into something more general.
 
-[small]#Version of {docdate}.#
+Version of {docdate}.
+
 
 [cols="4a,1a"]
 |===
-|  *Goal*
-The result shall at least look similar to the awesome
-http://thecreatorsproject.vice.com/blog/visualising-the-infinite-data-of-pie[mother
-of circular pi visualisations]
-
-There's even a nice
-https://www.youtube.com/watch?v=NPoj8lk9Fo4[Numberphile video] on this
-kind of graphics.
+|
+=== Goal
 
 Inspired by http://mkweb.bcgsc.ca/pi/art/method.mhtml[Martin Krzywinski]
-and his website "The art of Pi".
+and his website "The art of Pi", the results of
+kbd:[cirQlirz] shall look similar to the awesome
+http://thecreatorsproject.vice.com/blog/visualising-the-infinite-data-of-pie[mother
+of circular pi visualisations].
 
-Currently implemented using
-https://docs.oracle.com/javase/tutorial/2d/[Java2D],
-but architected to supply other 2D toolkits (like JavaFX or
-HTML5/WebGL).
+=== Implementation
 
-*Status*
+kbd:[cirQlizr] is _implemented_ in http://groovy-lang.org/[Groovy^] and
+_designed_ with flexibility (especially concerning UI-technology) in mind.
+
+Currently it supports
+https://docs.oracle.com/javase/tutorial/2d/[Java2D] as rendering technology,
+will support other 2D toolkits (like JavaFX, HTML5/WebGL or SVG)
+in the near future.
+
+For details, refer to our link:doc/asciidoc/architecture{outfilesuffix}[architecture]
+documentation.
+
+=== Status
 
 Work in progress:
 image:https://img.shields.io/github/license/gernotstarke/circulizr.svg[License]
 image:https://img.shields.io/github/issues/gernotstarke/circulizr.svg[Tasks]
 image:https://badge.waffle.io/gernotstarke/circulizr.svg?label=bug&title=Bugs[Bugs]
 
+=== Examples
+
+See our link:doc/asciidoc/gallery{outfilesuffix}[Gallery]
+
 
 | image:pi-original-slice.png[preview, 200]
 
-  http://thecreatorsproject.vice.com/blog/visualising-the-infinite-data-of-pie[image credits]
+http://thecreatorsproject.vice.com/blog/visualising-the-infinite-data-of-pie[image credits]
+
 |===
 
-
-== Examples
-See our link:doc/asciidoc/gallery{outfilesuffix}[Gallery]
 
 
 == Principle
@@ -62,6 +72,7 @@ first-to-second.
 position of the digits
 
 kbd:[cirQlizr] generalises this by allowing
+
 * arbitrary number of segments with different sizes and
 * strings instead of numbers as value-set.
 
@@ -73,44 +84,41 @@ image:circulizr-domain.png[number visualization domain]
 * The number to be visualized consists of ordered Digits.
 * Pair consists of left ("from") and right ("to") Digit,
 * Connection represents graphical connection of "from" (left) and "to"
-(right) +
-Digit of a Pair.
-* Connection can be a straight line or curve, maybe +
- (quadratic or higher degree) Bézier curve.
+(right) Digit of a Pair.
+* Connection can be a straight line or curve, maybe
+(quadratic or higher degree) Bézier curve.
 * Segment:
-* visually represents all Lines for one specific Digit (either left or
+** visually represents all Lines for one specific Digit (either left or
 right in a Pair).
-* contains ordered list of connection points called "connectionNodes"
-** determines their x/y positions on the drawing canvas.
-** number of connectionNodes on segment depends on the count of the
-corresponding +
-digit in the number.
-* has a position on drawing canvas
-* has a Color
-* is shaped like a "circle segment" of 36 degrees (1/10th of a full
-circle, +
- or 0.2*π in radians)
+** contains ordered list of connection points called "connectionNodes"
+*** determines their x/y positions on the drawing canvas.
+*** number of connectionNodes on segment depends on the count of the
+corresponding digit in the number.
+** has a position on drawing canvas
+** has a Color
+** is shaped like a "circle segment" of 36 degrees (1/10th of a full
+circle, or 0.2*π in radians)
 * Line
-* corresponds to a Pair of Digits.
-* Start and end of the line are connectionNodes
+** corresponds to a Pair of Digits.
+** Start and end of the line are connectionNodes
 
 
 === Working With Angles
 
-Although it seems easier to treat a Segment as a 36 _degree_ unit, +
-(instead of 0.2*π, which approximates to 0.6283185307179586, +
-a pretty cumbersome number) +
-working with radian units is the official standard, +
+Although it seems easier to treat a Segment as a 36 _degree_ unit,
+(instead of 0.2*π, which approximates to 0.6283185307179586,
+a pretty cumbersome number)
+working with radian units is the official standard,
 used in the Java Math package.
 
-Alas - in Java2D, some angles are expected in __degrees__, e.g. the +
+Alas - in Java2D, some angles are expected in __degrees__, e.g. the
 https://docs.oracle.com/javase/8/docs/api/java/awt/geom/Arc2D.html#setArcByCenter-double-double-double-double-double-int-[setArcByCenter]
-method to +
+method to
 draw an arc expects its angle-parameters (start, extend) in degrees...
 (WTF?)
 
-So: angles within Circulizr are internally treated in radian (remember:
-180DEG = πRAD) +
+So: angles within Circulizr are internally treated in radian
+(remember: 180DEG = πRAD)
 and converted where needed by Math.toRadians() resp. Math.toDegree.
 
 == Open Questions
@@ -119,17 +127,18 @@ and converted where needed by Math.toRadians() resp. Math.toDegree.
 * how to change the color scheme
 * Enable command line parameters to determine size, colors etc.
 
+
 == Color Selection
 
-Selecting color schemes for visualizations should _not_ only based +
+Selecting color schemes for visualizations should _not_ only based
 upon pure asthetic aspects, but on research...
 
 http://colorbrewer2.org/[Cynthia Bewer] gives serious advice on this
 topic.
 
-we use
+We use
 http://colorbrewer2.org/?type=qualitative&scheme=Paired&n=10[their]
-proposed 10-class scheme for qualitative data. +
+proposed 10-class scheme for qualitative data.
 Please note - this scheme is _not_ colorblind safe.
 
 image:./ColorBrewer10ClassScheme.jpg[ColorBrewer Scheme]
@@ -144,7 +153,7 @@ University of Utah]
 
 and helped myself with a small script to convert the plain format to +
 comma-separated digits useable as static ArrayList initializer: +
-(see package `org.gs.numviz.numbers`)
+(see package `org.cirqlizr.domain.numbers`)
 
 [source, groovy]
 .Convert csv to ArrayList initializer
@@ -173,3 +182,12 @@ println numAsArrayListStr
 
 
 == Helpful Links
+
+
+* There's a nice
+https://www.youtube.com/watch?v=NPoj8lk9Fo4[Numberphile video] describing
+these kind of graphics.
+
+* Connections are drawn as [Bezier curves].
+http://pomax.github.io/bezierinfo/[BezierInfo] is the ultimate reference
+and (interactive) explanation of their practice and theory.

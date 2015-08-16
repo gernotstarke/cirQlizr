@@ -1,0 +1,62 @@
+= image:./images/cirQlizr-logo.png[CIRQLIZR, 80%]
+
+== Architecture Documentation
+:imagesdir: ./images
+:experimental:
+:email: gernot.starke@innoq.com
+:date: {docdate}
+
+
+[.lead]
+Here you (will soon) find an overview of the internal
+design/architecture of kbd:[cirQlizr].
+
+[small]#Version of {docdate}#
+
+=== Introduction and Requirements
+kbd:[cirQlizr] has been primarily build as a private design challenge.
+
+
+==== Basic Usage
+
+Prerequisites: Java runtime.
+
+. A user wants to visualize data in circular manner. She configures some parameters
+ and starts the system via the command line or the [Gradle] build system.
+
+. A user wants to visualize own data in circular manner. She can either
+implement (a subclass of) a DataProvider or supply data in csv or text file.
+
+==== Quality Goals and Solution Approaches
+
+[options="header", cols="1,2,4a, 4a"]
+.Quality-Goals
+|===
+| Priority | Quality-Goal | Scenario | Approach
+| 1        | Flexibility
+| kbd:[cirQlizr] supports multiple UI technologies, e.g:
+
+* Java2D
+* JavaFX
+* SVG
+* HTML5 or WebGL
+
+| Strictly separate _domain_ from _technical_ components within
+the software design.
+
+| 2        | Flexibility
+| Details of output devices (like resolution), number of lines/connections,
+colors etc. can be configured.
+| File-based configuration and Configuration class. 
+|===
+
+=== Solution Approach
+
+Adhere to the _separation of concern_ design principle:
+
+* separate user-interface technology from the _domain_ of circular
+computation, segments and connections
+
+=== Building Blocks
+
+t.b.d.

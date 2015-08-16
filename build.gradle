@@ -39,13 +39,16 @@ ext {
     adocSrcDir = "$projectDir/doc/asciidoc"
 }
 
+println "asciidoctor source directory = ${adocSrcDir}"
+
+
 asciidoctor {
     outputDir "${buildDir}/docs"
     sourceDir "${adocSrcDir}"
 
-    sources {
-        include "gallery.adoc"
-    }
+    //sources {
+    //    include "gallery.adoc, architecture.adoc"
+    //}
 
     attributes = [
             doctype    : 'book',
