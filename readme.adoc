@@ -12,7 +12,7 @@ Inspired by http://mkweb.bcgsc.ca/pi/art/method.mhtml[Martin Krzywinski]
 and his website "The art of Pi".
 
 Currently implemented using
-https://docs.oracle.com/javase/tutorial/2d/[Java2D], +
+https://docs.oracle.com/javase/tutorial/2d/[Java2D],
 but architected to supply other 2D toolkits (like JavaFX or
 HTML5/WebGL).
 
@@ -24,15 +24,17 @@ image:https://img.shields.io/github/license/gernotstarke/circulizr.svg[License]
 image:https://img.shields.io/github/issues/gernotstarke/circulizr.svg[Tasks]
 image:https://badge.waffle.io/gernotstarke/circulizr.svg?label=bug&title=Bugs[Bugs]
 
-[[examples]]
+
+
 == Examples
 See our link:doc/asciidoc/gallery{outfilesuffix}[Gallery]
 
 
-[[goal]]
 == Goal
 
-The result shall at least look similar to the awesome
+
+|===
+| The result shall at least look similar to the awesome
 http://thecreatorsproject.vice.com/blog/visualising-the-infinite-data-of-pie[mother
 of circular pi visualisations]
 
@@ -40,11 +42,15 @@ There's even a nice
 https://www.youtube.com/watch?v=NPoj8lk9Fo4[Numberphile video] on this
 kind of graphics.
 
+| image:http://thecreatorsproject-images.vice.com/content-images/article/visualising-the-infinite-data-of-pie/6a091c0f782fdac8438c5bbbdffbbd9d.jpg[original, 200]
+|===
+
+
 == Principle
 
 A coarse overview by the
 http://mkweb.bcgsc.ca/pi/art/method.mhtml[original authors],
-Martin Krzywinski and Cristian Illies Vasile.
+Martin Krzywinski and Cristian Illies Vasile:
 
 1.  divide circle into 10 segments, one for each digit
 2.  for each pair of digits within a number, draw a curve from
@@ -52,6 +58,10 @@ first-to-second.
 3.  transition the color of this curve
 4.  the position of the curve on the segment is determined by the
 position of the digits
+
+kbd:[cirQlizr] generalises this by allowing
+* arbitrary number of segments with different sizes and
+* strings instead of numbers as value-set.
 
 
 == Domain Terminology
@@ -158,3 +168,6 @@ for(int i = 0; i < numAsString.length(); i++) {
 
 println numAsArrayListStr
 ----
+
+
+== Helpful Links
