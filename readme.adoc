@@ -32,7 +32,7 @@ See our link:doc/asciidoc/gallery{outfilesuffix}[Gallery]
 
 == Goal
 
-
+[cols="4,1"]
 |===
 | The result shall at least look similar to the awesome
 http://thecreatorsproject.vice.com/blog/visualising-the-infinite-data-of-pie[mother
@@ -91,7 +91,7 @@ circle, +
 * corresponds to a Pair of Digits.
 * Start and end of the line are connectionNodes
 
-[[working-with-angles]]
+
 === Working With Angles
 
 Although it seems easier to treat a Segment as a 36 _degree_ unit, +
