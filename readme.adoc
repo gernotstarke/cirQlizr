@@ -1,6 +1,7 @@
 = image:./cirQlizr-logo.png[CIRCULIZR,200] Circular visualization of data
 Gernot Starke <gernot.starke@innoq.com>
 :imagesdir: ../images
+ifdef::env-github[:outfilesuffix: .adoc]
 
 [.lead]
 A simple experiment with 2D graphics to create circular visualisations
@@ -26,6 +27,8 @@ image:https://badge.waffle.io/gernotstarke/circulizr.svg?label=bug&title=Bugs[Bu
 [[examples]]
 == Examples
 See our  <<doc/asciidoc/gallery.adoc#,Gallery>>
+
+See our link:doc/asciidoc/gallery{outfilesuffix}[Gallery]
 
 
 [[goal]]
