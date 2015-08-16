@@ -41,7 +41,7 @@ of circular pi visualisations]
 There's even a nice
 https://www.youtube.com/watch?v=NPoj8lk9Fo4[Numberphile video] on this
 kind of graphics.
-| http://thecreatorsproject-images.vice.com/content-images/article/visualising-the-infinite-data-of-pie/6a091c0f782fdac8438c5bbbdffbbd9d.jpg?crop=1xw:0.6666666666666667xh;*,*&resize=200:*&output-format=jpeg&output-quality=90[original]
+| image:http://thecreatorsproject-images.vice.com/content-images/article/visualising-the-infinite-data-of-pie/6a091c0f782fdac8438c5bbbdffbbd9d.jpg?crop=1xw:0.6666666666666667xh;*,*&resize=200:*&output-format=jpeg&output-quality=90[original]
 |===
 
 
