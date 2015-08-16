@@ -5,16 +5,15 @@ Gernot Starke <gernot.starke@innoq.com>
 
 ifdef::env-github[:outfilesuffix: .adoc]
 
-[.lead]
-A simple experiment with 2D graphics to create circular visualisations
-of numbers, like π (pi), e (Euler number) or similar - that might grow
+A simple experiment with 2D graphics to create circular visualizations
+of numbers, like π (pi), e (Euler number) or similar. Designed to grow
 into something more general.
 
-[small]#Version of {docdate}.
+[small]#Version of {docdate}.#
 
 [cols="4a,1a"]
 |===
-| == Goal
+|  *Goal*
 The result shall at least look similar to the awesome
 http://thecreatorsproject.vice.com/blog/visualising-the-infinite-data-of-pie[mother
 of circular pi visualisations]
@@ -31,21 +30,23 @@ https://docs.oracle.com/javase/tutorial/2d/[Java2D],
 but architected to supply other 2D toolkits (like JavaFX or
 HTML5/WebGL).
 
-== Status
+*Status*
 
-Work in progress.
-
+Work in progress:
 image:https://img.shields.io/github/license/gernotstarke/circulizr.svg[License]
 image:https://img.shields.io/github/issues/gernotstarke/circulizr.svg[Tasks]
 image:https://badge.waffle.io/gernotstarke/circulizr.svg?label=bug&title=Bugs[Bugs]
 
-== Examples
-See our link:doc/asciidoc/gallery{outfilesuffix}[Gallery]
 
 | image:pi-original-slice.png[preview, 200]
+
   [small]#(sliced version from
     http://thecreatorsproject.vice.com/blog/visualising-the-infinite-data-of-pie[creatorsproject])#
 |===
+
+
+== Examples
+See our link:doc/asciidoc/gallery{outfilesuffix}[Gallery]
 
 
 == Principle
