@@ -1,23 +1,28 @@
-= image:./images/cirQlizr-logo.png[CIRQLIZR, 80%]
+:toc:
+:toclevels: 4
+:toc-position: left
 
+= image:./images/cirQlizr-logo.png[CIRQLIZR, 70%]
+
+:numbered!:
 == Architecture Documentation
+
 :imagesdir: ./images
 :experimental:
 :email: gernot.starke@innoq.com
 :date: {docdate}
+:numbered:
 
-
-[.lead]
 Here you (will soon) find an overview of the internal
 design/architecture of kbd:[cirQlizr].
 
 [small]#Version of {docdate}#
 
-=== Introduction and Requirements
+== Introduction and Requirements
 kbd:[cirQlizr] has been primarily build as a private design challenge.
 
 
-==== Basic Usage
+=== Basic Usage
 
 Prerequisites: Java runtime.
 
@@ -27,12 +32,13 @@ Prerequisites: Java runtime.
 . A user wants to visualize own data in circular manner. She can either
 implement (a subclass of) a DataProvider or supply data in csv or text file.
 
-==== Quality Goals and Solution Approaches
+=== Quality Goals and Solution Approaches
 
-[options="header", cols="1,2,4a, 4a"]
+[options="header", cols="1,2,4a,4a"]
 .Quality-Goals
 |===
 | Priority | Quality-Goal | Scenario | Approach
+
 | 1        | Flexibility
 | kbd:[cirQlizr] supports multiple UI technologies, e.g:
 
@@ -47,16 +53,83 @@ the software design.
 | 2        | Flexibility
 | Details of output devices (like resolution), number of lines/connections,
 colors etc. can be configured.
-| File-based configuration and Configuration class. 
+| File-based configuration and Configuration class.
 |===
 
-=== Solution Approach
+== Solution Approach
 
 Adhere to the _separation of concern_ design principle:
 
 * separate user-interface technology from the _domain_ of circular
 computation, segments and connections
 
-=== Building Blocks
+See <<Building-Blocks>> for details.
 
-t.b.d.
+[[Building-Blocks]]
+== Building Blocks
+
+[[cirqulizer-whitebox]]
+.Cirqulizer Whitebox (internal design)
+image::cirqlizr-model.png[width="80%"]
+
+[cols="1a,3a", options="header"]
+.Cirqulizer Building Blocks
+|===
+| Name | Explanation
+
+| ConnectionNode  | A point belonging to a -> Segment where a ->Connection begins
+or ends. ConnectionNodes are evenly distributed along their Segment.
+
+| Segment | Part of the circle, associated to zero or more ->Connections.
+Correspond to elements of the value-set.
+
+|===
+
+=== Domain Parts
+The classes shown in blue within figure <<cirqulizer-whitebox>> belong to the
+technology-neutral domain-part of kbd:[cirQlizr]. All domain calculations
+are performed within a purely mathematical coordinate system (with resolution or
+currently 1000 units) and later transformed into one or more
+technical coordinate systems having arbitrary, configurable resolutions.
+
+Section <<coordinates, Concepts/Coordinate-Systems>> explains the details
+of this _separation of concern_.
+
+TODO: explain coordinate transformation
+
+=== Connection
+A Connection can be a (currently quadratic) <<bezier-curves,Bezier curve>> or
+a straight line. 
+
+== Concepts
+
+=== Domain Terminology
+
+[[coordinates]]
+=== Logical and Technical Coordinate system
+
+=== Angles, Degress and Radians
+
+[[bezier-curves]]
+=== Bezier Curves
+
+=== Building kbd:[cirQlizr]
+
+
+=== Configuration of kbd:[cirQlizr]
+kbd:[cirQlizr] expects configuration options to be specified
+in the file `cirQlirz.config`, which is read upon startup.
+
+TODO: Supply the filename as command-line parameter.
+
+The comments provided in that file should be sufficient
+to understand most of the parameters.
+
+
+== Glossary of Terms
+
+BCP:: Bezier Control point.
+cirQlizr:: Circular Visualizer
+POO:: Point of origin (in a coordinate system)
+value-set:: The set of (distinct!) values that are part of the data to be visualized.
+In case of numbers, the value-set consists of the digits from 0 to 9.
