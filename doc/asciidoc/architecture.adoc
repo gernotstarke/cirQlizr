@@ -99,7 +99,7 @@ TODO: explain coordinate transformation
 
 === Connection
 A Connection can be a (currently quadratic) <<bezier-curves,Bezier curve>> or
-a straight line. 
+a straight line.
 
 == Concepts
 
@@ -107,6 +107,20 @@ a straight line.
 
 [[coordinates]]
 === Logical and Technical Coordinate system
+
+All calculations are initially performed by domain classes within
+a logical coordinate system with typical mathematical orientation
+(x and y axis point right/upwards). Within this coordinate system,
+the circle where we create segments and connections has a
+radius of 1000 units.
+
+[[logical-coord-system]]
+.Logical Coordinate System
+image::logical-coords.jpg[]
+
+In the diagram you find one (Bezier) connection (green line) together
+with its two ConnectionNodes and the Bezier control point.
+
 
 === Angles, Degress and Radians
 
