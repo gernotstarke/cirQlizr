@@ -195,8 +195,7 @@ class DrawingCanvas extends JPanel {
         nv.segment[fromDigit].advanceToNextAvailableDigiNode()
         DigiNode toNode = nv.segment[toDigit].digiNode[toDigiNodeIndex]
 
-        double bcpRadius = Math.abs( fromDigit - toDigit) * 50 + 50
-        Coordinate2D bezierControlPoint = findBezierControlPoint(toNode.angle, fromNode.angle, bcpRadius)
+        Coordinate2D bezierControlPoint = findBezierControlPoint(toNode.angle, fromNode.angle, 50)
 
         // QuadCurve arguments: startX, startY, ctrlX, ctrlY, endX, endY)
         g2d.draw(new QuadCurve2D.Double(
@@ -223,8 +222,13 @@ class DrawingCanvas extends JPanel {
      */
     private Coordinate2D findBezierControlPoint( double alpha, double beta, double radius) {
         double minAngle = Math.min( alpha, beta)
-        double midAngle = (Math.max( alpha, beta) - minAngle) / 2
-        return Circle.getPointByRadiusAngle( radius, midAngle + minAngle)
+        double maxAngle = Math.max( alpha, beta)
+        double deltaAngle = Math.abs( minAngle - maxAngle)
+        double midAngle = minAngle + deltaAngle / 2
+
+        double multiplier = (deltaAngle % (Math.PI / 2)) * deltaAngle
+
+        return Circle.getPointByRadiusAngle( radius * multiplier, midAngle + minAngle)
     }
 
 
