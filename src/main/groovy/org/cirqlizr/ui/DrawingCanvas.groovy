@@ -25,6 +25,8 @@
 package org.cirqlizr.ui
 
 import org.cirqlizr.configuration.Configuration
+import org.cirqlizr.domain.Circle
+import org.cirqlizr.domain.Coordinate2D
 import org.cirqlizr.domain.DigiNode
 import org.cirqlizr.NumberVisualizer
 import org.cirqlizr.configuration.RunMode
@@ -149,6 +151,14 @@ class DrawingCanvas extends JPanel {
         }
     }
 
+
+    private void drawDotAtCoordinate( Graphics2D g2D, Coordinate2D coord) {
+        g2D.setPaint( Color.white)
+        Ellipse2D nodeCircle = new Ellipse2D.Double( coord.getX()-3, coord.getY()-3, 6,6)
+        g2D.fill( nodeCircle)
+    }
+
+
     /*
    * draw the lines for all pairs
     */
@@ -181,15 +191,22 @@ class DrawingCanvas extends JPanel {
         int fromDigiNodeIndex = nv.segment[fromDigit].getNextFreeDigiNode()
         int toDigiNodeIndex = nv.segment[toDigit].getNextFreeDigiNode()
 
+        DigiNode fromNode = nv.segment[fromDigit].digiNode[fromDigiNodeIndex]
+        DigiNode toNode = nv.segment[toDigit].digiNode[toDigiNodeIndex]
+
+        Coordinate2D bezierControlPoint = findBezierControlPoint(toNode.angle, fromNode.angle, 100)
+
         // QuadCurve arguments: startX, startY, ctrlX, ctrlY, endX, endY)
         g2d.draw(new QuadCurve2D.Double(
-                nv.segment[fromDigit].digiNode[fromDigiNodeIndex].coordinate.getX(),
-                nv.segment[fromDigit].digiNode[fromDigiNodeIndex].coordinate.getY(),
-                0,0,
-                nv.segment[toDigit].digiNode[toDigiNodeIndex].coordinate.getX(),
-                nv.segment[toDigit].digiNode[toDigiNodeIndex].coordinate.getY())
+                fromNode.coordinate.getX(),
+                fromNode.coordinate.getY(),
+                bezierControlPoint.getX(),
+                bezierControlPoint.getY(),
+                toNode.coordinate.getX(),
+                toNode.coordinate.getY())
                 )
 
+        drawDotAtCoordinate( g2d, bezierControlPoint)
         //g2d.draw(new Line2D.Double(
         //        nv.segment[fromDigit].digiNode[fromDigiNodeIndex].coordinate.toPoint(),
         //        nv.segment[toDigit].digiNode[toDigiNodeIndex].coordinate.toPoint()))
@@ -199,6 +216,16 @@ class DrawingCanvas extends JPanel {
 
         //LOGGER.info "draw line from $fromDigit (${segment[fromDigit].digiNode[pairIndex]}"
     }
+
+    /*
+    * calculates a control point between two angles
+     */
+    private Coordinate2D findBezierControlPoint( double alpha, double beta, double radius) {
+        double minAngle = Math.min( alpha, beta)
+        double midAngle = (Math.max( alpha, beta) - minAngle) / 2
+        return Circle.getPointByRadiusAngle( radius, midAngle + minAngle)
+    }
+
 
     /*
     * draw the legend

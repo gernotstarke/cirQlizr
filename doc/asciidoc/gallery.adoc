@@ -44,4 +44,9 @@ of 80 connections of PI with a 5.0f line thickness and white respectively black 
 
 | image:gallery/CIRCULIZR_0_9_-_3500-digits-of-pi.jpg[V0.9, 400, circulizr-V0.9]
 | That's how our images look like when really crowded with data.
+
+| image:gallery/problem_with_bcp_testNumber.jpg[bcp-issue, 400]
+| Here you see (white dots) the naive calculation of Bezier control points: The
+connections still cross the center of the circle (see
+  https://github.com/gernotstarke/cirQlizr/issues/68[issue #68^])
 |===

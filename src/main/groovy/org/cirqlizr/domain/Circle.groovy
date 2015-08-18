@@ -50,6 +50,18 @@ class Circle {
         return new Coordinate2D( x , y )
     }
 
+    /**
+     * gets a point off the point-of-origin with angle and radius
+     * @param radius
+     * @param angle
+     * @return
+     */
+    public static Coordinate2D getPointByRadiusAngle( double radius, double angle) {
+        Double x = radius * Math.cos( angle )
+        Double y = radius * Math.sin( angle )
+        return new Coordinate2D( x , 1 * y )
+    }
+
 
 }
 
