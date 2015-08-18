@@ -192,9 +192,11 @@ class DrawingCanvas extends JPanel {
         int toDigiNodeIndex = nv.segment[toDigit].getNextFreeDigiNode()
 
         DigiNode fromNode = nv.segment[fromDigit].digiNode[fromDigiNodeIndex]
+        nv.segment[fromDigit].advanceToNextAvailableDigiNode()
         DigiNode toNode = nv.segment[toDigit].digiNode[toDigiNodeIndex]
 
-        Coordinate2D bezierControlPoint = findBezierControlPoint(toNode.angle, fromNode.angle, 100)
+        double bcpRadius = Math.abs( fromDigit - toDigit) * 50 + 50
+        Coordinate2D bezierControlPoint = findBezierControlPoint(toNode.angle, fromNode.angle, bcpRadius)
 
         // QuadCurve arguments: startX, startY, ctrlX, ctrlY, endX, endY)
         g2d.draw(new QuadCurve2D.Double(
@@ -211,7 +213,6 @@ class DrawingCanvas extends JPanel {
         //        nv.segment[fromDigit].digiNode[fromDigiNodeIndex].coordinate.toPoint(),
         //        nv.segment[toDigit].digiNode[toDigiNodeIndex].coordinate.toPoint()))
 
-        nv.segment[fromDigit].advanceToNextAvailableDigiNode()
         nv.segment[toDigit].advanceToNextAvailableDigiNode()
 
         //LOGGER.info "draw line from $fromDigit (${segment[fromDigit].digiNode[pairIndex]}"
