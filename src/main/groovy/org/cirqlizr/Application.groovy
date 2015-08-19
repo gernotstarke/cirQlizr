@@ -56,7 +56,7 @@ class Application  {
         // construct the domain root
         NumberVisualizer numberVisualizer = new NumberVisualizer( configuration )
 
-        // create and initialize segments and digiNodes
+        // create and initialize segments and connectionNodes
         numberVisualizer.initSegments()
 
         // generate report only in DEBUG and DEVELOP mode

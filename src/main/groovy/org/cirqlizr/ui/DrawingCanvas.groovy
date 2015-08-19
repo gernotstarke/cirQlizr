@@ -27,7 +27,7 @@ package org.cirqlizr.ui
 import org.cirqlizr.configuration.Configuration
 import org.cirqlizr.domain.Circle
 import org.cirqlizr.domain.Coordinate2D
-import org.cirqlizr.domain.DigiNode
+import org.cirqlizr.domain.ConnectionNode
 import org.cirqlizr.NumberVisualizer
 import org.cirqlizr.configuration.RunMode
 import org.cirqlizr.domain.numbers.Pair
@@ -131,8 +131,8 @@ class DrawingCanvas extends JPanel {
                 g2d.draw(arc2D)
 
                 if (configuration.RUNMODE < RunMode.PRODUCTION) {
-                    // draw dot for all digiNode-instances
-                    drawDotForDigiNodes(g2d, digiNode)
+                    // draw dot for all connectionNode-instances
+                    drawDotForConnectionNodes(g2d, connectionNode)
                 }
             }
         }
@@ -141,7 +141,7 @@ class DrawingCanvas extends JPanel {
     /**
      *
      */
-    private void drawDotForDigiNodes(Graphics2D g2d, List<DigiNode> nodes) {
+    private void drawDotForConnectionNodes(Graphics2D g2d, List<ConnectionNode> nodes) {
         g2d.setPaint(Color.darkGray)
         nodes.each { node ->
             double xCoord = node.coordinate.x
@@ -188,12 +188,12 @@ class DrawingCanvas extends JPanel {
     private void drawConnectionForNumberPair(Graphics2D g2d, int fromDigit, int toDigit) {
         g2d.setColor(nv.segment[fromDigit].color)
 
-        int fromDigiNodeIndex = nv.segment[fromDigit].getNextFreeDigiNode()
-        int toDigiNodeIndex = nv.segment[toDigit].getNextFreeDigiNode()
+        int fromConnectionNodeIndex = nv.segment[fromDigit].getNextFreeConnectionNode()
+        int toConnectionNodeIndex = nv.segment[toDigit].getNextFreeConnectionNode()
 
-        DigiNode fromNode = nv.segment[fromDigit].digiNode[fromDigiNodeIndex]
-        nv.segment[fromDigit].advanceToNextAvailableDigiNode()
-        DigiNode toNode = nv.segment[toDigit].digiNode[toDigiNodeIndex]
+        ConnectionNode fromNode = nv.segment[fromDigit].connectionNode[fromConnectionNodeIndex]
+        nv.segment[fromDigit].advanceToNextAvailableConnectionNode()
+        ConnectionNode toNode = nv.segment[toDigit].connectionNode[toConnectionNodeIndex]
 
         Coordinate2D bezierControlPoint = findBezierControlPoint(toNode.angle, fromNode.angle, 50)
 
@@ -209,12 +209,12 @@ class DrawingCanvas extends JPanel {
 
         drawDotAtCoordinate( g2d, bezierControlPoint)
         //g2d.draw(new Line2D.Double(
-        //        nv.segment[fromDigit].digiNode[fromDigiNodeIndex].coordinate.toPoint(),
-        //        nv.segment[toDigit].digiNode[toDigiNodeIndex].coordinate.toPoint()))
+        //        nv.segment[fromDigit].connectionNode[fromConnectionNodeIndex].coordinate.toPoint(),
+        //        nv.segment[toDigit].connectionNode[toConnectionNodeIndex].coordinate.toPoint()))
 
-        nv.segment[toDigit].advanceToNextAvailableDigiNode()
+        nv.segment[toDigit].advanceToNextAvailableConnectionNode()
 
-        //LOGGER.info "draw line from $fromDigit (${segment[fromDigit].digiNode[pairIndex]}"
+        //LOGGER.info "draw line from $fromDigit (${segment[fromDigit].connectionNode[pairIndex]}"
     }
 
     /*

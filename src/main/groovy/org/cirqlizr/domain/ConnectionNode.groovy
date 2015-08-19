@@ -24,11 +24,11 @@
 package org.cirqlizr.domain
 
 /**
- * DigiNode represents an endpoint for a visual connection (e.g. line or curve).
+ * ConnectionNode represents an endpoint for a visual connection (e.g. line or curve).
  *
  */
 
-class DigiNode {
+class ConnectionNode {
 
     Coordinate2D coordinate
 
@@ -36,11 +36,11 @@ class DigiNode {
     double radius
 
     /**
-     * completely create a digiNode instance with its coordinates
+     * completely create a connectionNode instance with its coordinates
      * @param angle
      * @param radius
      */
-    public DigiNode( double angle, double radius) {
+    public ConnectionNode( double angle, double radius) {
         this.angle = angle
         this.radius = radius
 

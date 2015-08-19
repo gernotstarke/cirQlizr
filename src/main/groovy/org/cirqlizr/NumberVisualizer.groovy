@@ -84,7 +84,7 @@ class NumberVisualizer {
 
 
     /**
-     * initialize the segments, including digiNodes
+     * initialize the segments, including connectionNodes
      */
     public void initSegments() {
 
@@ -93,21 +93,21 @@ class NumberVisualizer {
         (0..9).each { thisDigit ->
             segment[thisDigit] = new Segment(
                     digit: thisDigit,
-                    nrOfRequiredDigiNodes: NUMBER.countOccurencesInPairs(thisDigit, NR_OF_CONNECTIONS_TO_SHOW-1),
+                    nrOfRequiredConnectionNodes: NUMBER.countOccurencesInPairs(thisDigit, NR_OF_CONNECTIONS_TO_SHOW-1),
                     color: CirqlizrColor.color[thisDigit],
                     radius: this.radius,
                     // TODO: adjust angleStart, so that segment 0 starts at top
                     angleStart: thisDigit * ((SEGMENT_EXTEND_ANGLE + (2 * SEGMENT_PADDING_ANGLE))),
                     angleExtend: SEGMENT_EXTEND_ANGLE)
 
-            // create digiNodes (== lineEndings) only if this digit occurs once or more
-            if (segment[thisDigit].nrOfRequiredDigiNodes > 0) {
+            // create connectionNodes (== lineEndings) only if this digit occurs once or more
+            if (segment[thisDigit].nrOfRequiredConnectionNodes > 0) {
                 segment[thisDigit].with {
 
                     if (configuration.RUNMODE < RunMode.PRODUCTION) {
-                        LOGGER.info "setting up ${nrOfRequiredDigiNodes} digiNodes for Segment[${thisDigit}]: angleStart=${angleStart}, angleExtend=${angleExtend} and radius=${radius}"
+                        LOGGER.info "setting up ${nrOfRequiredConnectionNodes} connectionNodes for Segment[${thisDigit}]: angleStart=${angleStart}, angleExtend=${angleExtend} and radius=${radius}"
                     }
-                    setUpDigiNodes()
+                    setUpConnectionNodes()
                 }
             }
 
@@ -126,8 +126,8 @@ class NumberVisualizer {
         // print segment information
         segment.each { oneSegment ->
             println oneSegment.toString()
-            // print digiNode information
-            oneSegment.digiNode.each { thisNode ->
+            // print connectionNode information
+            oneSegment.connectionNode.each { thisNode ->
                 println "    " + thisNode.toString()
             }
             println "="*80

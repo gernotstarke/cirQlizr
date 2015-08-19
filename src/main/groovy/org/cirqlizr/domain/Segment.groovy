@@ -39,10 +39,10 @@ class Segment {
 
     // how often does this digit occur in pairs?
     // how many connections will start or end in this segment?
-    private int nrOfRequiredDigiNodes
+    private int nrOfRequiredConnectionNodes
 
-    // what is the number of the next free digiNode
-    private int nextFreeDigiNode = -1
+    // what is the number of the next free connectionNode
+    private int nextFreeConnectionNode = -1
 
     private double radius
 
@@ -52,7 +52,7 @@ class Segment {
     private double angleExtend
 
     // several "connection points" for lines
-    public List<DigiNode> digiNode
+    public List<ConnectionNode> connectionNode
 
     // a Bezier Control Point
     public Coordinate2D bezierControlPoint
@@ -62,53 +62,53 @@ class Segment {
     // implicit constructor to allow named parameters
 
     /**
-     * returns the next free digiNode
+     * returns the next free connectionNode
      **/
-    public int getNextFreeDigiNode() {
+    public int getNextFreeConnectionNode() {
 
-        assert nextFreeDigiNode <= digiNode.size(): "Segment $digit has no free digiNodes after $nextFreeDigiNode"
-        return nextFreeDigiNode
+        assert nextFreeConnectionNode <= connectionNode.size(): "Segment $digit has no free connectionNodes after $nextFreeConnectionNode"
+        return nextFreeConnectionNode
     }
 
     /**
-     * increments the pointer to next available digiNode
+     * increments the pointer to next available connectionNode
      */
-    public void advanceToNextAvailableDigiNode() {
+    public void advanceToNextAvailableConnectionNode() {
 
-        assert nextFreeDigiNode < digiNode.size(): "cannot advance digiNode pointer, as segment $digit has no free digiNodes after $nextFreeDigiNode"
+        assert nextFreeConnectionNode < connectionNode.size(): "cannot advance connectionNode pointer, as segment $digit has no free connectionNodes after $nextFreeConnectionNode"
 
-        nextFreeDigiNode += 1
+        nextFreeConnectionNode += 1
     }
 
     /**
-     * calculate the digiNodes for this Segment with the
+     * calculate the connectionNodes for this Segment with the
      * <a href="http://www.mathopenref.com/coordparamcircle.html">parametric circle equation</a>:
      * x = radius * cos(t)    y = radius * sin(t) with t being the angle...
      * @return points in Segment, where lines will be attached
      */
-    public void setUpDigiNodes() {
+    public void setUpConnectionNodes() {
 
-        // digit does not occur in number -> no digiNodes
-        assert this.nrOfRequiredDigiNodes > 0: "setUpDigiNodes error: Segment[${this.digit}] cannot create $nrOfRequiredDigiNodes digiNodes"
+        // digit does not occur in number -> no connectionNodes
+        assert this.nrOfRequiredConnectionNodes > 0: "setUpConnectionNodes error: Segment[${this.digit}] cannot create $nrOfRequiredConnectionNodes connectionNodes"
 
         // as Lists start at index 0:
-        digiNode = new ArrayList<DigiNode>(nrOfRequiredDigiNodes)
+        connectionNode = new ArrayList<ConnectionNode>(nrOfRequiredConnectionNodes)
 
         // where to start attaching connections
-        nextFreeDigiNode = 0
+        nextFreeConnectionNode = 0
 
-        double deltaAngle = deltaAngle(this.nrOfRequiredDigiNodes, angleExtend)
+        double deltaAngle = deltaAngle(this.nrOfRequiredConnectionNodes, angleExtend)
 
-        // println "will create ${nrOfRequiredDigiNodes} digiNodes with deltaAngle=${deltaAngle} for angleExtend=${angleExtend} and angleStart=${angleStart}"
+        // println "will create ${nrOfRequiredConnectionNodes} connectionNodes with deltaAngle=${deltaAngle} for angleExtend=${angleExtend} and angleStart=${angleStart}"
 
-        // for each digit to show, create one digiNode
-        (1..nrOfRequiredDigiNodes).each { nrOfCurrentDigiNode ->
-            // digiNode constructor is responsible for calculating Coordinates/Points
-            DigiNode tmpNode = new DigiNode(angleForThisDigiNode(angleStart, deltaAngle, nrOfCurrentDigiNode),
+        // for each digit to show, create one connectionNode
+        (1..nrOfRequiredConnectionNodes).each { nrOfCurrentConnectionNode ->
+            // connectionNode constructor is responsible for calculating Coordinates/Points
+            ConnectionNode tmpNode = new ConnectionNode(angleForThisConnectionNode(angleStart, deltaAngle, nrOfCurrentConnectionNode),
                     radius)
             tmpNode.coordinate.mirrorAtXAxis()
 
-            digiNode[nrOfCurrentDigiNode - 1] = tmpNode
+            connectionNode[nrOfCurrentConnectionNode - 1] = tmpNode
 
 
         }
@@ -116,34 +116,34 @@ class Segment {
     }
 
     /**
-     * what is the actual angle for this digiNode?
+     * what is the actual angle for this connectionNode?
      */
-    public static double angleForThisDigiNode(double angleStart, double deltaAngle, int nrOfCurrentDigiNode) {
+    public static double angleForThisConnectionNode(double angleStart, double deltaAngle, int nrOfCurrentConnectionNode) {
 
-        double theAngle = angleStart + deltaAngle * (nrOfCurrentDigiNode)
+        double theAngle = angleStart + deltaAngle * (nrOfCurrentConnectionNode)
         return theAngle
     }
 
     /**
-     * what is the delta-angle between digiNodes? Does NOT depend on starting angle,
-     * only on angleExtend and nrOfDigiNodes
-     * @param nrOfDigiNodes
+     * what is the delta-angle between connectionNodes? Does NOT depend on starting angle,
+     * only on angleExtend and nrOfConnectionNodes
+     * @param nrOfConnectionNodes
      * @param angleExtend
-     * @return delta-angle between digiNodes within this segment
-     * for examples, {@link SegmentSpec # "DigiNodes are distributed evenly along Segment Zero"}:
+     * @return delta-angle between connectionNodes within this segment
+     * for examples, {@link SegmentSpec # "ConnectionNodes are distributed evenly along Segment Zero"}:
      *
      */
-    public static double deltaAngle(int nrOfDigiNodes, double angleExtend) {
-        assert nrOfDigiNodes >= 0
+    public static double deltaAngle(int nrOfConnectionNodes, double angleExtend) {
+        assert nrOfConnectionNodes >= 0
         assert angleExtend >= 0
-        return angleExtend / (Math.max(nrOfDigiNodes, 1) + 1)
+        return angleExtend / (Math.max(nrOfConnectionNodes, 1) + 1)
     }
 
     /**
      * returns a readable version of this segment
      */
     public String toString() {
-        return """Segment $digit requires $nrOfRequiredDigiNodes connections
+        return """Segment $digit requires $nrOfRequiredConnectionNodes connections
       angleStart=${sprintf("%3.3fRAD (%3.3f°)", angleStart, Math.toDegrees(angleStart))}, extend=${sprintf("%3.3fRAD (%3.3f°)", angleExtend, Math.toDegrees(angleExtend))}
 """
     }

@@ -39,27 +39,27 @@ class SegmentSpec extends Specification {
     }
 
 
-    def "Correct number of digiNodes is created for Segment"() {
+    def "Correct number of connectionNodes is created for Segment"() {
         given:
         // segment where digit "0" occurs once!
         Segment s = new Segment(
                 digit: 0,
-                nrOfRequiredDigiNodes: 1,
+                nrOfRequiredConnectionNodes: 1,
                 radius: 100,
                 angleStart: 0 + (2 * SEGMENT_PADDING_ANGLE),
                 angleExtend: Math.toRadians(30))
 
         when:
-        s.setUpDigiNodes()
+        s.setUpConnectionNodes()
 
         then:
-        // exactly ONE digiNode needs to be created
-        s.digiNode.size() == 1
+        // exactly ONE connectionNode needs to be created
+        s.connectionNode.size() == 1
 
     }
 
     /*
-    digiNodes shall be evenly spread across segments
+    connectionNodes shall be evenly spread across segments
      */
     //@Unroll
     def "actual angles are evenly spread across segment"(int nrOfNodes, List<Double> expectedAngles) {
@@ -70,7 +70,7 @@ class SegmentSpec extends Specification {
 
         Segment s = new Segment(
                 digit: 0,
-                nrOfRequiredDigiNodes: nrOfNodes,
+                nrOfRequiredConnectionNodes: nrOfNodes,
                 radius: 1,
                 angleStart: angleStart,
                 angleExtend: angleExtend)
@@ -78,9 +78,9 @@ class SegmentSpec extends Specification {
         List<Double> actualAngles = new ArrayList<Double>(nrOfNodes)
 
         when:
-        s.setUpDigiNodes()
+        s.setUpConnectionNodes()
 
-        s.digiNode.each {
+        s.connectionNode.each {
             actualAngles.add(it.angle)
         }
 
@@ -99,10 +99,10 @@ class SegmentSpec extends Specification {
     }
 
 
-    /* zero digiNodes shall fail
+    /* zero connectionNodes shall fail
 
      */
-    def "zero digiNodes shall fail"() {
+    def "zero connectionNodes shall fail"() {
         given:
 
         double angleStart = 0
@@ -110,7 +110,7 @@ class SegmentSpec extends Specification {
 
         Segment s = new Segment(
                 digit: 0,
-                nrOfRequiredDigiNodes: 0,
+                nrOfRequiredConnectionNodes: 0,
                 radius: 1,
                 angleStart: angleStart,
                 angleExtend: angleExtend)
@@ -118,7 +118,7 @@ class SegmentSpec extends Specification {
 
         expect:
         shouldFail(AssertionError) {
-            s.setUpDigiNodes()
+            s.setUpConnectionNodes()
 
         }
     }
