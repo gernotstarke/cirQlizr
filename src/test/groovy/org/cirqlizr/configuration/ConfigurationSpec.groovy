@@ -114,7 +114,7 @@ class ConfigurationSpec extends Specification {
 
     def "can convert configuration string to SpecialNumber instance"() {
         expect:
-        Configuration.convertStringToSpecialNumberInstance( "org.cirqlizr.domain.numbers.Pi") instanceof SpecialNumber
+        Configuration.convertStringToSpecialNumberInstance( "org.cirqlizr.domain.numbers.Pi", 10) instanceof SpecialNumber
     }
 }
 

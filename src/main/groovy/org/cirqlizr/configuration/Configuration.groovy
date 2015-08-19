@@ -93,6 +93,8 @@ class Configuration {
 
         this.VALUESET = (List<String>) validListOfStrings(config.valueSet)
 
+        this.PRECISION = (Integer) validNumber( config.precision )
+        
         this.NUMBER = convertStringToSpecialNumberInstance(config.number, config.precision)
 
         this.NR_OF_CONNECTIONS_TO_SHOW = (Integer) validNumber(config.nr_of_connections_to_show)
@@ -205,9 +207,9 @@ class Configuration {
      * @param configuredSpecialNumber
      * @return
      */
-    public SpecialNumber convertStringToSpecialNumberInstance(String configuredSpecialNumber, Integer precision) {
+    public static SpecialNumber convertStringToSpecialNumberInstance(String configuredSpecialNumber, Integer precision) {
         assert precision > 0 : "precision 0 makes no sense - aborted!"
-        this.PRECISION = precision
+        //this.PRECISION = precision
 
         return Class.forName(configuredSpecialNumber).newInstance( precision )
     }
