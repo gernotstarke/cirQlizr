@@ -36,7 +36,7 @@ import java.util.logging.Logger
 /**
  * Coordinates "business logic" of number visualization.
  */
-class NumberVisualizer {
+class CircularVisualizer {
 
     // what number to show
     final private SpecialNumber NUMBER
@@ -63,10 +63,10 @@ class NumberVisualizer {
     final Double SEGMENT_PADDING_ANGLE = Math.toRadians(SEGMENT_PADDING_ANGLE_DEG)
 
 
-    private static final Logger LOGGER = Logger.getLogger(NumberVisualizer.class.getName())
+    private static final Logger LOGGER = Logger.getLogger(CircularVisualizer.class.getName())
 
 
-    public NumberVisualizer( Configuration config) {
+    public CircularVisualizer( Configuration config) {
 
         assert config.NUMBER != null : "cannot visualize null value"
         assert config.NR_OF_CONNECTIONS_TO_SHOW >= 0 : "cannot visualize 0 connections"

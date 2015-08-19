@@ -28,7 +28,7 @@ import org.cirqlizr.configuration.Configuration
 import org.cirqlizr.domain.Circle
 import org.cirqlizr.domain.Coordinate2D
 import org.cirqlizr.domain.ConnectionNode
-import org.cirqlizr.NumberVisualizer
+import org.cirqlizr.CircularVisualizer
 import org.cirqlizr.configuration.RunMode
 import org.cirqlizr.domain.numbers.Pair
 
@@ -66,7 +66,7 @@ class DrawingCanvas extends JPanel {
 
 
     // entry point to the "domain" - in DDD-terms: AggregateRoot
-    private NumberVisualizer nv
+    private CircularVisualizer nv
 
     // accounting which connectionPoint within which Segment is currently active
     private List<Integer> currentConnectionPointInSegment
@@ -76,7 +76,7 @@ class DrawingCanvas extends JPanel {
 
 
 
-    DrawingCanvas(int x_resolution, int y_resolution, NumberVisualizer numberVisualizer, Configuration config) {
+    DrawingCanvas(int x_resolution, int y_resolution, CircularVisualizer numberVisualizer, Configuration config) {
         super()
         this.configuration = config
 
@@ -86,7 +86,7 @@ class DrawingCanvas extends JPanel {
     }
 
 
-    private void initCanvas(int xFrameSize, int yFrameSize, NumberVisualizer numberVisualizer) {
+    private void initCanvas(int xFrameSize, int yFrameSize, CircularVisualizer numberVisualizer) {
         X_CANVAS_SIZE = xFrameSize
         Y_CANVAS_SIZE = yFrameSize
 

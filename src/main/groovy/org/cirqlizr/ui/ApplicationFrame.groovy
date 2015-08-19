@@ -23,7 +23,7 @@
  */
 package org.cirqlizr.ui
 
-import org.cirqlizr.NumberVisualizer
+import org.cirqlizr.CircularVisualizer
 import org.cirqlizr.configuration.Configuration
 import org.cirqlizr.configuration.RunMode
 
@@ -48,7 +48,7 @@ class ApplicationFrame extends JFrame {
     private final RUNMODE = RunMode.DEVELOP
 
 
-    public ApplicationFrame(Configuration configuration, NumberVisualizer numberVisualizer) {
+    public ApplicationFrame(Configuration configuration, CircularVisualizer numberVisualizer) {
 
         this.X_CANVAS_SIZE = configuration.OUTPUT_RESOLUTION + 100
         this.Y_CANVAS_SIZE = configuration.OUTPUT_RESOLUTION
@@ -71,8 +71,8 @@ class ApplicationFrame extends JFrame {
 
 
     public
-    //static showApplicationFrame(String titleText, String infoLine, int resolution, NumberVisualizer nv, RunMode runmode) {
-    static showApplicationFrame(Configuration configuration, NumberVisualizer nv) {
+    //static showApplicationFrame(String titleText, String infoLine, int resolution, CircularVisualizer nv, RunMode runmode) {
+    static showApplicationFrame(Configuration configuration, CircularVisualizer nv) {
 
 
         if (configuration.RUNMODE < RunMode.PRODUCTION) {

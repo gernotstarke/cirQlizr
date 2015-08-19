@@ -54,7 +54,7 @@ class Application  {
 
 
         // construct the domain root
-        NumberVisualizer numberVisualizer = new NumberVisualizer( configuration )
+        CircularVisualizer numberVisualizer = new CircularVisualizer( configuration )
 
         // create and initialize segments and connectionNodes
         numberVisualizer.initSegments()

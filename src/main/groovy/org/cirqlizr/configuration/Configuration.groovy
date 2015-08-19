@@ -94,7 +94,7 @@ class Configuration {
         this.VALUESET = (List<String>) validListOfStrings(config.valueSet)
 
         this.PRECISION = (Integer) validNumber( config.precision )
-        
+
         this.NUMBER = convertStringToSpecialNumberInstance(config.number, config.precision)
 
         this.NR_OF_CONNECTIONS_TO_SHOW = (Integer) validNumber(config.nr_of_connections_to_show)
