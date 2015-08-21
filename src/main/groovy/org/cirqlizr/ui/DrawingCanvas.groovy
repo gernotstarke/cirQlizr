@@ -26,6 +26,7 @@ package org.cirqlizr.ui
 
 import org.cirqlizr.configuration.Configuration
 import org.cirqlizr.domain.Circle
+import org.cirqlizr.domain.Connection
 import org.cirqlizr.domain.Coordinate2D
 import org.cirqlizr.domain.ConnectionNode
 import org.cirqlizr.CircularVisualizer
@@ -195,7 +196,7 @@ class DrawingCanvas extends JPanel {
         nv.segment[fromDigit].advanceToNextAvailableConnectionNode()
         ConnectionNode toNode = nv.segment[toDigit].connectionNode[toConnectionNodeIndex]
 
-        Coordinate2D bezierControlPoint = findBezierControlPoint(toNode.angle, fromNode.angle, 50)
+        Coordinate2D bezierControlPoint = Connection.findBezierControlPoint(toNode.angle, fromNode.angle, 300)
 
         // QuadCurve arguments: startX, startY, ctrlX, ctrlY, endX, endY)
         g2d.draw(new QuadCurve2D.Double(
@@ -217,19 +218,7 @@ class DrawingCanvas extends JPanel {
         //LOGGER.info "draw line from $fromDigit (${segment[fromDigit].connectionNode[pairIndex]}"
     }
 
-    /*
-    * calculates a control point between two angles
-     */
-    private Coordinate2D findBezierControlPoint( double alpha, double beta, double radius) {
-        double minAngle = Math.min( alpha, beta)
-        double maxAngle = Math.max( alpha, beta)
-        double deltaAngle = Math.abs( minAngle - maxAngle)
-        double midAngle = minAngle + deltaAngle / 2
 
-        double multiplier = (deltaAngle % (Math.PI / 2)) * deltaAngle
-
-        return Circle.getPointByRadiusAngle( radius * multiplier, midAngle + minAngle)
-    }
 
 
     /*

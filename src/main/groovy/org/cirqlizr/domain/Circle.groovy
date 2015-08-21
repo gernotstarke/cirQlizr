@@ -62,6 +62,17 @@ class Circle {
         return new Coordinate2D( x , 1 * y )
     }
 
-
+    /**
+     * finds the delta of two angles (in RAD).
+     * Both angles are "normalized" before processing, that means they are taken
+     * modulo 2PI
+     */
+    public static Double deltaAngle( double originalAlpha, double originalBeta) {
+        double alpha = originalAlpha % (2 * Math.PI)
+        double beta  = originalBeta  % (2 * Math.PI)
+        double minAngle = Math.min( alpha, beta)
+        double maxAngle = Math.max( alpha, beta)
+        return  Math.abs( minAngle - maxAngle)
+    }
 }
 

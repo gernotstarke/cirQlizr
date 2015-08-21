@@ -35,6 +35,23 @@ import spock.lang.Specification
  */
 class CircleSpec extends Specification {
 
+    def "delta angle calculation"(double alpha, double beta, double expectedDelta, double epsilon) {
+
+        expect:
+        org.junit.Assert.assertEquals( "expect delta of $alpha and $beta to be $expectedDelta",
+                    expectedDelta, Circle.deltaAngle( alpha, beta), epsilon )
+
+        where:
+        alpha | beta | expectedDelta | epsilon
+        0     |    0 |           0   |   0.001
+        0     |    3 |           3   |   0.05
+        0     | 2*Math.PI |      0   |   0.05
+        0     |  0.5 |           0.5 |   0.001
+        1.5   |  4.6 |           3.1 |   0.01
+    }
+
+
+
     def "Circle crosses X axis With Angle Zero at Zero"() {
         given:
         Circle circle = new Circle(center: new Coordinate2D(0, 0), radius: 1)
