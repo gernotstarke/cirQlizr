@@ -28,7 +28,7 @@ class Connection {
 
         double midAngle = (minAngle + deltaAngle / 2) % (2 * Math.PI)
 
-        double multiplier = Math.abs( Math.sin( deltaAngle / 2 ))
+        double multiplier = Math.abs( 0.5 * Math.sin( deltaAngle / 2 ))
 
         return Circle.getPointByRadiusAngle( radius * multiplier, midAngle)
     }
