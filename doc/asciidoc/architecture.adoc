@@ -139,6 +139,18 @@ TODO: Supply the filename as command-line parameter.
 The comments provided in that file should be sufficient
 to understand most of the parameters.
 
+=== UI-Toolkits and Graphical Languages
+kbd:[cirQlizr] currently supports Java2D, but is designed to support
+JavaFX, SVG and Processing without code changes to its core.
+
+==== Fundamental Graphics Primitives
+// TODO
+
+==== Java2D
+
+==== Processing
+The https://processing.org/reference/[Processing language] contains many
+constructs known from UI toolkits like Java2D.
 
 == Glossary of Terms
 
@@ -147,3 +159,12 @@ cirQlizr:: Circular Visualizer
 POO:: Point of origin (in a coordinate system)
 value-set:: The set of (distinct!) values that are part of the data to be visualized.
 In case of numbers, the value-set consists of the digits from 0 to 9.
+
+https://processing.org/[Processing]:: From their website:
+"Processing is a flexible software sketchbook and a language for
+learning how to code within the context of visual arts."
+
+A domain-specific language plus corresponding development and runtime tools to
+describe and implement graphics, both in 2D and 3D. Processing is implemented
+in Java and is available for JavaScript too. kbd:[cirQlizr] uses the Processing language
+as one output format.
