@@ -45,7 +45,7 @@ implement (a subclass of) a DataProvider or supply data in csv or text file.
 * Java2D
 * JavaFX
 * SVG
-* HTML5 or WebGL
+* <<Processing>>
 
 | Strictly separate _domain_ from _technical_ components within
 the software design.
@@ -68,12 +68,45 @@ See <<Building-Blocks>> for details.
 [[Building-Blocks]]
 == Building Blocks
 
+=== Whitebox Level-1
+
+kbd:[cirQlizr] implementation has been split into three major
+building blocks
+[[cirqulizer-overview]]
+.Cirqulizer Whitebox (overview)
+image::cirqlizr-overview.png[width="70%"]
+
+[cols="1a,3a,2a", options="header"]
+.Cirqulizer Level-1 Building Blocks
+|===
+| Name | Explanation | Sources
+
+| Application Controller  | Creates a valid configuration and
+instantiates the domain- and technical components.
+| `org.cirqlizr.Application`, `org.cirqlizr.configuration`
+| Domain Calculation | Calculates the (logical) coordinates and shapes
+of Segments and their sizes, connections and connection-nodes.
+| `org.cirqlizr.domain`
+
+| Domain Data | Provides data in either numerical or textual format to
+the calculation.
+| `org.cirqlirz.domain.data`
+
+| Graphical Output | Creates either an image on the screen (by using a UI toolkit
+  like Java2D or JavaFX) or an image file (e.g. -><<processing>> or -><<SVG>>)
+| `org.cirqlirz.ui`
+|===
+
+
+=== Whitebox Level-2
+
+
 [[cirqulizer-whitebox]]
-.Cirqulizer Whitebox (internal design)
+.Cirqulizer Whitebox Level-2 (detailed design)
 image::cirqlizr-model.png[width="80%"]
 
 [cols="1a,3a", options="header"]
-.Cirqulizer Building Blocks
+.Cirqulizer Level-2 Building Blocks
 |===
 | Name | Explanation
 
@@ -124,10 +157,17 @@ with its two ConnectionNodes and the Bezier control point.
 
 === Angles, Degress and Radians
 
+// TODO
+
 [[bezier-curves]]
 === Bezier Curves
 
+// TODO
+
+
 === Building kbd:[cirQlizr]
+
+// TODO
 
 
 === Configuration of kbd:[cirQlizr]
@@ -146,6 +186,12 @@ JavaFX, SVG and Processing without code changes to its core.
 ==== Fundamental Graphics Primitives
 // TODO
 
+* Angle
+* Arc
+* Shape (Rectangle, Ellipse)
+* Line and (Bezier) Curve
+
+
 ==== Java2D
 
 ==== Processing
@@ -160,6 +206,7 @@ POO:: Point of origin (in a coordinate system)
 value-set:: The set of (distinct!) values that are part of the data to be visualized.
 In case of numbers, the value-set consists of the digits from 0 to 9.
 
+[[processing]]
 https://processing.org/[Processing]:: From their website:
 "Processing is a flexible software sketchbook and a language for
 learning how to code within the context of visual arts."
@@ -168,3 +215,8 @@ A domain-specific language plus corresponding development and runtime tools to
 describe and implement graphics, both in 2D and 3D. Processing is implemented
 in Java and is available for JavaScript too. kbd:[cirQlizr] uses the Processing language
 as one output format.
+
+[[svg]]
+http://www.w3.org/Graphics/SVG/[SVG]:: Scalable Vector Graphics.
+SVG is a markup language for describing two-dimensional
+graphics.
