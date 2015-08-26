@@ -134,6 +134,25 @@ TODO: explain coordinate transformation
 A Connection can be a (currently quadratic) <<bezier-curves,Bezier curve>> or
 a straight line.
 
+
+== Runtime Scenarios
+=== Top-Level Scenario
+
+
+[[top-leve-scenario]]
+.Cirqulizer Scenario (Top-Level)
+image::top-level-scenario.png[width="80%"]
+
+[cols="1a,3a", options="header"]
+|===
+| Interaction | Explanation
+| main        | call main method of class `Application`
+| init configuration | parse command line, read configuration file
+  and create `Configuration` object
+| 
+|===
+
+
 == Concepts
 
 === Domain Terminology
