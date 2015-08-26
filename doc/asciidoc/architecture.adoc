@@ -103,7 +103,7 @@ the calculation.
 
 [[cirqulizer-whitebox]]
 .Cirqulizer Whitebox Level-2 (detailed design)
-image::cirqlizr-model.png[width="80%"]
+image::building-blocks-level-2.png[width="80%"]
 
 [cols="1a,3a", options="header"]
 .Cirqulizer Level-2 Building Blocks
