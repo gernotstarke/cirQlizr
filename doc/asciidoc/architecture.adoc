@@ -153,15 +153,18 @@ image::top-level-scenario.png[width="80%"]
 e.g. is the available data sufficient to create the
 configured number of connections?
 | init segments and connections
-| two collections have to be created:
+| two collections have to be created: (see <<domain-terms>> for details)
 
 * segments (with their coordinates and sizes (extends)), independend of any connections.
 * connections - for which we need the connectionNodes on the respective segments.
+| show | create the visual representation in one of the supported UI technologies,
+e.g. Java2D, JavaFX, <<Processing, processing>> or <<svg,SVG>>.
 |===
 
 
 == Concepts
 
+[[domain-terms]]
 === Domain Terminology
 
 [[coordinates]]
