@@ -149,7 +149,14 @@ image::top-level-scenario.png[width="80%"]
 | main        | call main method of class `Application`
 | init configuration | parse command line, read configuration file
   and create `Configuration` object
-| 
+| check configuration | simple plausibility checks of domain-configuration,
+e.g. is the available data sufficient to create the
+configured number of connections?
+| init segments and connections
+| two collections have to be created:
+
+* segments (with their coordinates and sizes (extends)), independend of any connections.
+* connections - for which we need the connectionNodes on the respective segments.
 |===
 
 
