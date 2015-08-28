@@ -2,7 +2,7 @@
 :toclevels: 4
 :toc-position: left
 
-= image:./images/cirQlizr-logo.png[CIRQLIZR, 70%]
+= image:./images/cirQlizr-logo.png[CIRQLIZR, 60%]
 
 :numbered!:
 == Architecture Documentation
@@ -13,7 +13,7 @@
 :date: {docdate}
 :numbered:
 
-Here you (will soon) find an overview of the internal
+Here you find an overview of the internal
 design/architecture of kbd:[cirQlizr].
 
 [small]#Version of {docdate}#
@@ -44,7 +44,7 @@ implement (a subclass of) a DataProvider or supply data in csv or text file.
 
 * Java2D
 * JavaFX
-* SVG
+* <<svg, SVG>>
 * <<Processing>>
 
 | Strictly separate _domain_ from _technical_ components within
