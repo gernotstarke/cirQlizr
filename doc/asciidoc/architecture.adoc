@@ -32,6 +32,9 @@ Prerequisites: Java runtime.
 . A user wants to visualize own data in circular manner. She can either
 implement (a subclass of) a DataProvider or supply data in csv or text file.
 
+. A software developer wants to understand the architecture of kbd:[cirQlizr],
+its internal structures and crosscutting concepts.
+
 === Quality Goals and Solution Approaches
 
 [options="header", cols="1,2,4a,4a"]
@@ -48,13 +51,15 @@ implement (a subclass of) a DataProvider or supply data in csv or text file.
 * <<Processing>>
 
 | Strictly separate _domain_ from _technical_ components within
-the software design.
+the software design, so UI-technology can be changed without modification
+to domain parts.
 
 | 2        | Flexibility
 | Details of output devices (like resolution), number of lines/connections,
 colors etc. can be configured.
-| File-based configuration and Configuration class.
+| File-based configuration, handled by `Configuration` class.
 |===
+
 
 == Solution Approach
 
@@ -84,6 +89,7 @@ image::cirqlizr-overview.png[width="70%"]
 | Application Controller  | Creates a valid configuration and
 instantiates the domain- and technical components.
 | `org.cirqlizr.Application`, `org.cirqlizr.configuration`
+
 | Domain Calculation | Calculates the (logical) coordinates and shapes
 of Segments and their sizes, connections and connection-nodes.
 | `org.cirqlizr.domain`
@@ -92,9 +98,14 @@ of Segments and their sizes, connections and connection-nodes.
 the calculation.
 | `org.cirqlirz.domain.data`
 
-| Graphical Output | Creates either an image on the screen (by using a UI toolkit
-  like Java2D or JavaFX) or an image file (e.g. -><<processing>> or -><<SVG>>)
+| Graphical Output
+|
+* Either renders an image on the screen (by using a UI toolkit
+  like Java2D or JavaFX) or creates an image file (e.g. -><<processing>> or -><<SVG>>)
+* Transforms logical to physical -><<coordinates>>.
+
 | `org.cirqlirz.ui`
+
 |===
 
 
@@ -121,16 +132,16 @@ Correspond to elements of the value-set.
 === Domain Parts
 The classes shown in blue within figure <<cirqulizer-whitebox>> belong to the
 technology-neutral domain-part of kbd:[cirQlizr]. All domain calculations
-are performed within a purely mathematical coordinate system (with resolution or
-currently 1000 units) and later transformed into one or more
-technical coordinate systems having arbitrary, configurable resolutions.
+are performed within a purely mathematical coordinate system
+(with a resolution of currently 1000 units) and later transformed into one or more
+technical coordinate systems having configurable resolutions.
 
 Section <<coordinates, Concepts/Coordinate-Systems>> explains the details
 of this _separation of concern_.
 
 TODO: explain coordinate transformation
 
-=== Connection
+==== Connection
 A Connection can be a (currently quadratic) <<bezier-curves,Bezier curve>> or
 a straight line.
 
