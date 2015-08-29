@@ -32,3 +32,6 @@ circulizr-model.vpp.bak
 *.iml
 readme.html
 cirqlizr-model.vpp.working
+cirqlizr-model.vpp.bak
+*.working2
+*.working3
