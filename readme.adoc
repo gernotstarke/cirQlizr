@@ -153,7 +153,7 @@ University of Utah]
 
 and helped myself with a small script to convert the plain format to +
 comma-separated digits useable as static ArrayList initializer: +
-(see package `org.cirqlizr.domain.numbers`)
+(see package `org.cirqlizr.domain.data.numeric`)
 
 [source, groovy]
 .Convert csv to ArrayList initializer
