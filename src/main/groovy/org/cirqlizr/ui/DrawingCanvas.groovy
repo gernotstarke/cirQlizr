@@ -25,13 +25,12 @@
 package org.cirqlizr.ui
 
 import org.cirqlizr.configuration.Configuration
-import org.cirqlizr.domain.Circle
 import org.cirqlizr.domain.Connection
 import org.cirqlizr.domain.Coordinate2D
 import org.cirqlizr.domain.ConnectionNode
 import org.cirqlizr.CircularVisualizer
 import org.cirqlizr.configuration.RunMode
-import org.cirqlizr.domain.numbers.Pair
+import org.cirqlizr.domain.data.Pair
 
 import javax.swing.JPanel
 import java.awt.BasicStroke
@@ -183,7 +182,7 @@ class DrawingCanvas extends JPanel {
     }
 
     /*
-    draw line for a single getPair of numbers
+    draw line for a single getPair of numeric
      */
 
     private void drawConnectionForNumberPair(Graphics2D g2d, int fromDigit, int toDigit) {

@@ -26,7 +26,7 @@ package org.cirqlizr
 import org.cirqlizr.configuration.Configuration
 import org.cirqlizr.configuration.RunMode
 import org.cirqlizr.domain.Segment
-import org.cirqlizr.domain.numbers.SpecialNumber
+import org.cirqlizr.domain.data.SpecialNumber
 import org.cirqlizr.ui.CirqlizrColor
 
 import java.util.logging.Logger

@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.cirqlizr.domain.numbers
+package org.cirqlizr.domain.data
 
 // converts a number represented as GString to an ArrayList-able
 // representation, that can be pasted into the Pi-class-source...

@@ -21,14 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package org.cirqlizr.domain.numbers
+package org.cirqlizr.domain.data
 
 // see end-of-file for license information
 
 // thanx to
 class Pi extends SpecialNumber {
 
-    private final static ArrayList<Integer> ALL_KNOWN_DIGITS =
+    private final static ArrayList<Integer> KNOWN_DIGITS =
             [ 3,1,4,1,5,9,2,6,5,3,5,8,9,7,9,3,2,3,8,4,6,2,6,4,3,3,8,3,2,7,9,5,0,2,8,8,4,1,9,7,1,6,9,3,9,
               9,3,7,5,1,0,5,8,2,0,9,7,4,9,4,4,5,9,2,3,0,7,8,1,6,4,0,6,2,8,6,2,0,8,9,9,8,6,2,8,0,3,4,8,2,5,
               3,4,2,1,1,7,0,6,7,9,8,2,1,4,8,0,8,6,5,1,3,2,8,2,3,0,6,6,4,7,0,9,3,8,4,4,6,0,9,5,5,0,5,8,2,
@@ -119,7 +119,7 @@ class Pi extends SpecialNumber {
 
         name = "\u03c0";
 
-        MAX_AVAILABLE_DIGITS = ALL_KNOWN_DIGITS.size()
+        MAX_AVAILABLE_DIGITS = KNOWN_DIGITS.size()
 
         // avoid misconfiguration
         assert precision > 0 // zero digits make no sense at all
@@ -128,7 +128,7 @@ class Pi extends SpecialNumber {
 
         if (precision <= MAX_AVAILABLE_DIGITS) {
             this.NUMBER_OF_DIGITS = precision
-            this.digits = ALL_KNOWN_DIGITS[0..precision-1]
+            this.digits = KNOWN_DIGITS[0..precision-1]
         }
         // else throw new MisconfigurationException("illegal precision ${precision}")
 

@@ -1,4 +1,4 @@
-package org.cirqlizr.domain.numbers
+package org.cirqlizr.domain.data
 
 class TestNumber extends SpecialNumber {
 

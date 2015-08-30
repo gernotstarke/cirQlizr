@@ -1,7 +1,7 @@
 package org.cirqlizr.configuration
 
 import org.cirqlizr.domain.ConnectionStyle
-import org.cirqlizr.domain.numbers.SpecialNumber
+import org.cirqlizr.domain.data.SpecialNumber
 
 import java.awt.Color
 
@@ -18,7 +18,7 @@ class Configuration {
     // runmode must not be modified at runtime
     final RunMode RUNMODE
 
-    // default: valueSet consists of all digits to visualize numbers
+    // default: valueSet consists of all digits to visualize numeric
     // needs to be List (not Set), as we need indexed access due to SEGMENT_EXTEND_ANGLES
     // needs to have size() > 1
     List<String> VALUESET // ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
@@ -216,7 +216,7 @@ class Configuration {
 
 
     private boolean isValidSpecialNumber(potentialValue) {
-        return ((potentialValue instanceof org.cirqlizr.domain.numbers.SpecialNumber))
+        return ((potentialValue instanceof SpecialNumber))
     }
 
 }
