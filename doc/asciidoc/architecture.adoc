@@ -109,42 +109,7 @@ the calculation.
 |===
 
 
-=== <Level-2> Domain
-
-
-[[cirqulizer-whitebox]]
-.Cirqulizer Whitebox Level-2 (detailed design)
-image::building-blocks-level-2.png[width="80%"]
-
-[cols="1a,3a", options="header"]
-.Cirqulizer Level-2 Building Blocks
-|===
-| Name | Explanation
-
-| ConnectionNode  | A point belonging to a -> Segment where a ->Connection begins
-or ends. ConnectionNodes are evenly distributed along their Segment.
-
-| Segment | Part of the circle, associated to zero or more ->Connections.
-Correspond to elements of the value-set.
-
-|===
-
-==== Domain Parts
-The classes shown in blue within figure <<cirqulizer-whitebox>> belong to the
-technology-neutral domain-part of kbd:[cirQlizr]. All domain calculations
-are performed within a purely mathematical coordinate system
-(with a resolution of currently 1000 units) and later transformed into one or more
-technical coordinate systems having configurable resolutions.
-
-Section <<coordinates, Concepts/Coordinate-Systems>> explains the details
-of this _separation of concern_.
-
-TODO: explain coordinate transformation
-
-==== Connection
-A Connection can be a (currently quadratic) <<bezier-curves,Bezier curve>> or
-a straight line.
-
+include::cqlzr-domain.adoc[]
 
 === <Level-2> Graphical Output
 
@@ -251,7 +216,7 @@ JavaFX, SVG and Processing without code changes to its core.
 ==== Java2D
 
 ==== Processing
-The https://processing.org/reference/[Processing language] contains many
+The https://processing.org/reference/[Processing language^] contains many
 constructs known from UI toolkits like Java2D.
 
 == Glossary of Terms
@@ -263,7 +228,7 @@ value-set:: The set of (distinct!) values that are part of the data to be visual
 In case of numbers, the value-set consists of the digits from 0 to 9.
 
 [[processing]]
-https://processing.org/[Processing]:: From their website:
+https://processing.org/[Processing]:: Programming language to create graphics. From their website:
 "Processing is a flexible software sketchbook and a language for
 learning how to code within the context of visual arts."
 

@@ -1,0 +1,47 @@
+=== <Level-2> Domain
+
+The classes shown in blue within figure <<cirqulizer-whitebox>> belong to the
+technology-neutral domain-part of kbd:[cirQlizr].
+
+A few noteworthy aspects:
+
+. Data (e.g. digits or others) are handled via <<`Data Provider`>> instances.
+. Domain Calculations: All domain calculations
+are performed within a purely mathematical coordinate system
+(with a resolution of currently 1000 units) and later transformed into one or more
+technical coordinate systems having configurable resolutions.
+
+Section <<coordinates, Concepts/Coordinate-Systems>> explains the details
+of this _separation of concern_.
+
+TODO: explain coordinate transformation
+
+
+[[cirqulizer-domain-whitebox]]
+.Cirqulizer Domain
+image::building-blocks-level-2.png[width="80%"]
+
+[cols="1a,3a", options="header"]
+.Cirqulizer Level-2 Building Blocks
+|===
+| Name | Explanation
+
+| ConnectionNode  | A point belonging to a -> Segment where a ->Connection begins
+or ends. ConnectionNodes are evenly distributed along their Segment.
+
+| Segment | Part of the circle, associated to zero or more ->Connections.
+Correspond to elements of the value-set.
+
+|===
+
+
+==== Connection
+A Connection can be a (currently quadratic) <<bezier-curves,Bezier curve>> or
+a straight line.
+
+
+[[data-provider]]
+===== &raquo;interface&laquo; Data Provider
+
+Provides
+
