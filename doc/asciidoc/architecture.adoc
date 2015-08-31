@@ -98,7 +98,7 @@ of Segments and their sizes, connections and connection-nodes.
 the calculation.
 | `org.cirqlirz.domain.data`
 
-| Graphical Output
+| <<graphical-output,Graphical Output>>
 |
 * Either renders an image on the screen (by using a UI toolkit
   like Java2D or JavaFX) or creates an image file (e.g. -><<processing>> or -><<SVG>>)
@@ -109,7 +109,7 @@ the calculation.
 |===
 
 
-=== Whitebox Level-2
+=== <Level-2> Domain
 
 
 [[cirqulizer-whitebox]]
@@ -129,7 +129,7 @@ Correspond to elements of the value-set.
 
 |===
 
-=== Domain Parts
+==== Domain Parts
 The classes shown in blue within figure <<cirqulizer-whitebox>> belong to the
 technology-neutral domain-part of kbd:[cirQlizr]. All domain calculations
 are performed within a purely mathematical coordinate system
@@ -144,6 +144,22 @@ TODO: explain coordinate transformation
 ==== Connection
 A Connection can be a (currently quadratic) <<bezier-curves,Bezier curve>> or
 a straight line.
+
+
+=== <Level-2> Graphical Output
+
+
+[[cirqulizer-graphics-level-2]]
+.Cirqulizer Graphics Level-2 (detailed design)
+image::cqlzr-graphics-level-2.png[width="80%"]
+
+[cols="1a,3a", options="header"]
+.Cirqulizer Graphics Level-2 Building Blocks
+|===
+| Name | Explanation
+
+
+|===
 
 
 == Runtime Scenarios
