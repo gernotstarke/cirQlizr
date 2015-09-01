@@ -66,6 +66,10 @@ class Configuration {
     // thickness of connection
     Double STROKE_WIDTH
 
+    // show bezier-control-points as white dot
+    Boolean SHOW_BCP
+
+
     // if SHOW_LEGEND == true, distinct legend will be drawn
     // else segment-names will be drawn close to segments
     Boolean SHOW_LEGEND
