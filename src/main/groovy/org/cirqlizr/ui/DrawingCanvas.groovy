@@ -24,30 +24,23 @@
 
 package org.cirqlizr.ui
 
-import org.cirqlizr.configuration.Configuration
-import org.cirqlizr.domain.Connection
-import org.cirqlizr.domain.Coordinate2D
-import org.cirqlizr.domain.ConnectionNode
 import org.cirqlizr.CircularVisualizer
+import org.cirqlizr.configuration.Configuration
 import org.cirqlizr.configuration.RunMode
+import org.cirqlizr.domain.Connection
+import org.cirqlizr.domain.ConnectionNode
+import org.cirqlizr.domain.Coordinate2D
 import org.cirqlizr.domain.data.Pair
 
-import javax.swing.JPanel
-import java.awt.BasicStroke
-import java.awt.Color
-import java.awt.Font
-import java.awt.FontMetrics
-import java.awt.Graphics
-import java.awt.Graphics2D
-import java.awt.RenderingHints
+import javax.swing.*
+import java.awt.*
 import java.awt.font.TextAttribute
 import java.awt.geom.Arc2D
 import java.awt.geom.Ellipse2D
 import java.awt.geom.Line2D
 import java.awt.geom.QuadCurve2D
+import java.util.List
 import java.util.logging.Logger
-
-
 
 class DrawingCanvas extends JPanel {
 
@@ -64,7 +57,6 @@ class DrawingCanvas extends JPanel {
 
     private Integer LEGEND_WIDTH = 40
 
-
     // entry point to the "domain" - in DDD-terms: AggregateRoot
     private CircularVisualizer nv
 
@@ -73,7 +65,6 @@ class DrawingCanvas extends JPanel {
 
 
     private static final Logger LOGGER = Logger.getLogger(DrawingCanvas.class.getName())
-
 
 
     DrawingCanvas(int x_resolution, int y_resolution, CircularVisualizer numberVisualizer, Configuration config) {
@@ -94,7 +85,7 @@ class DrawingCanvas extends JPanel {
         assert X_CANVAS_SIZE > 1
         assert Y_CANVAS_SIZE > 1
 
-        setBackground( configuration.BACKGROUND_COLOR )
+        setBackground(configuration.BACKGROUND_COLOR)
 
         TRANSLATION_OFFSET = Math.min(X_CANVAS_SIZE, Y_CANVAS_SIZE - configuration.MARGIN).intdiv(2)
 
@@ -152,12 +143,11 @@ class DrawingCanvas extends JPanel {
     }
 
 
-    private void drawDotAtCoordinate( Graphics2D g2D, Coordinate2D coord) {
-        g2D.setPaint( Color.white)
-        Ellipse2D nodeCircle = new Ellipse2D.Double( coord.getX()-3, coord.getY()-3, 6,6)
-        g2D.fill( nodeCircle)
+    private void drawDotAtCoordinate(Graphics2D g2D, Coordinate2D coord) {
+        g2D.setPaint(Color.white)
+        Ellipse2D nodeCircle = new Ellipse2D.Double(coord.getX() - 3, coord.getY() - 3, 6, 6)
+        g2D.fill(nodeCircle)
     }
-
 
     /*
    * draw the lines for all pairs
@@ -205,10 +195,10 @@ class DrawingCanvas extends JPanel {
                 bezierControlPoint.getY(),
                 toNode.coordinate.getX(),
                 toNode.coordinate.getY())
-                )
+        )
 
         // show BCP only if configured
-        if (configuration.SHOW_BCP) drawDotAtCoordinate( g2d, bezierControlPoint)
+        if (configuration.SHOW_BCP) drawDotAtCoordinate(g2d, bezierControlPoint)
         //g2d.draw(new Line2D.Double(
         //        nv.segment[fromDigit].connectionNode[fromConnectionNodeIndex].coordinate.toPoint(),
         //        nv.segment[toDigit].connectionNode[toConnectionNodeIndex].coordinate.toPoint()))
@@ -218,9 +208,6 @@ class DrawingCanvas extends JPanel {
 
         //LOGGER.info "draw line from $fromDigit (${segment[fromDigit].connectionNode[pairIndex]}"
     }
-
-
-
 
     /*
     * draw the legend
@@ -240,20 +227,45 @@ class DrawingCanvas extends JPanel {
                     (Y_CANVAS_SIZE - TRANSLATION_OFFSET - 2 * configuration.MARGIN - (digit + 1) * 35), 30, 30)
 
             // show corresponding digit
-            g2d.drawString(digit.toString(), (X_CANVAS_SIZE - TRANSLATION_OFFSET - 20),
-                    (Y_CANVAS_SIZE - TRANSLATION_OFFSET - 2 * configuration.MARGIN - digit * 35 - 14))
+            g2d.drawString(digit.toString(), (X_CANVAS_SIZE - TRANSLATION_OFFSET - 70),
+                    (Y_CANVAS_SIZE - TRANSLATION_OFFSET - 2 * configuration.MARGIN - digit * 35 - 13))
+
+            if (configuration.SHOW_LEGEND_STATISTICS) {
+                drawLegendStatistics( g2d, digit )
+            }
         }
+    }
+
+    private void drawLegendStatistics( Graphics2D g2d, int digit) {
+         g2d.drawString( "stat", (X_CANVAS_SIZE - TRANSLATION_OFFSET - 20),
+                 (Y_CANVAS_SIZE - TRANSLATION_OFFSET - 2 * configuration.MARGIN - digit * 35 - 13))
     }
 
 
     private void initLegendFont(Graphics2D g2d) {
-        Font font = new Font(Font.SANS_SERIF, Font.TRUETYPE_FONT, 16);
+        Font font = new Font(Font.SANS_SERIF, Font.TRUETYPE_FONT + Font.BOLD, 16);
         Hashtable<TextAttribute, Object> map =
                 new Hashtable<TextAttribute, Object>();
 
-
         // find contrasting color so legend font will always be readable
-        Color contrastingColor = CirqlizrColor.findContrastingColorFor( configuration.BACKGROUND_COLOR )
+        Color contrastingColor = CirqlizrColor.findContrastingColorFor(configuration.BACKGROUND_COLOR)
+
+        /* This colour applies just to the font, not other rendering */
+
+        map.put(TextAttribute.FOREGROUND, contrastingColor);
+
+        font = font.deriveFont(map);
+        g2d.setFont(font);
+    }
+
+
+    private void initLegendStatisticFont(Graphics2D g2d) {
+        Font font = new Font(Font.SANS_SERIF, Font.TRUETYPE_FONT, 9);
+        Hashtable<TextAttribute, Object> map =
+                new Hashtable<TextAttribute, Object>();
+
+        // find contrasting color so legend statistic font will always be readable
+        Color contrastingColor = CirqlizrColor.findContrastingColorFor(configuration.BACKGROUND_COLOR)
 
         /* This colour applies just to the font, not other rendering */
 
@@ -352,11 +364,15 @@ class DrawingCanvas extends JPanel {
         // display project name & URL
         showInfoLine(g2d)
 
-
         // the actual line drawing between Pairs
         drawLines(g2d)
 
-        drawLegend(g2d)
+        // draw legend, if configured
+        if (configuration.SHOW_LEGEND) {
+            drawLegend(g2d)
+        }
+
+
         drawSegments(g2d)
 
         // if in debug or devel mode, draw raster

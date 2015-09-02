@@ -23,7 +23,7 @@ class Configuration {
     // needs to have size() > 1
     List<String> VALUESET // ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
-    // TODO: rename number to pairProvider
+    // TODO: rename number to dataProvider
     SpecialNumber NUMBER
     Integer       PRECISION
 
@@ -108,6 +108,8 @@ class Configuration {
 
         configureConnections( config )
 
+        configureLegend( config )
+
         configureResolution( config )
 
         configureLayout( config )
@@ -138,6 +140,10 @@ class Configuration {
         this.INTERNAL_RESOLUTION = (Integer) validNumber( config.resolution.internal )
     }
 
+    private void configureLegend( config ) {
+        this.SHOW_LEGEND = (Boolean) validBoolean( config.legend.show )
+        this.SHOW_LEGEND_STATISTICS = (Boolean) validBoolean( config.legend.statistics )
+    }
 
     private void configureConnections( config ) {
         this.STROKE_WIDTH = (Double) validNumber( config.connections.stroke_width)
