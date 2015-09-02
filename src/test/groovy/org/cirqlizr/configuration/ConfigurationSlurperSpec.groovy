@@ -106,7 +106,7 @@ class ConfigurationSlurperSpec extends Specification {
 
     def "can convert configuration string to class instance by no-arc constructor"() {
         given:
-        def specialNumberConfig = """ number="Pi"  """
+        def specialNumberConfig = """ number="org.cirqlizr.domain.data.Pi"  """
         def config = new ConfigSlurper().parse(specialNumberConfig)
 
         when:
@@ -115,7 +115,7 @@ class ConfigurationSlurperSpec extends Specification {
 
         then:
         // found the right configuration string
-        config.number == "Pi"
+        config.number == "org.cirqlizr.domain.data.Pi"
 
         // we created an instance of the correct class
         [Pi.class, SpecialNumber.class].each {
@@ -130,7 +130,7 @@ class ConfigurationSlurperSpec extends Specification {
 
     def "can convert configuration string to class instance by specific constructor"() {
         given:
-        def specialNumberConfig = """ number="Pi"  """
+        def specialNumberConfig = """ number="org.cirqlizr.domain.data.Pi"  """
         def config = new ConfigSlurper().parse(specialNumberConfig)
         def precision = 7
 
