@@ -143,6 +143,9 @@ class Configuration {
         this.STROKE_WIDTH = (Double) validNumber( config.connections.stroke_width)
 
         this.CONNECTION_STYLE = config.connections.style as ConnectionStyle
+
+        // show bezier control point(s)
+        this.SHOW_BCP = (Boolean) validBoolean( config.connections.show_bcp)
     }
 
 

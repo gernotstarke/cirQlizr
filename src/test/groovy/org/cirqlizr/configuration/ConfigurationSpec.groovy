@@ -15,7 +15,7 @@ class ConfigurationSpec extends Specification {
 
     valueSet = ["0", "1", "2", "3"]
 
-    number="Pi"
+    number="org.cirqlizr.domain.data.Pi"
     precision=123
 
     nr_of_connections_to_show = 42
@@ -53,6 +53,9 @@ class ConfigurationSpec extends Specification {
         style = "BEZIER" // "STRAIGHT"
 
         stroke_width = 0.75d
+
+        // show bezier-control-points as white dot
+        show_bcp = false
     }
 
 
@@ -108,13 +111,14 @@ class ConfigurationSpec extends Specification {
 
           20 == configuration.MARGIN
 
+        false == configuration.SHOW_BCP
 
     }
 
 
     def "can convert configuration string to SpecialNumber instance"() {
         expect:
-        Configuration.convertStringToSpecialNumberInstance( "Pi", 10) instanceof SpecialNumber
+        Configuration.convertStringToSpecialNumberInstance( "org.cirqlizr.domain.data.Pi", 10) instanceof SpecialNumber
     }
 }
 
