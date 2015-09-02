@@ -207,10 +207,12 @@ class DrawingCanvas extends JPanel {
                 toNode.coordinate.getY())
                 )
 
-        drawDotAtCoordinate( g2d, bezierControlPoint)
+        // show BCP only if configured
+        if (configuration.SHOW_BCP) drawDotAtCoordinate( g2d, bezierControlPoint)
         //g2d.draw(new Line2D.Double(
         //        nv.segment[fromDigit].connectionNode[fromConnectionNodeIndex].coordinate.toPoint(),
         //        nv.segment[toDigit].connectionNode[toConnectionNodeIndex].coordinate.toPoint()))
+
 
         nv.segment[toDigit].advanceToNextAvailableConnectionNode()
 
