@@ -230,15 +230,18 @@ class Configuration {
         return ((potentialValue instanceof SpecialNumber))
     }
 
+    /*
+    creates a Color object...
+    reflection is nasty but sometimes very helpful, thanx:
+    http://stackoverflow.com/questions/2854043/converting-a-string-to-color-in-java
+     */
     private void configureColors(config) {
         String colorName = (String) config.colors.background
         def validColorNames = ["WHITE", "LIGHT_GRAY", "GRAY", "DARK_GRAY", "BLACK"]
 
-        if (colorName in validColorNames) {
-            this.BACKGROUND_COLOR = (Color)
-                    Class.forName("java.awt.Color").getField(colorName)
-        }
-        else this.BACKGROUND_COLOR = Color.BLACK
+        this.BACKGROUND_COLOR = (colorName in validColorNames) ?
+                (Color) Class.forName("java.awt.Color").getField(colorName).get(null)
+                : Color.BLACK
 
     }
 }
