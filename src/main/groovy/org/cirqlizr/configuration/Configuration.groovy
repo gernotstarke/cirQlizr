@@ -114,7 +114,7 @@ class Configuration {
         configureLayout(config)
 
 
-        this.BACKGROUND_COLOR = getValidColor((String) config.colors.background)
+        configureColors(config)
 
         this.TITLE_TEXT = "CIRCULIZR - ${this.NR_OF_CONNECTIONS_TO_SHOW} digits of ${this.NUMBER.name}"
     }
@@ -230,13 +230,15 @@ class Configuration {
         return ((potentialValue instanceof SpecialNumber))
     }
 
-    private Color getValidColor( colorName) {
+    private void configureColors(config) {
+        String colorName = (String) config.colors.background
         def validColorNames = ["WHITE", "LIGHT_GRAY", "GRAY", "DARK_GRAY", "BLACK"]
 
         if (colorName in validColorNames) {
-            return Class.forName("java.awt.Color").getField(colorName)
+            this.BACKGROUND_COLOR = (Color)
+                    Class.forName("java.awt.Color").getField(colorName)
         }
-            else return Color.BLACK
+        else this.BACKGROUND_COLOR = Color.BLACK
 
     }
 }
