@@ -230,15 +230,20 @@ class DrawingCanvas extends JPanel {
             g2d.drawString(digit.toString(), (X_CANVAS_SIZE - TRANSLATION_OFFSET - 70),
                     (Y_CANVAS_SIZE - TRANSLATION_OFFSET - 2 * configuration.MARGIN - digit * 35 - 13))
 
-            if (configuration.SHOW_LEGEND_STATISTICS) {
-                drawLegendStatistics( g2d, digit )
-            }
+        }
+
+        if (configuration.SHOW_LEGEND_STATISTICS) {
+            drawLegendStatistics(g2d)
         }
     }
 
-    private void drawLegendStatistics( Graphics2D g2d, int digit) {
-         g2d.drawString( "stat", (X_CANVAS_SIZE - TRANSLATION_OFFSET - 20),
-                 (Y_CANVAS_SIZE - TRANSLATION_OFFSET - 2 * configuration.MARGIN - digit * 35 - 13))
+    private void drawLegendStatistics(Graphics2D g2d ) {
+        initLegendStatisticFont(g2d)
+        (0..9).each { digit ->
+            String connectionsPerSegment = nv.segment[digit].connectionNode.size().toString()
+            g2d.drawString( connectionsPerSegment, (X_CANVAS_SIZE - TRANSLATION_OFFSET - 20),
+                    (Y_CANVAS_SIZE - TRANSLATION_OFFSET - 2 * configuration.MARGIN - digit * 35 - 13))
+        }
     }
 
 

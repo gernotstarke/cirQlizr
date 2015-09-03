@@ -3,7 +3,8 @@ package org.cirqlizr.configuration
 import org.cirqlizr.domain.ConnectionStyle
 import org.cirqlizr.domain.data.SpecialNumber
 
-import java.awt.Color
+import java.awt.*
+import java.util.List
 
 /**
  * To make the configuration foolproof :-)
@@ -25,7 +26,7 @@ class Configuration {
 
     // TODO: rename number to dataProvider
     SpecialNumber NUMBER
-    Integer       PRECISION
+    Integer PRECISION
 
     // how many connections (==lines) to show?
     Integer NR_OF_CONNECTIONS_TO_SHOW
@@ -36,9 +37,8 @@ class Configuration {
     // window title
     String TITLE_TEXT = "cirQlizr"
 
-
     // background color of canvas/drawing-area
-    Color BACKGROUND_COLOR
+    Color BACKGROUND_COLOR = Color.LIGHT_GRAY
 
     // what is the default angle (distance) between segments?
     Double SEGMENT_PADDING_ANGLE_DEG
@@ -69,7 +69,6 @@ class Configuration {
     // show bezier-control-points as white dot
     Boolean SHOW_BCP
 
-
     // if SHOW_LEGEND == true, distinct legend will be drawn
     // else segment-names will be drawn close to segments
     Boolean SHOW_LEGEND
@@ -97,7 +96,7 @@ class Configuration {
 
         this.VALUESET = (List<String>) validListOfStrings(config.valueSet)
 
-        this.PRECISION = (Integer) validNumber( config.precision )
+        this.PRECISION = (Integer) validNumber(config.precision)
 
         this.NUMBER = convertStringToSpecialNumberInstance(config.number, config.precision)
 
@@ -106,16 +105,16 @@ class Configuration {
 
         configureSegments(config)
 
-        configureConnections( config )
+        configureConnections(config)
 
-        configureLegend( config )
+        configureLegend(config)
 
-        configureResolution( config )
+        configureResolution(config)
 
-        configureLayout( config )
+        configureLayout(config)
 
 
-        this.BACKGROUND_COLOR = Color.DARK_GRAY
+        this.BACKGROUND_COLOR = getValidColor((String) config.colors.background)
 
         this.TITLE_TEXT = "CIRCULIZR - ${this.NR_OF_CONNECTIONS_TO_SHOW} digits of ${this.NUMBER.name}"
     }
@@ -124,36 +123,34 @@ class Configuration {
      * With filename given, read configuration via ConfigSlurper
      * @param filename
      */
-    public Configuration( String filename) {
-        this( new ConfigSlurper().parse(new File('cirQlizr.config').toURL()))
+    public Configuration(String filename) {
+        this(new ConfigSlurper().parse(new File('cirQlizr.config').toURL()))
     }
 
 
-
-    private void configureLayout( config ) {
-        this.MARGIN = (Integer) validNumber( config.layout.margin)
+    private void configureLayout(config) {
+        this.MARGIN = (Integer) validNumber(config.layout.margin)
     }
 
 
-    private void configureResolution( config ) {
-        this.OUTPUT_RESOLUTION = (Integer) validNumber( config.resolution.output )
-        this.INTERNAL_RESOLUTION = (Integer) validNumber( config.resolution.internal )
+    private void configureResolution(config) {
+        this.OUTPUT_RESOLUTION = (Integer) validNumber(config.resolution.output)
+        this.INTERNAL_RESOLUTION = (Integer) validNumber(config.resolution.internal)
     }
 
-    private void configureLegend( config ) {
-        this.SHOW_LEGEND = (Boolean) validBoolean( config.legend.show )
-        this.SHOW_LEGEND_STATISTICS = (Boolean) validBoolean( config.legend.statistics )
+    private void configureLegend(config) {
+        this.SHOW_LEGEND = (Boolean) validBoolean(config.legend.show)
+        this.SHOW_LEGEND_STATISTICS = (Boolean) validBoolean(config.legend.statistics)
     }
 
-    private void configureConnections( config ) {
-        this.STROKE_WIDTH = (Double) validNumber( config.connections.stroke_width)
+    private void configureConnections(config) {
+        this.STROKE_WIDTH = (Double) validNumber(config.connections.stroke_width)
 
         this.CONNECTION_STYLE = config.connections.style as ConnectionStyle
 
         // show bezier control point(s)
-        this.SHOW_BCP = (Boolean) validBoolean( config.connections.show_bcp)
+        this.SHOW_BCP = (Boolean) validBoolean(config.connections.show_bcp)
     }
-
 
 
     private void configureSegments(config) {
@@ -171,15 +168,15 @@ class Configuration {
 
         this.SEGMENT_PADDING_ANGLE_DEG = (Double) validNumber(config.segments.padding_angle)
 
-        this.SEGMENT_CONNECTION_DISTANCE = (Double) validNumber(config.segments.connection_distance )
+        this.SEGMENT_CONNECTION_DISTANCE = (Double) validNumber(config.segments.connection_distance)
 
-        this.SEGMENT_BCP_POO_DISTANCE = (Double) validNumber( config.segments.bcp_poo_distance)
+        this.SEGMENT_BCP_POO_DISTANCE = (Double) validNumber(config.segments.bcp_poo_distance)
 
     }
 
 
-    private void fillSegmentExtendAnglesWithIdenticalValue( extend ) {
-        double theExtendAngle = (Double) validNumber( extend )
+    private void fillSegmentExtendAnglesWithIdenticalValue(extend) {
+        double theExtendAngle = (Double) validNumber(extend)
         SEGMENT_EXTEND_ANGLE = new ArrayList<Double>()
         this.VALUESET.each {
             SEGMENT_EXTEND_ANGLE.add(theExtendAngle)
@@ -194,7 +191,7 @@ class Configuration {
     }
 
 
-    public static List<Double> validListOfDoubles( potentialDoublesList) {
+    public static List<Double> validListOfDoubles(potentialDoublesList) {
         assert potentialDoublesList instanceof java.util.List: "$potentialDoublesList must be of type 'java.util.List', but isn't."
         return (ArrayList<Double>) potentialDoublesList
     }
@@ -220,11 +217,12 @@ class Configuration {
      * @param configuredSpecialNumber
      * @return
      */
-    public static SpecialNumber convertStringToSpecialNumberInstance(String configuredSpecialNumber, Integer precision) {
-        assert precision > 0 : "precision 0 makes no sense - aborted!"
+    public
+    static SpecialNumber convertStringToSpecialNumberInstance(String configuredSpecialNumber, Integer precision) {
+        assert precision > 0: "precision 0 makes no sense - aborted!"
         //this.PRECISION = precision
 
-        return Class.forName(configuredSpecialNumber).newInstance( precision )
+        return Class.forName(configuredSpecialNumber).newInstance(precision)
     }
 
 
@@ -232,6 +230,15 @@ class Configuration {
         return ((potentialValue instanceof SpecialNumber))
     }
 
+    private Color getValidColor( colorName) {
+        def validColorNames = ["WHITE", "LIGHT_GRAY", "GRAY", "DARK_GRAY", "BLACK"]
+
+        if (colorName in validColorNames) {
+            return Class.forName("java.awt.Color").getField(colorName)
+        }
+            else return Color.BLACK
+
+    }
 }
 
 

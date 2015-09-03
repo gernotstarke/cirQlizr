@@ -22,5 +22,6 @@ package org.cirqlizr.domain
 
 enum ConnectionStyle {
     BEZIER,
-    STRAIGHT
+    STRAIGHT,
+    RIBBON
 }
