@@ -240,7 +240,8 @@ class DrawingCanvas extends JPanel {
     private void drawLegendStatistics(Graphics2D g2d ) {
         initLegendStatisticFont(g2d)
         (0..9).each { digit ->
-            String connectionsPerSegment = nv.segment[digit].connectionNode.size().toString()
+
+            String connectionsPerSegment = nv.segment[digit].nrOfConnections()
             g2d.drawString( connectionsPerSegment, (X_CANVAS_SIZE - TRANSLATION_OFFSET - 20),
                     (Y_CANVAS_SIZE - TRANSLATION_OFFSET - 2 * configuration.MARGIN - digit * 35 - 13))
         }

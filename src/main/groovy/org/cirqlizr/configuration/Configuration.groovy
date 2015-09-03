@@ -237,7 +237,7 @@ class Configuration {
      */
     private void configureColors(config) {
         String colorName = (String) config.colors.background
-        def validColorNames = ["WHITE", "LIGHT_GRAY", "GRAY", "DARK_GRAY", "BLACK"]
+        def validColorNames = ["WHITE", "LIGHT_GRAY", "GRAY", "DARK_GRAY", "BLACK", "YELLOW"]
 
         this.BACKGROUND_COLOR = (colorName in validColorNames) ?
                 (Color) Class.forName("java.awt.Color").getField(colorName).get(null)

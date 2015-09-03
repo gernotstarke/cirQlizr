@@ -116,6 +116,15 @@ class Segment {
     }
 
     /**
+     * How many connections does this segment have?
+     * @return
+     */
+    public int nrOfConnections() {
+        return nrOfRequiredConnectionNodes
+    }
+
+
+    /**
      * what is the actual angle for this connectionNode?
      */
     public static double angleForThisConnectionNode(double angleStart, double deltaAngle, int nrOfCurrentConnectionNode) {
@@ -138,6 +147,7 @@ class Segment {
         assert angleExtend >= 0
         return angleExtend / (Math.max(nrOfConnectionNodes, 1) + 1)
     }
+
 
     /**
      * returns a readable version of this segment

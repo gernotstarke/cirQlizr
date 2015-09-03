@@ -123,6 +123,16 @@ class SegmentSpec extends Specification {
         }
     }
 
+    def "nrOfConnections shall return correct value"() {
+        given:
+           Segment s = new Segment(
+                digit: 0,
+                nrOfRequiredConnectionNodes: 0)
+        expect:
+            s.nrOfConnections() == 0
+    }
+
+
     def "calculate delta angle"(int nrOfNodes, double angleExtend, double deltaAngle) {
 
         when:
