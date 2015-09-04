@@ -22,9 +22,8 @@ class ConfigurationSpec extends Specification {
 
 
     colors {
-        // use java.awt.Color names here,
-        // alternatively use hex values...
-        background = DARK_GRAY
+        // use java.awt.Color names here
+        background = "DARK_GRAY"
     }
 
     segments {
