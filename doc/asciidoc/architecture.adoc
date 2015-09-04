@@ -13,13 +13,16 @@
 :date: {docdate}
 :numbered:
 
+[.lead]
 Here you find an overview of the internal
 design/architecture of kbd:[cirQlizr].
 
 [small]#Version of {docdate}#
 
+
 == Introduction and Requirements
-kbd:[cirQlizr] has been primarily build as a private design challenge.
+kbd:[cirQlizr] has originally been build as a private challenge in software
+design.
 
 
 === Basic Usage
@@ -29,13 +32,15 @@ Prerequisites: Java runtime.
 . A user wants to visualize data in circular manner. She configures some parameters
  and starts the system via the command line or the [Gradle] build system.
 
-. A user wants to visualize own data in circular manner. She can either
-implement (a subclass of) a DataProvider or supply data in csv or text file.
+. A user wants to visualize own data in circular manner. She can provide
+data in various ways (e.g. implement a subclass of a `DataProvider` or
+supply data in csv or text file.
 
 . A software developer wants to understand the architecture of kbd:[cirQlizr],
 its internal structures and crosscutting concepts.
 
-=== Quality Goals and Solution Approaches
+
+=== Quality Goals
 
 [options="header", cols="1,2,4a,4a"]
 .Quality-Goals

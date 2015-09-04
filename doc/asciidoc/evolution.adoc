@@ -1,0 +1,58 @@
+= The Evolution of image:./images/cirQlizr-logo.png[CIRQLIZR, 200px]
+
+:imagesdir: ./images
+:experimental:
+:email: gernot.starke@innoq.com
+:date: {docdate}
+
+
+[.lead]
+Here you find the design- and architecture _evolution_ of kbd:[cirQlizr],
+from an unstructured mess to (decide-for-yourself).
+
+[small]#Version of {docdate}.#
+
+== The Quick Hack
+[cols="3,3a"]
+|===
+|image:evolution/structure-v0.png[V-Zero,300]
+| The ealiest version was more of a "slightly structured script"
+than a deliberately engineered system.
+|===
+
+[source,groovy]
+----
+class NumberVisualizer extends JFrame {
+
+        public NumberVisualizer() {
+            add(new Graphic());
+
+            setTitle("Circular Visualization");
+            setSize(400, 400);
+            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        }
+
+        public static void main(String[] args) {
+
+            EventQueue.invokeLater(new Runnable() {
+
+                @Override
+                public void run() {
+                    NumberVisualizer ex = new NumberVisualizer();
+                    ex.setVisible(true);
+                }
+            });
+        }
+    }
+----
+
+The `JFrame` subclass initializes the actual drawing class (`Graphic`),
+everything else is shoved into that poor overburdened Java2D object...
+
+
+== V1: Separating View From Calculations
+[cols="3,3a"]
+|===
+|image:evolution/structure-v1.png[V1,400]
+| We introduced the concept of ConnectionNodes.
+|===
