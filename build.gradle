@@ -50,9 +50,10 @@ asciidoctor {
     //    include "gallery.adoc, architecture.adoc"
     //}
 
-    attributes = [
-            doctype    : 'book',
-            icons      : 'font',
-            sectlink   : true,
-            sectanchors: true]
+  attributes 'source-highlighter': 'coderay',
+             doctype    : 'book',
+             icons      : 'font',
+             sectlink   : true,
+             sectanchors: true,
+             experimental: true
 }

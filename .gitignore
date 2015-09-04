@@ -35,3 +35,5 @@ cirqlizr-model.vpp.working
 cirqlizr-model.vpp.bak
 *.working2
 *.working3
+*.bak
+*bak~?
