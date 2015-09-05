@@ -46,9 +46,9 @@ asciidoctor {
     outputDir "${buildDir}/docs"
     sourceDir "${adocSrcDir}"
 
-    //sources {
-    //    include "gallery.adoc, architecture.adoc"
-    //}
+    sources {
+        include 'gallery.adoc', 'architecture.adoc', 'evolution.adoc'
+    }
 
   attributes 'source-highlighter': 'coderay',
              doctype    : 'book',
