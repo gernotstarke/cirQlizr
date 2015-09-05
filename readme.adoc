@@ -47,12 +47,13 @@ image:https://badge.waffle.io/gernotstarke/circulizr.svg?label=bug&title=Bugs[Bu
 
 === Examples
 
-See our link:doc/asciidoc/gallery{outfilesuffix}[Gallery]
+See our link:doc/asciidoc/gallery{outfilesuffix}[Gallery] with screenshots
+and explanations.
 
 
 | image:pi-original-slice.png[preview, 200]
 
-http://thecreatorsproject.vice.com/blog/visualising-the-infinite-data-of-pie[image credits]
+http://thecreatorsproject.vice.com/blog/visualising-the-infinite-data-of-pie[image by thecreatorsproject]
 
 |===
 
