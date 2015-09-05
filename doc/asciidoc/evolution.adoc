@@ -54,5 +54,15 @@ everything else is shoved into that poor overburdened Java2D object...
 [cols="3,3a"]
 |===
 |image:evolution/structure-v1.png[V1,400]
-| We introduced the concept of ConnectionNodes.
+| We introduced the concept of Segments.
+|===
+
+
+== V-Two: Clarify the Domain
+
+== V-One: Separating View From Calculations
+[cols="3,3a"]
+|===
+|image:evolution/structure-v2.png[V1,500]
+| We modularized the domain.
 |===
