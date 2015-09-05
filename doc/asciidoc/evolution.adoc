@@ -12,6 +12,24 @@ from an unstructured mess to (decide-for-yourself).
 
 [small]#Version of {docdate}.#
 
+[cols="10a,15a,15a,20a,20a,10a"]
+|===
+|image:evolution/structure-v0.png[V0,100]
+|image:evolution/structure-v1.png[V1,150]
+|image:evolution/structure-v2.png[V2,150]
+|image:evolution/structure-v3.png[V3,200]
+|image:evolution/structure-v4.png[V4,200]
+|image:evolution/structure-v5.png[V5,100]
+
+| <<V-Zero>>
+| <<V-One>>
+| <<V-Two>>
+| <<V-Three>>
+|
+| <<V-Five>>
+|===
+
+[[V-Zero]]
 == V-Zero: The Quick Hack
 [cols="3,3a"]
 |===
@@ -50,6 +68,7 @@ The `JFrame` subclass initializes the actual drawing class (`Graphic`),
 everything else is shoved into that poor overburdened Java2D object...
 
 
+[[V-One]]
 == V-One: Separating View From Calculations
 [cols="3,3a"]
 |===
@@ -58,11 +77,48 @@ everything else is shoved into that poor overburdened Java2D object...
 |===
 
 
+[[V-Two]]
 == V-Two: Clarify the Domain
 
-== V-One: Separating View From Calculations
 [cols="3,3a"]
 |===
-|image:evolution/structure-v2.png[V1,500]
-| We modularized the domain.
+|image:evolution/structure-v2.png[V2,600]
+| We modularized the domain and created the first unit-tests.
 |===
+
+
+
+[[V-Three]]
+== V-Three:
+
+[cols="4,3a"]
+|===
+|image:evolution/structure-v3.png[V3,600]
+| We modularized the domain and introduced `DigiNode` as the connection
+of a line with a Segment.
+
+
+|===
+
+
+[[V-Four]]
+== V-Four:
+
+[cols="4,3a"]
+|===
+|image:evolution/structure-v4.png[V4,600]
+| We modularized the domain even further, separated domain from technology.
+
+|===
+
+
+[[V-Five]]
+== V-Five: Top-Level Building Blocks
+
+[cols="3,5a"]
+|===
+|image:evolution/structure-v5.png[V5,300]
+| We introduced a top-level structure with domain-, ui- and application component.
+The whole application is now configurable with a type-safe configuration.
+|===
+
