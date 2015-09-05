@@ -2,7 +2,7 @@
 :toclevels: 4
 :toc-position: left
 
-= image:./images/cirQlizr-logo.png[CIRQLIZR, 60%]
+= image:./images/cirQlizr-logo.jpg[CIRQLIZR, 60%]
 
 :numbered!:
 == Architecture Documentation

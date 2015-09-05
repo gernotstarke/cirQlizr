@@ -1,4 +1,4 @@
-= image:./images/cirQlizr-logo.png[CIRQLIZR, 80%]
+= image:./images/cirQlizr-logo.jpg[CIRQLIZR, 80%]
 
 == Image Gallery
 :imagesdir: ./images
