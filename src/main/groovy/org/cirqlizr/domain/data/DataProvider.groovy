@@ -1,3 +1,5 @@
+// tag::DataProviderInterface[]
+
 package org.cirqlizr.domain.data
 
 
@@ -12,5 +14,6 @@ interface DataProvider {
     public getRelationsForElementNr( int elementNr )
 
 
-
 }
+
+// end::DataProviderInterface[]

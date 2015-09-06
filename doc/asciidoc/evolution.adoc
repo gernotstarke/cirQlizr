@@ -5,6 +5,9 @@
 :email: gernot.starke@innoq.com
 :date: {docdate}
 
+:coresourcepath: ../../src/main/groovy/
+:coretestpath:   ../../src/test/groovy/
+
 
 [.lead]
 Here you find the design- and architecture _evolution_ of kbd:[cirQlizr],
@@ -12,21 +15,24 @@ from an unstructured mess to (decide-for-yourself).
 
 [small]#Version of {docdate}.#
 
-[cols="10a,15a,15a,20a,20a,10a"]
+[cols="10a,15a,15a,20a,20a"]
 |===
 |image:evolution/structure-v0.png[V0,100]
 |image:evolution/structure-v1.png[V1,150]
 |image:evolution/structure-v2.png[V2,150]
 |image:evolution/structure-v3.png[V3,200]
 |image:evolution/structure-v4.png[V4,200]
-|image:evolution/structure-v5.png[V5,100]
 
-| <<V-Zero>>
-| <<V-One>>
-| <<V-Two>>
-| <<V-Three>>
+| <<V-Zero>> | <<V-One>> | <<V-Two>> | <<V-Three>> | <<V-Four>>
+
+|image:evolution/structure-v5.png[V5,100]
+|image:evolution/structure-v6.png[V6,200]
 |
-| <<V-Five>>
+|
+|
+
+| <<V-Five>> | <<V-Six>>|||
+
 |===
 
 [[V-Zero]]
@@ -102,23 +108,45 @@ of a line with a Segment.
 
 
 [[V-Four]]
-== V-Four:
+== V-Four: Configuration and Data-Provider
 
 [cols="4,3a"]
 |===
 |image:evolution/structure-v4.png[V4,600]
-| We modularized the domain even further, separated domain from technology.
+| 1. Introduced `DataProvider` as an abstraction
+for all kinds of data to be visualized.
+
+2. Introduced `Configuration` class: The whole application is now configurable with a type-safe configuration
+with a configuration-file (cirQlizr.config).
 
 |===
 
 
 [[V-Five]]
-== V-Five: Top-Level Building Blocks
+== V-Five: Building Blocks Hierarchy
 
 [cols="3,5a"]
 |===
 |image:evolution/structure-v5.png[V5,300]
-| We introduced a top-level structure with domain-, ui- and application component.
-The whole application is now configurable with a type-safe configuration.
+| We introduced a top-level structure with domain-, ui- and application component, as both the domain
+and UI became quite complex.
+
 |===
 
+
+
+[[V-Six]]
+== V-Six: More Flexibility in Domain
+
+[cols="3,5a"]
+|===
+|image:evolution/structure-v6.png[V6,600]
+| `DataProvider` became more elaborated (see below).
+|===
+
+
+[source, groovy]
+.Interface DataProvider
+----
+include::{coresourcepath}/org/cirqlizr/domain/data/DataProvider.groovy[tags=DataProviderInterface]
+----
