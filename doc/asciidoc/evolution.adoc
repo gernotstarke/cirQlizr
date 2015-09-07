@@ -79,7 +79,8 @@ everything else is shoved into that poor overburdened Java2D object...
 [cols="3,3a"]
 |===
 |image:evolution/structure-v1.png[V1,400]
-| We introduced the concept of Segments.
+| We introduced the concept of Segments, having different colors
+and a distinct size (_extend_).
 |===
 
 
@@ -89,19 +90,31 @@ everything else is shoved into that poor overburdened Java2D object...
 [cols="3,3a"]
 |===
 |image:evolution/structure-v2.png[V2,600]
-| We modularized the domain and created the first unit-tests.
+| We modularized the domain and created the first unit-tests. Color
+and Coordinate become domain-concepts.
+
+The notion of `digiNodes` is introduced, as a `Collection` of
+Java2D points in 2-dimensional space.
 |===
 
 
 
 [[V-Three]]
-== V-Three:
+== V-Three: DigiNodes
 
 [cols="4,3a"]
 |===
 |image:evolution/structure-v3.png[V3,600]
-| We modularized the domain and introduced `DigiNode` as the connection
-of a line with a Segment.
+| We modularized the domain and introduced the `DigiNode` class,
+representing the connection of a line with a Segment (where
+the line will start or end at the corresponding segment).
+
+These nodes have to be evenly distributed along
+segments, which requires the number of nodes-per-segment to be known before
+the digiNode instances can be created.
+
+In addition, we need circular arithmetic to perform these calculations,
+so the circle class had to be enhanced.
 
 
 |===
@@ -114,7 +127,7 @@ of a line with a Segment.
 |===
 |image:evolution/structure-v4.png[V4,600]
 | 1. Introduced `DataProvider` as an abstraction
-for all kinds of data to be visualized.
+for all kinds of data to be visualized (with a simplistic interface).
 
 2. Introduced `Configuration` class: The whole application is now configurable with a type-safe configuration
 with a configuration-file (cirQlizr.config).
@@ -131,6 +144,9 @@ with a configuration-file (cirQlizr.config).
 | We introduced a top-level structure with domain-, ui- and application component, as both the domain
 and UI became quite complex.
 
+_Curved_ connections between `DigiNodes` are drawn as http://pomax.github.io/bezierinfo/[quadratic Bezier] curves
+with a single _control point_ (BCP). Determining an appropriate BCP proved to be tricky and required additional
+circular arithmetic.
 |===
 
 
@@ -141,7 +157,7 @@ and UI became quite complex.
 [cols="3,5a"]
 |===
 |image:evolution/structure-v6.png[V6,600]
-| `DataProvider` became more elaborated (see below).
+| `DataProvider` became more elaborated (see below) to allow connections other than pairs of consecutive numbers.
 |===
 
 
