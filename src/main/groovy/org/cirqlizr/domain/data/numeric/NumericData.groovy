@@ -27,7 +27,7 @@ package org.cirqlizr.domain.data
  * This is an abstract class that cannot be instantiated directly.
  * Known subclasses are @see Pi
  */
-abstract class SpecialNumber {
+abstract class NumericData {
 
     // that value needs to be set by subclasses' constructor
     protected ArrayList<Integer> digits

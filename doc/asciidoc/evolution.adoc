@@ -145,8 +145,16 @@ and UI became quite complex.
 _Curved_ connections between `DigiNodes` are drawn as http://pomax.github.io/bezierinfo/[quadratic Bezier] curves
 with a single _control point_ (BCP). Determining an appropriate BCP proved to be tricky and required additional
 circular arithmetic.
+
 |===
 
+Additionally we detailed the overall interaction (_scenario_) between the top-level building blocks
+as sequence diagram. Please note that domain parts (blue) have no (!) dependencies to the technical
+ui parts (green). This enables modification of the ui without touching the domain.
+
+Only the small (yellow) startup and configuration parts know about both, domain and technology.
+
+image:evolution/scenario-v5.png[Scenario-V5,600]
 
 
 [[V-Six]]
