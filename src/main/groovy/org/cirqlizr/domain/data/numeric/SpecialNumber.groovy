@@ -90,19 +90,18 @@ abstract class SpecialNumber {
 
 
 
-
-
     private boolean indexIsWithinBounds( int index ) {
         return (index >= 0) && (index < digits.size())
     }
 
+
     /**
      *
      * @param index
-     * @return
+     * @return the number pair at the specified index.
      */
     public  Pair getPair( int index ) {
-        assert index < NUMBER_OF_DIGITS : "pair($index) out of bounds"
+        assert index < NUMBER_OF_DIGITS : "pair($index) out of bounds, only $NUMBER_OF_DIGITS available!"
         return new Pair( getDigit( index ), getDigit( index+1))
     }
 

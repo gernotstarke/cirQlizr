@@ -224,6 +224,7 @@ JavaFX, SVG and Processing without code changes to its core.
 The https://processing.org/reference/[Processing language^] contains many
 constructs known from UI toolkits like Java2D.
 
+
 == Glossary of Terms
 
 BCP:: Bezier Control point.
@@ -246,3 +247,6 @@ as one output format.
 http://www.w3.org/Graphics/SVG/[SVG]:: Scalable Vector Graphics.
 SVG is a markup language for describing two-dimensional
 graphics.
+
+Value Set:: Set of values that shall be displayed. In many cases this will be the set
+of digits from 0..9. Every element of this set is associated with a circle segment.

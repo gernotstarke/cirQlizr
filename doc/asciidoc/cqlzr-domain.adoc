@@ -43,5 +43,7 @@ a straight line.
 [[data-provider]]
 ===== &raquo;interface&laquo; Data Provider
 
-Provides
+Provides the data to be visualized plus some meta info.
+
+
 

@@ -2,16 +2,39 @@
 
 package org.cirqlizr.domain.data
 
-
 interface DataProvider {
 
     /**
      * @return name of this data (e.g. "Pi" for the number pi)
      */
-    public getName()
+    public String getName()
+
+    /**
+     * @return list of allowed values (e.g. 0..9 for numbers if all digits shall be visualized)
+     */
+    public List<DataElement> getValueSet()
+
+    /**
+     * @param index == position, starting with zero
+     * @return the Element at index within the data
+     */
+    public getElementAtIndex( int index)
 
 
-    public getRelationsForElementNr( int elementNr )
+    /**
+     * @param index == position, starting with zero
+     * @return the Element(s) within the data *related* to the Element at index
+     */
+    public DataElement getRelationsForElementAtIndex( int index)
+
+
+    /**
+     * counts how often the @param element occurs as source or target of relations
+     * (aka connections)
+     * @param element
+     * @return how often does element occur in relations
+     */
+    public int getTotalNrOfRelationsForElement( DataElement element)
 
 
 }
