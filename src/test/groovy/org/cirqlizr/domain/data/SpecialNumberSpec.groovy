@@ -38,8 +38,8 @@ class SpecialNumberSpec extends Specification {
             number = new Pi( 5 ) // 3.1415
 
         then:
-            number.getDigit( 0 ) == 3
-            number.getDigit( 1 ) == 1
+            number.getElementAtIndex( 0 ) == 3
+            number.getElementAtIndex( 1 ) == 1
 
             number.countDigit( 3 ) == 1 // occurs once
             number.countDigit( 1 ) == 2 // occurs twice

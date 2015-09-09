@@ -123,8 +123,8 @@ class ConfigurationSlurperSpec extends Specification {
         }
 
         // we can access number ...
-        number.getDigit(0) == 3
-        number.getDigit(1) == 1
+        number.getElementAtIndex(0) == 3
+        number.getElementAtIndex(1) == 1
 
     }
 

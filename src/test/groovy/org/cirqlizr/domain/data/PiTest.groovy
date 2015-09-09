@@ -40,14 +40,14 @@ class PiTest extends GroovyTestCase {
 
     @Test
     public void testFirstDigitIsThree() {
-        GroovyTestCase.assertEquals( "first digit must be three", 3, pi.getDigit(0))
+        GroovyTestCase.assertEquals( "first digit must be three", 3, pi.getElementAtIndex(0))
     }
 
 
     @Test
     public void testIllegalIndex() {
         shouldFail( IndexOutOfBoundsException ) {
-            pi.getDigit(-1)
+            pi.getElementAtIndex(-1)
         }
     }
 

@@ -36,6 +36,8 @@ abstract class NumericData {
     // this value needs to be set by subclass
     protected int MAX_AVAILABLE_DIGITS
 
+    // how many digits (elements) are available
+    // in this implementation / instance?
     protected int NUMBER_OF_DIGITS
 
     // name of this number
@@ -47,8 +49,11 @@ abstract class NumericData {
     // (used by subclass constructor)
     final static int DEFAULT_PRECISION = 10
 
-
-    public int getDigit( int position) {
+    /**
+     * @param position, starting with zero
+     * @return data element at position
+     */
+    public int getElementAtIndex( int position) {
         if (indexIsWithinBounds(position) ) {
             return digits.get(position) }
         else throw new IndexOutOfBoundsException( "Position ${position} out of bounds, should be within 0 and ${digits.size()}" )
@@ -102,7 +107,7 @@ abstract class NumericData {
      */
     public  Pair getPair( int index ) {
         assert index < NUMBER_OF_DIGITS : "pair($index) out of bounds, only $NUMBER_OF_DIGITS available!"
-        return new Pair( getDigit( index ), getDigit( index+1))
+        return new Pair( getElementAtIndex( index ), getElementAtIndex( index+1))
     }
 
 
