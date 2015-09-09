@@ -101,15 +101,28 @@ abstract class NumericData {
 
 
     /**
-     *
+     * get the Pair-relation
      * @param index
-     * @return the number pair at the specified index.
+     * @return the pair at the specified index.
      */
     public  Pair getPair( int index ) {
         assert index < NUMBER_OF_DIGITS : "pair($index) out of bounds, only $NUMBER_OF_DIGITS available!"
-        return new Pair( getElementAtIndex( index ), getElementAtIndex( index+1))
+
+        // old version: pair always consists of (digit_i, digit_i+1)
+        //return new Pair( getElementAtIndex( index ), getElementAtIndex( index+1))
+
+        // new version: pair is determined by this element and getRelationForElementAtIndex( int index)
+        return new Pair( getElementAtIndex( index ), getRelationForElementAtIndex( index ))
     }
 
+
+    /**
+     * get the related element for the element at index
+     *
+     */
+    public int getRelationForElementAtIndex( int index) {
+        return getElementAtIndex( index+1)
+    }
 
     /**
      * collects all pairs up to the Nth
