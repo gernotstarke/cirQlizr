@@ -14,6 +14,7 @@ interface DataProvider {
      */
     public List<DataElement> getValueSet()
 
+
     /**
      * @param index == position, starting with zero
      * @return the Element at index within the data
@@ -25,7 +26,7 @@ interface DataProvider {
      * @param index == position, starting with zero
      * @return the Element(s) within the data *related* to the Element at index
      */
-    public DataElement getRelationsForElementAtIndex( int index)
+    public DataElement getRelationForElementAtIndex( int index)
 
 
     /**
