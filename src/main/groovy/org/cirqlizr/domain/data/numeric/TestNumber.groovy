@@ -1,6 +1,6 @@
 package org.cirqlizr.domain.data
 
-class TestNumber extends SpecialNumber {
+class TestNumber extends NumericData {
 
     private final static ArrayList<Integer> ALL_KNOWN_DIGITS =
             //[1,2,1,3,1,4,1,5,1,6,1,7,1,8,1,9,1,0,1]

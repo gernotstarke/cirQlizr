@@ -31,7 +31,7 @@ import spock.lang.Unroll
 
 class SpecialNumberSpec extends Specification {
 
-    SpecialNumber number
+    NumericData number
 
     def "pi is a nice and special number"() {
         when:

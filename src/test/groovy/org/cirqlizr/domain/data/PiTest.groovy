@@ -31,7 +31,7 @@ import org.junit.Test
 
 class PiTest extends GroovyTestCase {
 
-    SpecialNumber pi
+    NumericData pi
 
     @Before
     public void setUp() {
@@ -69,7 +69,7 @@ class PiTest extends GroovyTestCase {
 
     @Test
     public void testLowPrecision() {
-        SpecialNumber sn = new Pi(1)
+        NumericData sn = new Pi(1)
 
         List<Integer> actual = sn.digits
 
@@ -78,7 +78,7 @@ class PiTest extends GroovyTestCase {
 
     @Test
     public void testHighPrecision() {
-        SpecialNumber sn = new Pi(1500)
+        NumericData sn = new Pi(1500)
 
         int actualNrOfDigits = sn.digits.size()
 
