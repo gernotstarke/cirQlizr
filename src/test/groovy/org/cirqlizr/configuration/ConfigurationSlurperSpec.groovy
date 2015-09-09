@@ -25,7 +25,7 @@ package org.cirqlizr.configuration
 
 import org.cirqlizr.AssertHelper
 import org.cirqlizr.domain.data.Pi
-import org.cirqlizr.domain.data.SpecialNumber
+import org.cirqlizr.domain.data.NumericData
 import spock.lang.Specification
 
 class ConfigurationSlurperSpec extends Specification {
@@ -111,14 +111,14 @@ class ConfigurationSlurperSpec extends Specification {
 
         when:
         // newInstance() invokes no-arg constructor
-        SpecialNumber number = Class.forName(config.number).newInstance()
+        NumericData number = Class.forName(config.number).newInstance()
 
         then:
         // found the right configuration string
         config.number == "org.cirqlizr.domain.data.Pi"
 
         // we created an instance of the correct class
-        [Pi.class, SpecialNumber.class].each {
+        [Pi.class, NumericData.class].each {
             number.class in it
         }
 
@@ -136,7 +136,7 @@ class ConfigurationSlurperSpec extends Specification {
 
         when:
         // create Pi instance with defined precision
-        SpecialNumber number = Class.forName(config.number).newInstance(precision)
+        NumericData number = Class.forName(config.number).newInstance(precision)
 
         then:
         number.NUMBER_OF_DIGITS == precision

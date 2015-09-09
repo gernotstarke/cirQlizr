@@ -26,7 +26,7 @@ package org.cirqlizr
 import org.cirqlizr.configuration.Configuration
 import org.cirqlizr.configuration.RunMode
 import org.cirqlizr.domain.Segment
-import org.cirqlizr.domain.data.SpecialNumber
+import org.cirqlizr.domain.data.NumericData
 import org.cirqlizr.ui.CirqlizrColor
 
 import java.util.logging.Logger
@@ -39,7 +39,7 @@ import java.util.logging.Logger
 class CircularVisualizer {
 
     // what number to show
-    final private SpecialNumber NUMBER
+    final private NumericData NUMBER
 
     // how many pairs of digits to show in visualization?
     final protected Integer NR_OF_CONNECTIONS_TO_SHOW

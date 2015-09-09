@@ -1,7 +1,7 @@
 package org.cirqlizr.configuration
 
 import org.cirqlizr.domain.ConnectionStyle
-import org.cirqlizr.domain.data.SpecialNumber
+import org.cirqlizr.domain.data.NumericData
 
 import java.awt.*
 import java.util.List
@@ -25,7 +25,7 @@ class Configuration {
     List<String> VALUESET // ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
     // TODO: rename number to dataProvider
-    SpecialNumber NUMBER
+    NumericData NUMBER
     Integer PRECISION
 
     // how many connections (==lines) to show?
@@ -218,7 +218,7 @@ class Configuration {
      * @return
      */
     public
-    static SpecialNumber convertStringToSpecialNumberInstance(String configuredSpecialNumber, Integer precision) {
+    static NumericData convertStringToSpecialNumberInstance(String configuredSpecialNumber, Integer precision) {
         assert precision > 0: "precision 0 makes no sense - aborted!"
         //this.PRECISION = precision
 
@@ -227,7 +227,7 @@ class Configuration {
 
 
     private boolean isValidSpecialNumber(potentialValue) {
-        return ((potentialValue instanceof SpecialNumber))
+        return ((potentialValue instanceof NumericData))
     }
 
     /*

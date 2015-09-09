@@ -1,7 +1,7 @@
 package org.cirqlizr.configuration
 
 import org.cirqlizr.domain.ConnectionStyle
-import org.cirqlizr.domain.data.SpecialNumber
+import org.cirqlizr.domain.data.NumericData
 import spock.lang.Specification
 
 import java.awt.Color
@@ -94,7 +94,7 @@ class ConfigurationSpec extends Specification {
         ["0", "1", "2", "3"] == configuration.VALUESET
 
         // can configure number
-        configuration.NUMBER instanceof SpecialNumber
+        configuration.NUMBER instanceof NumericData
         123 == configuration.PRECISION
 
         42 == configuration.NR_OF_CONNECTIONS_TO_SHOW
@@ -117,7 +117,7 @@ class ConfigurationSpec extends Specification {
 
     def "can convert configuration string to SpecialNumber instance"() {
         expect:
-        Configuration.convertStringToSpecialNumberInstance( "org.cirqlizr.domain.data.Pi", 10) instanceof SpecialNumber
+        Configuration.convertStringToSpecialNumberInstance( "org.cirqlizr.domain.data.Pi", 10) instanceof NumericData
     }
 }
 
