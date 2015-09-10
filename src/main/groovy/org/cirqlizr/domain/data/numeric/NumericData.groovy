@@ -74,20 +74,20 @@ abstract class NumericData {
     }
 
     /**
-     * counts the occurences within the first 0..N pairs. Example: Number = "3.14", digit=1, N=2, result = 2
+     * counts the occurences within the first 0..N pairs. Example: Number = "3.14", element=1, N=2, result = 2
      * as pairs are (3,1), (1,4)
-     * @param digit
+     * @param element
      * @param pairNr
-     * @return how often does digit occur in the first N pairs (where pairs count from 0 onwards)
+     * @return how often does element occur in the first N pairs (where pairs count from 0 onwards)
      */
-    public int countOccurencesInPairs( int digit, int pairNr) {
+    public int countOccurencesInPairs( int element, int pairNr) {
         assert pairNr < NUMBER_OF_ELEMENTS : "number has only $NUMBER_OF_ELEMENTS elements, cannot get pairNr $pairNr "
 
         int pairsItOccursIn = 0
 
         getAllPairsUpTo( pairNr ).each { pair ->
-            if (pair.first == digit) pairsItOccursIn++
-            if (pair.second == digit) pairsItOccursIn++
+            if (pair.first == element) pairsItOccursIn++
+            if (pair.second == element) pairsItOccursIn++
         }
 
         return pairsItOccursIn
