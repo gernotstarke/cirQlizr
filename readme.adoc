@@ -87,10 +87,12 @@ kbd:[cirQlizr] generalises this by allowing
 
 image:circulizr-domain.png[number visualization domain]
 
-* The number to be visualized consists of ordered Digits.
-* Pair consists of left ("from") and right ("to") Digit,
+* The number to be visualized consists of ordered Elements (digits).
+* An element can have a relation to other elements of the data,
+  in case of our pi-visualization it's the neighbourship-relation.
+* Pair consists of left ("from") and right ("to") Element,
 * Connection represents graphical connection of "from" (left) and "to"
-(right) Digit of a Pair.
+(right) Element of a Pair.
 * Connection can be a straight line or curve, maybe
 (quadratic or higher degree) Bézier curve.
 * Segment:
@@ -108,6 +110,11 @@ circle, or 0.2*π in radians)
 ** corresponds to a Pair of Digits.
 ** Start and end of the line are connectionNodes
 
+* Relations (pairs) can be of various kinds, e.g.:
+** the next digit within the number (e.g. pi)
+** any function applied to the digit
+** the next noun following this word
+** the number of occurrences of this element (applying the count-function)
 
 === Working With Angles
 
