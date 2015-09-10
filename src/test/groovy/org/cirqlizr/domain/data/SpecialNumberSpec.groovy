@@ -64,7 +64,7 @@ class SpecialNumberSpec extends Specification {
         number = new Pi(5) // 3.1415
 
         then:
-        number.NUMBER_OF_DIGITS == 5
+        number.NUMBER_OF_ELEMENTS == 5
         number.getAllPairsUpTo( 3 ) == [new Pair(3,1), new Pair(1,4), new Pair( 4,1), new Pair(1,5)]
     }
 

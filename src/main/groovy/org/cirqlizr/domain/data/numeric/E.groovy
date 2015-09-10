@@ -86,15 +86,15 @@ class E extends NumericData {
 
         name = "e (Euler's number)";
 
-        MAX_AVAILABLE_DIGITS = ALL_KNOWN_DIGITS.size()
+        MAX_AVAILABLE_ELEMENTS = ALL_KNOWN_DIGITS.size()
 
         // avoid misconfiguration
         assert precision > 0 // zero elements make no sense at all
-        assert precision <= MAX_AVAILABLE_DIGITS
+        assert precision <= MAX_AVAILABLE_ELEMENTS
 
 
-        if (precision <= MAX_AVAILABLE_DIGITS) {
-            this.NUMBER_OF_DIGITS = precision
+        if (precision <= MAX_AVAILABLE_ELEMENTS) {
+            this.NUMBER_OF_ELEMENTS = precision
             this.elements = ALL_KNOWN_DIGITS[0..precision-1]
         }
         // else throw new MisconfigurationException("illegal precision ${precision}")

@@ -34,11 +34,11 @@ abstract class NumericData {
 
     // how many elements are available
     // this value needs to be set by subclass
-    protected int MAX_AVAILABLE_DIGITS
+    protected int MAX_AVAILABLE_ELEMENTS
 
     // how many elements (elements) are available
     // in this implementation / instance?
-    protected int NUMBER_OF_DIGITS
+    protected int NUMBER_OF_ELEMENTS
 
     // name of this number
     // in case of greek names, use unicode (see class Pi for an example)
@@ -81,7 +81,7 @@ abstract class NumericData {
      * @return how often does digit occur in the first N pairs (where pairs count from 0 onwards)
      */
     public int countOccurencesInPairs( int digit, int pairNr) {
-        assert pairNr < NUMBER_OF_DIGITS : "number has only $NUMBER_OF_DIGITS elements, cannot get pairNr $pairNr "
+        assert pairNr < NUMBER_OF_ELEMENTS : "number has only $NUMBER_OF_ELEMENTS elements, cannot get pairNr $pairNr "
 
         int pairsItOccursIn = 0
 
@@ -106,7 +106,7 @@ abstract class NumericData {
      * @return the pair at the specified index.
      */
     public  Pair getPair( int index ) {
-        assert index < NUMBER_OF_DIGITS : "pair($index) out of bounds, only $NUMBER_OF_DIGITS available!"
+        assert index < NUMBER_OF_ELEMENTS : "pair($index) out of bounds, only $NUMBER_OF_ELEMENTS available!"
 
         // old version: pair always consists of (digit_i, digit_i+1)
         //return new Pair( getElementAtIndex( index ), getElementAtIndex( index+1))
@@ -131,7 +131,7 @@ abstract class NumericData {
      */
     public ArrayList<Pair> getAllPairsUpTo(int pairNr) {
         assert pairNr >= 0 : "pairNr should be >= 0"
-        assert pairNr < NUMBER_OF_DIGITS: "pairNr should be less than NUMBER_OF_DIGITS ($NUMBER_OF_DIGITS)"
+        assert pairNr < NUMBER_OF_ELEMENTS: "pairNr should be less than NUMBER_OF_ELEMENTS ($NUMBER_OF_ELEMENTS)"
 
         return (0..pairNr).collect { getPair( it ) }
     }

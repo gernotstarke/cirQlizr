@@ -139,7 +139,7 @@ class ConfigurationSlurperSpec extends Specification {
         NumericData number = Class.forName(config.number).newInstance(precision)
 
         then:
-        number.NUMBER_OF_DIGITS == precision
+        number.NUMBER_OF_ELEMENTS == precision
     }
 
 
