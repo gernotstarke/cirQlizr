@@ -108,7 +108,7 @@ abstract class NumericData {
     public  Pair getPair( int index ) {
         assert index < NUMBER_OF_ELEMENTS : "pair($index) out of bounds, only $NUMBER_OF_ELEMENTS available!"
 
-        // old version: pair always consists of (digit_i, digit_i+1)
+        // old version: pair always consists of (element_i, element_i+1)
         //return new Pair( getElementAtIndex( index ), getElementAtIndex( index+1))
 
         // new version: pair is determined by this element and getRelationForElementAtIndex( int index)
