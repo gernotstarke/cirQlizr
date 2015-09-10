@@ -69,7 +69,7 @@ class SpecialNumberSpec extends Specification {
     }
 
     /**
-     * count occurences of digits in pairs. E.g. in "3.14", 1 occurs in two pairs
+     * count occurences of elements in pairs. E.g. in "3.14", 1 occurs in two pairs
      */
     @Unroll
     def "count occurence of digit in first two pairs"() {

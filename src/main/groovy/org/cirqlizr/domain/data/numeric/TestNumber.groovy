@@ -15,13 +15,13 @@ class TestNumber extends NumericData {
         MAX_AVAILABLE_DIGITS = ALL_KNOWN_DIGITS.size()
 
         // avoid misconfiguration
-        assert precision > 0 // zero digits make no sense at all
+        assert precision > 0 // zero elements make no sense at all
         assert precision <= MAX_AVAILABLE_DIGITS
 
 
         if (precision <= MAX_AVAILABLE_DIGITS) {
             this.NUMBER_OF_DIGITS = precision
-            this.digits = ALL_KNOWN_DIGITS[0..precision-1]
+            this.elements = ALL_KNOWN_DIGITS[0..precision-1]
         }
         // else throw new MisconfigurationException("illegal precision ${precision}")
 

@@ -55,7 +55,7 @@ class ApplicationFrame extends JFrame {
 
         this.RUNMODE = configuration.RUNMODE
 
-        String TITLE_TEXT = "cirQlizr - ${configuration.NR_OF_CONNECTIONS_TO_SHOW} digits of ${configuration.NUMBER.name}"
+        String TITLE_TEXT = "cirQlizr - ${configuration.NR_OF_CONNECTIONS_TO_SHOW} elements of ${configuration.NUMBER.name}"
 
         setTitle(TITLE_TEXT);
         setSize(X_CANVAS_SIZE, Y_CANVAS_SIZE);

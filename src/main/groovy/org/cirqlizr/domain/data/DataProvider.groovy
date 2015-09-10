@@ -10,7 +10,7 @@ interface DataProvider {
     public String getName()
 
     /**
-     * @return list of allowed values (e.g. 0..9 for numbers if all digits shall be visualized)
+     * @return list of allowed values (e.g. 0..9 for numbers if all elements shall be visualized)
      */
     public List<DataElement> getValueSet()
 

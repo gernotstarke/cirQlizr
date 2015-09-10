@@ -89,7 +89,7 @@ for(int i = 0; i < numAsString.length(); i++)
     if ((i>0) && (i % 50) == 0) numAsArrayListStr += "\n "
 }
 
-println "showing the first ${numAsString.length()} digits:"
+println "showing the first ${numAsString.length()} elements:"
 println numAsArrayListStr
 
 

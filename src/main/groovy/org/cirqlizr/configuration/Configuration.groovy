@@ -19,7 +19,7 @@ class Configuration {
     // runmode must not be modified at runtime
     final RunMode RUNMODE
 
-    // default: valueSet consists of all digits to visualize numeric
+    // default: valueSet consists of all elements to visualize numeric
     // needs to be List (not Set), as we need indexed access due to SEGMENT_EXTEND_ANGLES
     // needs to have size() > 1
     List<String> VALUESET // ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
@@ -116,7 +116,7 @@ class Configuration {
 
         configureColors(config)
 
-        this.TITLE_TEXT = "CIRCULIZR - ${this.NR_OF_CONNECTIONS_TO_SHOW} digits of ${this.NUMBER.name}"
+        this.TITLE_TEXT = "CIRCULIZR - ${this.NR_OF_CONNECTIONS_TO_SHOW} elements of ${this.NUMBER.name}"
     }
 
     /**

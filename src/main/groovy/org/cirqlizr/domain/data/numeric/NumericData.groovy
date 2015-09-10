@@ -30,13 +30,13 @@ package org.cirqlizr.domain.data
 abstract class NumericData {
 
     // that value needs to be set by subclasses' constructor
-    protected ArrayList<Integer> digits
+    protected ArrayList<Integer> elements
 
-    // how many digits are available
+    // how many elements are available
     // this value needs to be set by subclass
     protected int MAX_AVAILABLE_DIGITS
 
-    // how many digits (elements) are available
+    // how many elements (elements) are available
     // in this implementation / instance?
     protected int NUMBER_OF_DIGITS
 
@@ -55,14 +55,14 @@ abstract class NumericData {
      */
     public int getElementAtIndex( int position) {
         if (indexIsWithinBounds(position) ) {
-            return digits.get(position) }
-        else throw new IndexOutOfBoundsException( "Position ${position} out of bounds, should be within 0 and ${digits.size()}" )
+            return elements.get(position) }
+        else throw new IndexOutOfBoundsException( "Position ${position} out of bounds, should be within 0 and ${elements.size()}" )
     }
 
 
 
     /**
-     * counts the occurences of @param digit in all digits. Example: Number="3.141", result for digit 1 would be 2
+     * counts the occurences of @param digit in all elements. Example: Number="3.141", result for digit 1 would be 2
      * @param digit
      * @return nr of occurences, 0 if digit does not occur
      */
@@ -70,7 +70,7 @@ abstract class NumericData {
         assert digit >= 0
         assert digit <= 9
 
-        return digits.count( digit )
+        return elements.count( digit )
     }
 
     /**
@@ -81,7 +81,7 @@ abstract class NumericData {
      * @return how often does digit occur in the first N pairs (where pairs count from 0 onwards)
      */
     public int countOccurencesInPairs( int digit, int pairNr) {
-        assert pairNr < NUMBER_OF_DIGITS : "number has only $NUMBER_OF_DIGITS digits, cannot get pairNr $pairNr "
+        assert pairNr < NUMBER_OF_DIGITS : "number has only $NUMBER_OF_DIGITS elements, cannot get pairNr $pairNr "
 
         int pairsItOccursIn = 0
 
@@ -96,7 +96,7 @@ abstract class NumericData {
 
 
     private boolean indexIsWithinBounds( int index ) {
-        return (index >= 0) && (index < digits.size())
+        return (index >= 0) && (index < elements.size())
     }
 
 

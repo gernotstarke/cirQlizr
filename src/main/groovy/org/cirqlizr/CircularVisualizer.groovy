@@ -41,7 +41,7 @@ class CircularVisualizer {
     // what number to show
     final private NumericData NUMBER
 
-    // how many pairs of digits to show in visualization?
+    // how many pairs of elements to show in visualization?
     final protected Integer NR_OF_CONNECTIONS_TO_SHOW
 
     // some more configuration stuff
@@ -121,7 +121,7 @@ class CircularVisualizer {
     public void domainReport() {
 
         println "="*80 + "\n"
-        println "Circulizr Domain Report for ${NR_OF_CONNECTIONS_TO_SHOW} connections for ${NUMBER.name} (${NUMBER.digits})"
+        println "Circulizr Domain Report for ${NR_OF_CONNECTIONS_TO_SHOW} connections for ${NUMBER.name} (${NUMBER.elements})"
 
         // print segment information
         segment.each { oneSegment ->

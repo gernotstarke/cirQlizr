@@ -71,7 +71,7 @@ class PiTest extends GroovyTestCase {
     public void testLowPrecision() {
         NumericData sn = new Pi(1)
 
-        List<Integer> actual = sn.digits
+        List<Integer> actual = sn.elements
 
         assertEquals( "expect Pi with precision==1 to be [3]", [3], actual)
     }
@@ -80,7 +80,7 @@ class PiTest extends GroovyTestCase {
     public void testHighPrecision() {
         NumericData sn = new Pi(1500)
 
-        int actualNrOfDigits = sn.digits.size()
+        int actualNrOfDigits = sn.elements.size()
 
         assertEquals("Pi(1500) should have 1500 digits", 1500, actualNrOfDigits)
     }
