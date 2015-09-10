@@ -41,9 +41,9 @@ class SpecialNumberSpec extends Specification {
             number.getElementAtIndex( 0 ) == 3
             number.getElementAtIndex( 1 ) == 1
 
-            number.countDigit( 3 ) == 1 // occurs once
-            number.countDigit( 1 ) == 2 // occurs twice
-            number.countDigit( 2 ) == 0 // does not occur
+            number.countElement( 3 ) == 1 // occurs once
+            number.countElement( 1 ) == 2 // occurs twice
+            number.countElement( 2 ) == 0 // does not occur
     }
 
     /**
@@ -118,7 +118,7 @@ class SpecialNumberSpec extends Specification {
             number = new Pi( precision )
 
         then:
-            number.countDigit(digit) == count
+            number.countElement(digit) == count
 
         where:
         precision | digit | count

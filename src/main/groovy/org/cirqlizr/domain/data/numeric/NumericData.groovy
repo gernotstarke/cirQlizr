@@ -62,15 +62,15 @@ abstract class NumericData {
 
 
     /**
-     * counts the occurences of @param digit in all elements. Example: Number="3.141", result for digit 1 would be 2
-     * @param digit
-     * @return nr of occurences, 0 if digit does not occur
+     * counts the occurences of @param element in all elements. Example: Number="3.141", result for element 1 would be 2
+     * @param element
+     * @return nr of occurences, 0 if element does not occur
      */
-    public int countDigit( int digit ) {
-        assert digit >= 0
-        assert digit <= 9
+    public int countElement( int element ) {
+        assert element >= 0
+        assert element <= 9
 
-        return elements.count( digit )
+        return elements.count( element )
     }
 
     /**
