@@ -51,7 +51,7 @@ class CircularVisualizer {
     private float radius
 
     // segments to attach connections to...
-    // every segment instance corresponds to one digit
+    // every segment instance corresponds to one element
     public List<Segment> segment
 
     // some properties of (all) segments
@@ -68,8 +68,8 @@ class CircularVisualizer {
 
     public CircularVisualizer( Configuration config) {
 
-        assert config.NUMBER != null : "cannot visualize null value"
-        assert config.NR_OF_CONNECTIONS_TO_SHOW >= 0 : "cannot visualize 0 connections"
+        assert config.NUMBER != null : "cannot visualize null value (likely reason: no data configured)"
+        assert config.NR_OF_CONNECTIONS_TO_SHOW >= 0 : "cannot visualize negative nr of connections"
 
         // the most important property: what number shall we visualize?
         this.NUMBER = config.NUMBER
@@ -92,7 +92,7 @@ class CircularVisualizer {
 
         (0..9).each { thisDigit ->
             segment[thisDigit] = new Segment(
-                    digit: thisDigit,
+                    element: thisDigit,
                     nrOfRequiredConnectionNodes: NUMBER.countOccurencesInPairs(thisDigit, NR_OF_CONNECTIONS_TO_SHOW-1),
                     color: CirqlizrColor.color[thisDigit],
                     radius: this.radius,
@@ -100,7 +100,7 @@ class CircularVisualizer {
                     angleStart: thisDigit * ((SEGMENT_EXTEND_ANGLE + (2 * SEGMENT_PADDING_ANGLE))),
                     angleExtend: SEGMENT_EXTEND_ANGLE)
 
-            // create connectionNodes (== lineEndings) only if this digit occurs once or more
+            // create connectionNodes (== lineEndings) only if this element occurs once or more
             if (segment[thisDigit].nrOfRequiredConnectionNodes > 0) {
                 segment[thisDigit].with {
 

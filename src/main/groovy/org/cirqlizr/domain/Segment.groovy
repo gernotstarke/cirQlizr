@@ -28,16 +28,16 @@ import java.util.logging.Logger
 
 
 /**
- * Segment represents a digit and is drawn as part of a circle.
+ * Segment represents a element and is drawn as part of a circle.
  * When we use 10 Segments, every instance extends 36 deg, that is 0.2*&#960;rad.
  *
  */
 
 class Segment {
 
-    private int digit
+    private int element
 
-    // how often does this digit occur in pairs?
+    // how often does this element occur in pairs?
     // how many connections will start or end in this segment?
     private int nrOfRequiredConnectionNodes
 
@@ -66,7 +66,7 @@ class Segment {
      **/
     public int getNextFreeConnectionNode() {
 
-        assert nextFreeConnectionNode <= connectionNode.size(): "Segment $digit has no free connectionNodes after $nextFreeConnectionNode"
+        assert nextFreeConnectionNode <= connectionNode.size(): "Segment $element has no free connectionNodes after $nextFreeConnectionNode"
         return nextFreeConnectionNode
     }
 
@@ -75,7 +75,7 @@ class Segment {
      */
     public void advanceToNextAvailableConnectionNode() {
 
-        assert nextFreeConnectionNode < connectionNode.size(): "cannot advance connectionNode pointer, as segment $digit has no free connectionNodes after $nextFreeConnectionNode"
+        assert nextFreeConnectionNode < connectionNode.size(): "cannot advance connectionNode pointer, as segment $element has no free connectionNodes after $nextFreeConnectionNode"
 
         nextFreeConnectionNode += 1
     }
@@ -88,8 +88,8 @@ class Segment {
      */
     public void setUpConnectionNodes() {
 
-        // digit does not occur in number -> no connectionNodes
-        assert this.nrOfRequiredConnectionNodes > 0: "setUpConnectionNodes error: Segment[${this.digit}] cannot create $nrOfRequiredConnectionNodes connectionNodes"
+        // element does not occur in number -> no connectionNodes
+        assert this.nrOfRequiredConnectionNodes > 0: "setUpConnectionNodes error: Segment[${this.element}] cannot create $nrOfRequiredConnectionNodes connectionNodes"
 
         // as Lists start at index 0:
         connectionNode = new ArrayList<ConnectionNode>(nrOfRequiredConnectionNodes)
@@ -101,7 +101,7 @@ class Segment {
 
         // println "will create ${nrOfRequiredConnectionNodes} connectionNodes with deltaAngle=${deltaAngle} for angleExtend=${angleExtend} and angleStart=${angleStart}"
 
-        // for each digit to show, create one connectionNode
+        // for each element to show, create one connectionNode
         (1..nrOfRequiredConnectionNodes).each { nrOfCurrentConnectionNode ->
             // connectionNode constructor is responsible for calculating Coordinates/Points
             ConnectionNode tmpNode = new ConnectionNode(angleForThisConnectionNode(angleStart, deltaAngle, nrOfCurrentConnectionNode),
@@ -153,7 +153,7 @@ class Segment {
      * returns a readable version of this segment
      */
     public String toString() {
-        return """Segment $digit requires $nrOfRequiredConnectionNodes connections
+        return """Segment $element requires $nrOfRequiredConnectionNodes connections
       angleStart=${sprintf("%3.3fRAD (%3.3f°)", angleStart, Math.toDegrees(angleStart))}, extend=${sprintf("%3.3fRAD (%3.3f°)", angleExtend, Math.toDegrees(angleExtend))}
 """
     }
