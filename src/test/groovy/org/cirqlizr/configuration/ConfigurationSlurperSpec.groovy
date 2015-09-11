@@ -24,6 +24,7 @@
 package org.cirqlizr.configuration
 
 import org.cirqlizr.AssertHelper
+import org.cirqlizr.domain.data.DataElement
 import org.cirqlizr.domain.data.Pi
 import org.cirqlizr.domain.data.NumericData
 import spock.lang.Specification
@@ -123,8 +124,8 @@ class ConfigurationSlurperSpec extends Specification {
         }
 
         // we can access number ...
-        number.getElementAtIndex(0) == 3
-        number.getElementAtIndex(1) == 1
+        number.getElementAtIndex(0) == new DataElement(3).getValue()
+        number.getElementAtIndex(1) == new DataElement(1).getValue()
 
     }
 
