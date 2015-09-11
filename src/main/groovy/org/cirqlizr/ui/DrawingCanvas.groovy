@@ -116,7 +116,7 @@ class DrawingCanvas extends JPanel {
         (0..9).each { digit ->
             nv.segment[digit].with {
                 g2d.setPaint(color)
-                //LOGGER.info "digit $digit: center.x=${center.x}, center.y=${center.y}"
+                //LOGGER.info "element $element: center.x=${center.x}, center.y=${center.y}"
 
                 arc2D.setArcByCenter(0, 0, radius, Math.toDegrees(angleStart), Math.toDegrees(angleExtend), Arc2D.OPEN)
                 g2d.draw(arc2D)
@@ -167,7 +167,7 @@ class DrawingCanvas extends JPanel {
 
     private void resetConnectionPoints() {
         nv.segment.each {
-            currentConnectionPointInSegment[it.digit] = 0
+            currentConnectionPointInSegment[it.element] = 0
         }
     }
 
@@ -226,7 +226,7 @@ class DrawingCanvas extends JPanel {
             g2d.fillRect((X_CANVAS_SIZE - TRANSLATION_OFFSET) - 55,
                     (Y_CANVAS_SIZE - TRANSLATION_OFFSET - 2 * configuration.MARGIN - (digit + 1) * 35), 30, 30)
 
-            // show corresponding digit
+            // show corresponding element
             g2d.drawString(digit.toString(), (X_CANVAS_SIZE - TRANSLATION_OFFSET - 70),
                     (Y_CANVAS_SIZE - TRANSLATION_OFFSET - 2 * configuration.MARGIN - digit * 35 - 13))
 

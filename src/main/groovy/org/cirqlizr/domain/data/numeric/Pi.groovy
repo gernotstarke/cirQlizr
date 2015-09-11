@@ -126,9 +126,18 @@ class Pi extends NumericData {
         assert precision <= MAX_AVAILABLE_ELEMENTS
 
 
+        // with just numeric data (elements were all int!):
+        // this.elements = ALL_KNOWN_ELEMENTS[0..precision-1]
+
+        this.elements = new ArrayList<DataElement>()
+
+        // with the general DataElement type:
         if (precision <= MAX_AVAILABLE_ELEMENTS) {
             this.NUMBER_OF_ELEMENTS = precision
-            this.elements = ALL_KNOWN_ELEMENTS[0..precision-1]
+
+            [0..precision-1].each { index ->
+                this.elements[index] = new DataElement( ALL_KNOWN_ELEMENTS[index].toString() )
+            }
         }
         // else throw new MisconfigurationException("illegal precision ${precision}")
 

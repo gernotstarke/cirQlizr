@@ -30,7 +30,7 @@ package org.cirqlizr.domain.data
 abstract class NumericData {
 
     // that value needs to be set by subclasses' constructor
-    protected ArrayList<Integer> elements
+    protected ArrayList<DataElement> elements
 
     // how many elements are available
     // this value needs to be set by subclass
@@ -53,7 +53,7 @@ abstract class NumericData {
      * @param position, starting with zero
      * @return data element at position
      */
-    public int getElementAtIndex( int position) {
+    public DataElement getElementAtIndex( int position) {
         if (indexIsWithinBounds(position) ) {
             return elements.get(position) }
         else throw new IndexOutOfBoundsException( "Position ${position} out of bounds, should be within 0 and ${elements.size()}" )
@@ -80,7 +80,7 @@ abstract class NumericData {
      * @param pairNr
      * @return how often does element occur in the first N pairs (where pairs count from 0 onwards)
      */
-    public int countOccurencesInPairs( int element, int pairNr) {
+    public int countOccurencesInPairs( DataElement element, int pairNr) {
         assert pairNr < NUMBER_OF_ELEMENTS : "number has only $NUMBER_OF_ELEMENTS elements, cannot get pairNr $pairNr "
 
         int pairsItOccursIn = 0

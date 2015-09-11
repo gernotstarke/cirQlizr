@@ -41,9 +41,9 @@ class SegmentSpec extends Specification {
 
     def "Correct number of connectionNodes is created for Segment"() {
         given:
-        // segment where digit "0" occurs once!
+        // segment where element "0" occurs once!
         Segment s = new Segment(
-                digit: 0,
+                element: 0,
                 nrOfRequiredConnectionNodes: 1,
                 radius: 100,
                 angleStart: 0 + (2 * SEGMENT_PADDING_ANGLE),
@@ -69,7 +69,7 @@ class SegmentSpec extends Specification {
         double angleExtend = Math.toRadians(30)
 
         Segment s = new Segment(
-                digit: 0,
+                element: 0,
                 nrOfRequiredConnectionNodes: nrOfNodes,
                 radius: 1,
                 angleStart: angleStart,
@@ -109,7 +109,7 @@ class SegmentSpec extends Specification {
         double angleExtend = Math.toRadians(30)
 
         Segment s = new Segment(
-                digit: 0,
+                element: 0,
                 nrOfRequiredConnectionNodes: 0,
                 radius: 1,
                 angleStart: angleStart,
@@ -126,7 +126,7 @@ class SegmentSpec extends Specification {
     def "nrOfConnections shall return correct value"() {
         given:
            Segment s = new Segment(
-                digit: 0,
+                element: 0,
                 nrOfRequiredConnectionNodes: 0)
         expect:
             s.nrOfConnections() == 0

@@ -40,7 +40,7 @@ class PiTest extends GroovyTestCase {
 
     @Test
     public void testFirstDigitIsThree() {
-        GroovyTestCase.assertEquals( "first digit must be three", 3, pi.getElementAtIndex(0))
+        GroovyTestCase.assertEquals( "first element must be three", 3, pi.getElementAtIndex(0))
     }
 
 
