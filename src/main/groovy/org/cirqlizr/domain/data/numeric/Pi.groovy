@@ -23,6 +23,8 @@
  */
 package org.cirqlizr.domain.data
 
+import org.cirqlizr.configuration.MisconfigurationException
+
 // see end-of-file for license information
 
 // thanx to
@@ -129,7 +131,7 @@ class Pi extends NumericData {
         // with just numeric data (elements were all int!):
         // this.elements = ALL_KNOWN_ELEMENTS[0..precision-1]
 
-        this.elements = new ArrayList<DataElement>()
+        this.elements = new ArrayList<DataElement>(precision+1)
 
         // with the general DataElement type:
         if (precision <= MAX_AVAILABLE_ELEMENTS) {
@@ -139,7 +141,7 @@ class Pi extends NumericData {
                 this.elements[index] = new DataElement( ALL_KNOWN_ELEMENTS[index].toString() )
             }
         }
-        // else throw new MisconfigurationException("illegal precision ${precision}")
+        else throw new MisconfigurationException("illegal precision ${precision}: not enough digits available")
 
     }
 
