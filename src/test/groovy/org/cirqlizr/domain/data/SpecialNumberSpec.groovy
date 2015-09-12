@@ -33,17 +33,28 @@ class SpecialNumberSpec extends Specification {
 
     NumericData number
 
+    DataElement de1, de2, de3, de4, de5
+
+    def setup() {
+        de1 = new DataElement(1)
+        de2 = new DataElement(2)
+        de3 = new DataElement(3)
+        de4 = new DataElement(4)
+        de5 = new DataElement(5)
+    }
+
+
     def "pi is a nice and special number"() {
         when:
             number = new Pi( 5 ) // 3.1415
 
         then:
-            number.getElementAtIndex( 0 ) == new DataElement(3)
-            number.getElementAtIndex( 1 ) == new DataElement(1)
+            number.getElementAtIndex( 0 ) == de3
+            number.getElementAtIndex( 1 ) == de1
 
-            number.countElement( "3" ) == 1 // occurs once
-            number.countElement( "1" ) == 2 // occurs twice
-            number.countElement( "2" ) == 0 // does not occur
+            number.countValue( "3" ) == 1 // occurs once
+            number.countValue( "1" ) == 2 // occurs twice
+            number.countValue( "2" ) == 0 // does not occur
     }
 
     /**
@@ -78,16 +89,16 @@ class SpecialNumberSpec extends Specification {
 
         then:
             // 3 occurs in one pair
-            number.countOccurencesInPairs( 3, 1) == 1
+            number.countOccurencesInPairs( de3, 1) == 1
 
             // 1 occurs in two pairs
-            number.countOccurencesInPairs( 1, 1) == 2
+            number.countOccurencesInPairs( de1, 1) == 2
 
             // 4 occurs in one pair
-            number.countOccurencesInPairs( 4, 1) == 1
+            number.countOccurencesInPairs( de4, 1) == 1
 
             // 5 does not occur
-            number.countOccurencesInPairs( 5,1)  == 0
+            number.countOccurencesInPairs( de5,1)  == 0
 
     }
 
@@ -97,15 +108,15 @@ class SpecialNumberSpec extends Specification {
 
         then:
         // 3 occurs in three pairs
-           number.countOccurencesInPairs( 3, 9) == 3
+           number.countOccurencesInPairs( de3, 9) == 3
 
-           number.countOccurencesInPairs( 5, 9) == 5 // 5 pairs
+           number.countOccurencesInPairs( de5, 9) == 5 // 5 pairs
 
          // 1 occures once in first pair
-           number.countOccurencesInPairs( 1, 0) == 1
+           number.countOccurencesInPairs( de1, 0) == 1
 
          //... and again in second pair
-           number.countOccurencesInPairs( 1, 1) == 2
+           number.countOccurencesInPairs( de1, 1) == 2
 
 
 
@@ -118,7 +129,7 @@ class SpecialNumberSpec extends Specification {
             number = new Pi( precision )
 
         then:
-            number.countElement(digit) == count
+            number.countValue(digit) == count
 
         where:
         precision | digit | count

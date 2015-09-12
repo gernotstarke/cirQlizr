@@ -9,7 +9,7 @@ class ConnectionSpec extends Specification {
 
 
     def "Find Bezier Control Point"() {
-
+       expect: false
 
     }
 }

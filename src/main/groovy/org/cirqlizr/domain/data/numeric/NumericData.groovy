@@ -66,20 +66,20 @@ abstract class NumericData {
      * @param element
      * @return nr of occurences, 0 if element does not occur
      */
-    public int countElement( DataElement element ) {
+    public int countValue( DataElement thisElement ) {
         int counter = 0
-        elements.each {
-           if (elements[it] == element ) counter ++
+        elements.each {  element ->
+           if (element == thisElement) counter ++
         }
         return counter
     }
 
-    public int countElement( String value ) {
-        return countElement( new DataElement( value ))
+    public int countValue( String value ) {
+        return countValue( new DataElement( value ))
     }
 
-    public int countElement( Integer value ) {
-        return countElement( new DataElement( value ))
+    public int countValue( Integer value ) {
+        return countValue( new DataElement( value ))
     }
 
     /**
