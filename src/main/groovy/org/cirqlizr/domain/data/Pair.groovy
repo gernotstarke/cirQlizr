@@ -29,16 +29,22 @@ import groovy.transform.EqualsAndHashCode
 
 @EqualsAndHashCode
 class Pair {
-    final int first
-    final int second
+    final DataElement first
+    final DataElement second
 
-    public Pair( int first, int second) {
+    public Pair( DataElement first, DataElement second) {
         this.first = first
         this.second = second
+    }
+
+    public Pair( Integer first, Integer second) {
+        this.first  = new DataElement( first )
+        this.second = new DataElement( second )
     }
 
     public String toString() {
         return "("+first + ", " + second + ")"
     }
+
 
 }

@@ -124,8 +124,8 @@ class ConfigurationSlurperSpec extends Specification {
         }
 
         // we can access number ...
-        number.getElementAtIndex(0) == new DataElement(3).getValue()
-        number.getElementAtIndex(1) == new DataElement(1).getValue()
+        number.getElementAtIndex(0) == new DataElement(3)
+        number.getElementAtIndex(1) == new DataElement(1)
 
     }
 

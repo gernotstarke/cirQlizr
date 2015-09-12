@@ -38,12 +38,12 @@ class SpecialNumberSpec extends Specification {
             number = new Pi( 5 ) // 3.1415
 
         then:
-            number.getElementAtIndex( 0 ) == 3
-            number.getElementAtIndex( 1 ) == 1
+            number.getElementAtIndex( 0 ) == new DataElement(3)
+            number.getElementAtIndex( 1 ) == new DataElement(1)
 
-            number.countElement( 3 ) == 1 // occurs once
-            number.countElement( 1 ) == 2 // occurs twice
-            number.countElement( 2 ) == 0 // does not occur
+            number.countElement( "3" ) == 1 // occurs once
+            number.countElement( "1" ) == 2 // occurs twice
+            number.countElement( "2" ) == 0 // does not occur
     }
 
     /**

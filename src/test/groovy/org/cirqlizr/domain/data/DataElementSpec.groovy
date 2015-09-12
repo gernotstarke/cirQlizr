@@ -30,6 +30,20 @@ class DataElementSpec extends Specification {
 
     }
 
+    def "Comparing for Equality works for DataElement"() {
+        Integer i = 12
+        String the = "the"
+
+
+
+        when:
+            def de1 = new DataElement(i)
+            def de2 = new DataElement(the)
+
+        then:
+            de1 == new DataElement(i)
+            de2 == new DataElement(the)
+    }
 
 }
 

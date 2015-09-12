@@ -40,7 +40,7 @@ class PiTest extends GroovyTestCase {
 
     @Test
     public void testFirstDigitIsThree() {
-        GroovyTestCase.assertEquals( "first element must be three", 3, pi.getElementAtIndex(0))
+        GroovyTestCase.assertEquals( "first element must be three", new DataElement(3), pi.getElementAtIndex(0))
     }
 
 
@@ -73,7 +73,7 @@ class PiTest extends GroovyTestCase {
 
         List<Integer> actual = sn.elements
 
-        assertEquals( "expect Pi with precision==1 to be [3]", [3], actual)
+        assertEquals( "expect Pi with precision==1 to be [3]", [new DataElement(3)], actual)
     }
 
     @Test

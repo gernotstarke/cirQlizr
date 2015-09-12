@@ -2,6 +2,7 @@ package org.cirqlizr.domain.data
 
 
 class DataElement {
+
     final String  value
 
     public DataElement( int numericValue ) {
@@ -24,6 +25,11 @@ class DataElement {
 
         DataElement de = (DataElement) o
         return this.value == de.value
+    }
+
+    @Override
+    public String toString() {
+        return this.value
     }
 }
 

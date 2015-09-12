@@ -56,7 +56,7 @@ abstract class NumericData {
     public DataElement getElementAtIndex( int position) {
         if (indexIsWithinBounds(position) ) {
             return elements.get(position) }
-        else throw new IndexOutOfBoundsException( "Position ${position} out of bounds, should be within 0 and ${elements.size()}" )
+        else throw new IndexOutOfBoundsException( "Position ${position} out of bounds, should be within 0 and ${elements.size()-1}" )
     }
 
 
@@ -66,11 +66,20 @@ abstract class NumericData {
      * @param element
      * @return nr of occurences, 0 if element does not occur
      */
-    public int countElement( int element ) {
-        assert element >= 0
-        assert element <= 9
+    public int countElement( DataElement element ) {
+        int counter = 0
+        elements.each {
+           if (elements[it] == element ) counter ++
+        }
+        return counter
+    }
 
-        return elements.count( element )
+    public int countElement( String value ) {
+        return countElement( new DataElement( value ))
+    }
+
+    public int countElement( Integer value ) {
+        return countElement( new DataElement( value ))
     }
 
     /**
@@ -120,7 +129,7 @@ abstract class NumericData {
      * get the related element for the element at index
      *
      */
-    public int getRelationForElementAtIndex( int index) {
+    public DataElement getRelationForElementAtIndex( int index) {
         return getElementAtIndex( index+1)
     }
 

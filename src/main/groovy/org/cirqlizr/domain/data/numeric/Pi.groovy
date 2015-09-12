@@ -137,8 +137,8 @@ class Pi extends NumericData {
         if (precision <= MAX_AVAILABLE_ELEMENTS) {
             this.NUMBER_OF_ELEMENTS = precision
 
-            [0..precision-1].each { index ->
-                this.elements[index] = new DataElement( ALL_KNOWN_ELEMENTS[index].toString() )
+            (0..precision-1).each { index ->
+                this.elements.add ( new DataElement( ALL_KNOWN_ELEMENTS[index] ))
             }
         }
         else throw new MisconfigurationException("illegal precision ${precision}: not enough digits available")
