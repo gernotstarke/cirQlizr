@@ -26,6 +26,7 @@ package org.cirqlizr
 import org.cirqlizr.configuration.Configuration
 import org.cirqlizr.configuration.RunMode
 import org.cirqlizr.domain.Segment
+import org.cirqlizr.domain.data.DataElement
 import org.cirqlizr.domain.data.NumericData
 import org.cirqlizr.ui.CirqlizrColor
 
@@ -93,7 +94,7 @@ class CircularVisualizer {
         (0..9).each { thisDigit ->
             segment[thisDigit] = new Segment(
                     element: thisDigit,
-                    nrOfRequiredConnectionNodes: NUMBER.countOccurencesInPairs(thisDigit, NR_OF_CONNECTIONS_TO_SHOW-1),
+                    nrOfRequiredConnectionNodes: NUMBER.countOccurencesInPairs(new DataElement( thisDigit), NR_OF_CONNECTIONS_TO_SHOW-1),
                     color: CirqlizrColor.color[thisDigit],
                     radius: this.radius,
                     // TODO: adjust angleStart, so that segment 0 starts at top
