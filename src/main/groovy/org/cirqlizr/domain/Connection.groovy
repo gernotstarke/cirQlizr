@@ -1,5 +1,7 @@
 package org.cirqlizr.domain
 
+import org.cirqlizr.domain.data.DataElement
+
 // see end-of-file for license information
 
 
@@ -12,10 +14,13 @@ class Connection {
      * a point than just the coordinates
      */
     final ConnectionNode startPoint
+    final DataElement fromElement
 
     final ConnectionNode endPoint
+    final DataElement toElement
 
     Coordinate2D bezierControlPoint
+
 
 
     /*
@@ -32,4 +37,7 @@ class Connection {
 
         return Circle.getPointByRadiusAngle( radius * multiplier, midAngle)
     }
+
+
+
 }
