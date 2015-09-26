@@ -172,18 +172,18 @@ class DrawingCanvas extends JPanel {
     }
 
     /*
-    draw line for a single getPair of numeric
+    draw line for a single Pair of numeric elements
      */
 
-    private void drawConnectionForNumberPair(Graphics2D g2d, int fromDigit, int toDigit) {
-        g2d.setColor(nv.segment[fromDigit].color)
+    private void drawConnectionForNumberPair(Graphics2D g2d, int fromElement, int toElement) {
+        g2d.setColor(nv.segment[fromElement].color)
 
-        int fromConnectionNodeIndex = nv.segment[fromDigit].getNextFreeConnectionNode()
-        int toConnectionNodeIndex = nv.segment[toDigit].getNextFreeConnectionNode()
+        int fromConnectionNodeIndex = nv.segment[fromElement].getNextFreeConnectionNode()
+        int toConnectionNodeIndex = nv.segment[toElement].getNextFreeConnectionNode()
 
-        ConnectionNode fromNode = nv.segment[fromDigit].connectionNode[fromConnectionNodeIndex]
-        nv.segment[fromDigit].advanceToNextAvailableConnectionNode()
-        ConnectionNode toNode = nv.segment[toDigit].connectionNode[toConnectionNodeIndex]
+        ConnectionNode fromNode = nv.segment[fromElement].connectionNode[fromConnectionNodeIndex]
+        nv.segment[fromElement].advanceToNextAvailableConnectionNode()
+        ConnectionNode toNode = nv.segment[toElement].connectionNode[toConnectionNodeIndex]
 
         Coordinate2D bezierControlPoint = Connection.findBezierControlPoint(toNode.angle, fromNode.angle, 300)
 
@@ -200,13 +200,13 @@ class DrawingCanvas extends JPanel {
         // show BCP only if configured
         if (configuration.SHOW_BCP) drawDotAtCoordinate(g2d, bezierControlPoint)
         //g2d.draw(new Line2D.Double(
-        //        nv.segment[fromDigit].connectionNode[fromConnectionNodeIndex].coordinate.toPoint(),
-        //        nv.segment[toDigit].connectionNode[toConnectionNodeIndex].coordinate.toPoint()))
+        //        nv.segment[fromElement].connectionNode[fromConnectionNodeIndex].coordinate.toPoint(),
+        //        nv.segment[toElement].connectionNode[toConnectionNodeIndex].coordinate.toPoint()))
 
 
-        nv.segment[toDigit].advanceToNextAvailableConnectionNode()
+        nv.segment[toElement].advanceToNextAvailableConnectionNode()
 
-        //LOGGER.info "draw line from $fromDigit (${segment[fromDigit].connectionNode[pairIndex]}"
+        //LOGGER.info "draw line from $fromElement (${segment[fromElement].connectionNode[pairIndex]}"
     }
 
     /*
