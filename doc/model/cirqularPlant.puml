@@ -1,0 +1,10 @@
+@startuml
+skinparam componentStyle uml2
+
+[MathLib] - CircleArithmetic
+[Connection] --> CircleArithmetic
+
+[Window] -down-> [Renderer]
+[Connection] <- [Window]
+
+@enduml

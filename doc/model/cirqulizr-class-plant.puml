@@ -1,0 +1,71 @@
+@startuml
+
+Application o-- ApplicationFrame
+Application o-- CircularVisualizer
+Application -> Configuration
+CircularVisualizer --> Configuration
+CircularVisualizer o-- Segment
+
+ApplicationFrame o-- DrawingCanvas
+
+class CircularVisualizer {
+Segment[] segments
+size()
+}
+
+CircularVisualizer o-- DataProvider
+CircularVisualizer o-- Connection
+
+interface DataProvider {
+String getName()
+List<DataElement> getValueSet()
+DataElement getValueAtIndex( nr )
+}
+
+NumericData --|> DataProvider
+class NumericData {
+String name
+int nrOfDigits
+String[] digits
+}
+
+Pi --|> NumericData
+
+abstract NumericData {
+}
+
+class  ConnectionNode {
+float x
+float y
+mirrorAtAxis()
+transformToPoint()
+}
+
+ConnectionNode o-- Coordinate2D
+
+Circle -> Coordinate2D
+
+class Segment {
+int digit
+int nrOfOccurences
+int nextFeeNode
+double radius
+double distanceToConnections
+Point controlPoint
+setupConnectionNodes()
+}
+
+Segment -- Color
+
+Segment --> Circle
+Segment o-- ConnectionNode
+Segment o-- DataElement
+
+DataProvider --> DataElement
+
+class DataElement {
+String value
+}
+
+
+@enduml
